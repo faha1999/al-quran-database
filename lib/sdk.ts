@@ -71,6 +71,37 @@ export class QuranDevSDK {
     const query = edition ? `?edition=${edition}` : '';
     return this.fetcher<ResolvedAyah[]>(`/api/juz/${id}${query}`);
   }
+
+  /**
+   * Get all ayahs in a specific Hizb
+   */
+  async getHizb(id: number, edition?: string) {
+    const query = edition ? `?edition=${edition}` : '';
+    return this.fetcher<ResolvedAyah[]>(`/api/hizb/${id}${query}`);
+  }
+
+  /**
+   * Get all ayahs in a specific Rub (Quarter)
+   */
+  async getRub(id: number, edition?: string) {
+    const query = edition ? `?edition=${edition}` : '';
+    return this.fetcher<ResolvedAyah[]>(`/api/rub/${id}${query}`);
+  }
+
+  /**
+   * Get all ayahs in a specific Mushaf Page
+   */
+  async getPage(id: number, edition?: string) {
+    const query = edition ? `?edition=${edition}` : '';
+    return this.fetcher<ResolvedAyah[]>(`/api/pages/${id}${query}`);
+  }
+
+  /**
+   * Get word-by-word breakdown for an Ayah
+   */
+  async getWords(ayahId: number) {
+    return this.fetcher<unknown[]>(`/api/words?ayah_id=${ayahId}`);
+  }
 }
 
 // Export a default instance for easy use

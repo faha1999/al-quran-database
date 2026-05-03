@@ -25,7 +25,8 @@ interface SearchDoc {
   translation: string;
   surah_id: number;
   ayah_number: number;
-  [key: string]: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 // Create FlexSearch Document Index

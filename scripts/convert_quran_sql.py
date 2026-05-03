@@ -87,6 +87,40 @@ def derive_groups(ayahs: list[dict[str, object]], key: str) -> list[dict[str, ob
 
     return derived
 
+def derive_hizbs(ayahs: list[dict[str, object]]) -> list[dict[str, object]]:
+    groups: dict[int, dict[str, object]] = {}
+    for ayah in ayahs:
+        # hizb_id in SQL is actually rub_id (quarter, 1-480)
+        # 4 quarters = 1 hizb
+        rub_id = int(ayah["hizb_id"])
+        hizb_id = ((rub_id - 1) // 4) + 1
+        current = groups.setdefault(
+            hizb_id,
+            {
+                "id": hizb_id,
+                "ayah_count": 0,
+                "start_ayah_number": int(ayah["number"]),
+                "end_ayah_number": int(ayah["number"]),
+                "start_page": int(ayah["page"]),
+                "end_page": int(ayah["page"]),
+                "surah_ids": [],
+            },
+        )
+        current["ayah_count"] = int(current["ayah_count"]) + 1
+        current["start_ayah_number"] = min(int(current["start_ayah_number"]), int(ayah["number"]))
+        current["end_ayah_number"] = max(int(current["end_ayah_number"]), int(ayah["number"]))
+        current["start_page"] = min(int(current["start_page"]), int(ayah["page"]))
+        current["end_page"] = max(int(current["end_page"]), int(ayah["page"]))
+        current["surah_ids"].append(int(ayah["surah_id"]))
+
+    derived = []
+    for group_id in sorted(groups):
+        group = groups[group_id]
+        group["surah_ids"] = sorted_unique(group["surah_ids"])
+        derived.append(group)
+
+    return derived
+
 
 def stage_core_data(sql_path: Path, stage_dir: Path) -> tuple[list[dict[str, object]], list[dict[str, object]], list[dict[str, object]]]:
     surahs: list[dict[str, object]] = []
@@ -109,7 +143,9 @@ def stage_core_data(sql_path: Path, stage_dir: Path) -> tuple[list[dict[str, obj
     write_json(stage_dir / "ayahs.json", ayahs)
     write_json(stage_dir / "editions.json", editions, pretty=True)
     write_json(stage_dir / "juzs.json", derive_groups(ayahs, "juz_id"), pretty=True)
-    write_json(stage_dir / "hizbs.json", derive_groups(ayahs, "hizb_id"), pretty=True)
+    write_json(stage_dir / "hizbs.json", derive_hizbs(ayahs), pretty=True)
+    write_json(stage_dir / "rubs.json", derive_groups(ayahs, "hizb_id"), pretty=True)
+    write_json(stage_dir / "pages.json", derive_groups(ayahs, "page"), pretty=True)
 
     return surahs, ayahs, editions
 
@@ -209,6 +245,8 @@ def publish_stage(stage_dir: Path, output_dir: Path) -> None:
         "editions.json",
         "juzs.json",
         "hizbs.json",
+        "rubs.json",
+        "pages.json",
         "edition-manifest.json",
         "ayah-editions",
     )

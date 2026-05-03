@@ -9,6 +9,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
     { title: 'Ayahs', href: '/docs/ayahs' },
     { title: 'Juz', href: '/docs/juz' },
     { title: 'Search', href: '/docs/search' },
+    { title: 'Database & Exports', href: '/docs/database' },
     { title: 'FAQ', href: '/docs/faq' },
   ];
 

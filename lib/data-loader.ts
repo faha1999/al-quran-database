@@ -9,10 +9,13 @@ import type {
   EditionSummary,
   Hizb,
   Juz,
+  Page,
   ResolvedAyah,
+  Rub,
   SearchFilters,
   SearchResultAyah,
   Surah,
+  Word,
 } from '@/lib/quran-types';
 import { advancedSearch } from './search-engine';
 
@@ -25,7 +28,10 @@ const surahs = readJson<Surah[]>(path.join(DATA_DIR, 'surahs.json'));
 const ayahs = readJson<Ayah[]>(path.join(DATA_DIR, 'ayahs.json'));
 const editions = readJson<Edition[]>(path.join(DATA_DIR, 'editions.json'));
 const juzs = readJson<Juz[]>(path.join(DATA_DIR, 'juzs.json'));
-readJson<Hizb[]>(path.join(DATA_DIR, 'hizbs.json'));
+const hizbs = readJson<Hizb[]>(path.join(DATA_DIR, 'hizbs.json'));
+const rubs = readJson<Rub[]>(path.join(DATA_DIR, 'rubs.json'));
+const pages = readJson<Page[]>(path.join(DATA_DIR, 'pages.json'));
+const words = readJson<Word[]>(path.join(DATA_DIR, 'words.json'));
 const editionManifest = readJson<EditionManifest>(path.join(DATA_DIR, 'edition-manifest.json'));
 
 const DEFAULT_TRANSLATION_IDENTIFIER = editionManifest.default_translation_identifier;
@@ -254,6 +260,52 @@ export function getSurahById(id: number, identifier?: string): (Surah & { ayahs:
   };
 }
 
+export function getJuzs(): Juz[] {
+  return juzs;
+}
+
+export function getHizbs(): Hizb[] {
+  return hizbs;
+}
+
+export function getPages(): Page[] {
+  return pages;
+}
+
+export function getRubs(): Rub[] {
+  return rubs;
+}
+
+export function getWordsByAyah(ayahId: number): Word[] {
+  return words.filter(w => w.ayah_id === ayahId);
+}
+
+export function getAyah(id: number, edition?: string, includeWords: boolean = false): ResolvedAyah | null {
+  const ayah = ayahs.find((a) => a.id === id);
+  if (!ayah) return null;
+
+  let resolvedAyah: ResolvedAyah = { ...ayah, translation: null };
+
+  if (edition) {
+    const content = getAyahTextForEdition(id, edition);
+    if (content) {
+      resolvedAyah.edition_content = content;
+      resolvedAyah.edition = getEditionSummary(getEditionByIdentifier(edition));
+    }
+  }
+
+  // Always try to load default translation if not explicitly requested otherwise
+  if (!resolvedAyah.edition_content) {
+    resolvedAyah.translation = resolveTranslation(id);
+  }
+
+  if (includeWords) {
+    resolvedAyah.words = getWordsByAyah(id);
+  }
+
+  return resolvedAyah;
+}
+
 export function getAyahByNumber(number: number, identifier?: string): ResolvedAyah | null {
   const ayah = ayahsByNumber.get(number) ?? null;
   if (!ayah) {
@@ -300,9 +352,54 @@ export function getAyahsByJuz(id: number, identifier?: string): ResolvedAyah[] {
 
 export function getAyahsByHizb(id: number, identifier?: string): ResolvedAyah[] {
   return resolveAyahs(
+    ayahs.filter((ayah) => {
+      const rubId = ayah.hizb_id;
+      const hizbId = Math.floor((rubId - 1) / 4) + 1;
+      return hizbId === id;
+    }),
+    identifier,
+  );
+}
+
+export function getAyahsByRub(id: number, identifier?: string): ResolvedAyah[] {
+  return resolveAyahs(
     ayahs.filter((ayah) => ayah.hizb_id === id),
     identifier,
   );
+}
+
+export function getAyahsByPage(id: number, identifier?: string): ResolvedAyah[] {
+  return resolveAyahs(
+    ayahs.filter((ayah) => ayah.page === id),
+    identifier,
+  );
+}
+
+export function getHizbById(id: number, identifier?: string): (Hizb & { ayahs: ResolvedAyah[] }) | null {
+  const hizb = hizbs.find((item) => item.id === id) ?? null;
+  if (!hizb) return null;
+  return {
+    ...hizb,
+    ayahs: getAyahsByHizb(id, identifier),
+  };
+}
+
+export function getRubById(id: number, identifier?: string): (Rub & { ayahs: ResolvedAyah[] }) | null {
+  const rub = rubs.find((item) => item.id === id) ?? null;
+  if (!rub) return null;
+  return {
+    ...rub,
+    ayahs: getAyahsByRub(id, identifier),
+  };
+}
+
+export function getPageById(id: number, identifier?: string): (Page & { ayahs: ResolvedAyah[] }) | null {
+  const page = pages.find((item) => item.id === id) ?? null;
+  if (!page) return null;
+  return {
+    ...page,
+    ayahs: getAyahsByPage(id, identifier),
+  };
 }
 
 export function getSupportedLanguages(): string[] {

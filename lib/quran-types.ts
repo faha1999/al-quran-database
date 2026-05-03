@@ -17,6 +17,18 @@ export interface Ayah {
   hizb_id: number;
   juz_id: number;
   sajda: boolean;
+  words?: Word[];
+}
+
+export interface Word {
+  id: number;
+  ayah_id: number;
+  text: string;
+  position: number;
+  surah_id: number;
+  number_in_surah: number;
+  root: string | null;
+  morphology: string | null;
 }
 
 export interface Edition {
@@ -33,6 +45,26 @@ export interface AyahEdition {
   ayah_id: number;
   data: string;
   is_audio: boolean;
+}
+
+export interface Page {
+  id: number;
+  ayah_count: number;
+  start_ayah_number: number;
+  end_ayah_number: number;
+  start_page: number;
+  end_page: number;
+  surah_ids: number[];
+}
+
+export interface Rub {
+  id: number;
+  ayah_count: number;
+  start_ayah_number: number;
+  end_ayah_number: number;
+  start_page: number;
+  end_page: number;
+  surah_ids: number[];
 }
 
 export interface Juz {

@@ -23,6 +23,26 @@ const endpoints = [
   },
   {
     method: 'GET',
+    path: '/hizb/[id]',
+    description: 'Get one hizb by ID (1-60), containing all ayahs in that division.',
+  },
+  {
+    method: 'GET',
+    path: '/rub/[id]',
+    description: 'Get one Rub (Quarter) by ID (1-480).',
+  },
+  {
+    method: 'GET',
+    path: '/pages/[id]',
+    description: 'Get ayahs for a specific Mushaf page (1-604).',
+  },
+  {
+    method: 'GET',
+    path: '/words?ayah_id=[id]',
+    description: 'Get word-by-word breakdown (Arabic tokens) for a specific ayah.',
+  },
+  {
+    method: 'GET',
     path: '/search?q=[query]',
     description: 'Search ayahs. Supports edition, language, page, and limit query params.',
   },
