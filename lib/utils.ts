@@ -6,5 +6,5 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatAyahNumber(surahNumber: number, ayahNumber: number) {
-  return `\${surahNumber}:\${ayahNumber}`;
+  return `${surahNumber}:${ayahNumber}`;
 }

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Book, Code, Zap, Search } from "lucide-react";
 
@@ -21,7 +22,14 @@ export default function Home() {
       </div>
 
       <div className="relative flex flex-col items-center place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[1]">
-        <img src="/logo.png" alt="Quran Dev Logo" className="w-32 h-32 md:w-48 md:h-48 mb-8 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+        <Image
+          src="/logo.png"
+          alt="Quran Dev Logo"
+          width={192}
+          height={192}
+          className="mb-8 h-32 w-32 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)] md:h-48 md:w-48"
+          priority
+        />
         <h1 className="text-6xl font-bold tracking-tighter sm:text-7xl md:text-8xl lg:text-9xl text-center">
           Quran <span className="text-blue-500">Dev</span>
         </h1>
@@ -93,7 +101,7 @@ export default function Home() {
         <div className="flex flex-col items-center text-center p-6 bg-zinc-900/50 rounded-2xl border border-zinc-800">
           <Book className="w-10 h-10 mb-4 text-blue-500" />
           <h3 className="text-xl font-bold mb-2">Complete Dataset</h3>
-          <p className="text-gray-400 text-sm">All 114 Surahs and 6,236 Ayahs available via API.</p>
+          <p className="text-gray-400 text-sm">All 114 surahs, 6,236 ayahs, and 134 editions available via JSON API.</p>
         </div>
         <div className="flex flex-col items-center text-center p-6 bg-zinc-900/50 rounded-2xl border border-zinc-800">
           <Zap className="w-10 h-10 mb-4 text-yellow-500" />
@@ -108,7 +116,7 @@ export default function Home() {
         <div className="flex flex-col items-center text-center p-6 bg-zinc-900/50 rounded-2xl border border-zinc-800">
           <Search className="w-10 h-10 mb-4 text-purple-500" />
           <h3 className="text-xl font-bold mb-2">Fast Search</h3>
-          <p className="text-gray-400 text-sm">Instant keyword search across all translations.</p>
+          <p className="text-gray-400 text-sm">Instant keyword search with Arabic default plus multi-edition filters.</p>
         </div>
       </div>
     </main>
