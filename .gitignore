@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# General build artifacts
+dist/
+build/
+coverage/
+
+# Logs
+*.log
+/npm-log.txt
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Deployment and cache directories
+.vercel/
+.turbo/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.bak
+*.swp
+*.swo
+
+# Local data files
+/quran.sql
+
+# prd and manual
+/prd.md
+/manual.md 
