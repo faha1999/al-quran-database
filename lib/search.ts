@@ -13,7 +13,9 @@ export function getSearchIndex() {
 
   console.log('Building search index...');
   ayahsData.forEach((ayah) => {
-    index?.add(ayah.number, ayah.text);
+    // Combine Arabic and English for indexing
+    const content = `${ayah.text} ${ayah.translation || ''}`;
+    index?.add(ayah.number, content);
   });
   console.log('Search index built.');
 

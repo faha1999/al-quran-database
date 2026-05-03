@@ -15,7 +15,7 @@ export default function SearchPage() {
     
     setLoading(true);
     try {
-      const res = await fetch(`/api/search?q=\${encodeURIComponent(query)}`);
+      const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
       const data = await res.json();
       if (data.success) {
         setResults(data.data);
@@ -74,8 +74,9 @@ export default function SearchPage() {
                   <p className="text-xl font-arabic text-right mb-4 leading-relaxed">
                     {result.text}
                   </p>
-                  {/* For MVP we only have Arabic text in the primary dataset, 
-                      In a full version we would show translation here too */}
+                  <p className="text-zinc-400 text-sm italic leading-relaxed">
+                    {result.translation}
+                  </p>
                 </div>
               ))}
             </div>

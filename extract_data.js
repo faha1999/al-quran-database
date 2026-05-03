@@ -36,6 +36,7 @@ async function extract() {
 
     const surahs = [];
     const ayahs = [];
+    const translations = {}; // ayah_id -> text
     let currentTable = null;
 
     console.log('Parsing SQL file...');
@@ -46,6 +47,9 @@ async function extract() {
             continue;
         } else if (line.includes('INSERT INTO `ayahs`')) {
             currentTable = 'ayahs';
+            continue;
+        } else if (line.includes('INSERT INTO `ayah_edition`')) {
+            currentTable = 'ayah_edition';
             continue;
         } else if (line.trim().startsWith('(')) {
             const rowStr = line.trim().replace(/,$/, '').replace(/;$/, '').replace(/^\(|\)$/g, '');
@@ -71,20 +75,23 @@ async function extract() {
                     juz_id: parseInt(vals[7]),
                     sajda: vals[8] === '1'
                 });
-            }
-        } else if (line.includes('--') || line.trim() === '') {
-            // Comment or empty line reset current table if needed
-            if (line.includes('Dumping data for table')) {
-                 // stay on current table if it matches
-            } else {
-                // currentTable = null; // Dangerous if multi-line is interrupted by comments
+            } else if (currentTable === 'ayah_edition') {
+                const editionId = parseInt(vals[2]);
+                if (editionId === 20) { // Saheeh International
+                    translations[parseInt(vals[1])] = vals[3];
+                }
             }
         } else if (line.includes('UNLOCK TABLES') || line.includes('CREATE TABLE')) {
             currentTable = null;
         }
     }
 
-    console.log(`Extracted ${surahs.length} surahs and ${ayahs.length} ayahs.`);
+    // Merge translations
+    ayahs.forEach(ayah => {
+        ayah.translation = translations[ayah.id] || "";
+    });
+
+    console.log(`Extracted ${surahs.length} surahs, ${ayahs.length} ayahs and ${Object.keys(translations).length} translations.`);
 
     fs.writeFileSync(path.join(outputDir, 'surahs.json'), JSON.stringify(surahs, null, 2));
     fs.writeFileSync(path.join(outputDir, 'ayahs.json'), JSON.stringify(ayahs, null, 2));
@@ -93,4 +100,3 @@ async function extract() {
 }
 
 extract().catch(console.error);
-
