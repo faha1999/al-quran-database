@@ -1,0 +1,30 @@
+{
+  "asbab_al_nuzul": [
+    {
+      "ayah_id": 1,
+      "surah_id": 1,
+      "content": "Al-Fatihah is the first complete Surah revealed.",
+      "source": "Al-Wahidi"
+    },
+    {
+      "ayah_id": 190,
+      "surah_id": 2,
+      "content": "Revealed when the Muslims were prevented from Umrah in the year of Hudaybiyyah.",
+      "source": "Ibn Abbas"
+    }
+  ],
+  "hadith_references": [
+    {
+      "ayah_id": 1,
+      "surah_id": 1,
+      "hadith": "The prayer is not valid without the recitation of Al-Fatihah.",
+      "source": "Sahih Bukhari"
+    },
+    {
+      "ayah_id": 255,
+      "surah_id": 2,
+      "hadith": "Ayatul Kursi is the greatest verse in the Quran.",
+      "source": "Sahih Muslim"
+    }
+  ]
+}

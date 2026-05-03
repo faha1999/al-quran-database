@@ -118,7 +118,19 @@
       "format": "text",
       "row_count": 6236,
       "files": [
-        "ayah-editions/ar.jalalayn.json"
+        "ayah-editions/ar.jalalayn.part-1.json",
+        "ayah-editions/ar.jalalayn.part-2.json",
+        "ayah-editions/ar.jalalayn.part-3.json",
+        "ayah-editions/ar.jalalayn.part-4.json",
+        "ayah-editions/ar.jalalayn.part-5.json",
+        "ayah-editions/ar.jalalayn.part-6.json",
+        "ayah-editions/ar.jalalayn.part-7.json",
+        "ayah-editions/ar.jalalayn.part-8.json",
+        "ayah-editions/ar.jalalayn.part-9.json",
+        "ayah-editions/ar.jalalayn.part-10.json",
+        "ayah-editions/ar.jalalayn.part-11.json",
+        "ayah-editions/ar.jalalayn.part-12.json",
+        "ayah-editions/ar.jalalayn.part-13.json"
       ]
     },
     "ar.mahermuaiqly": {
@@ -468,7 +480,19 @@
       "format": "text",
       "row_count": 6236,
       "files": [
-        "ayah-editions/en.transliteration.json"
+        "ayah-editions/en.transliteration.part-1.json",
+        "ayah-editions/en.transliteration.part-2.json",
+        "ayah-editions/en.transliteration.part-3.json",
+        "ayah-editions/en.transliteration.part-4.json",
+        "ayah-editions/en.transliteration.part-5.json",
+        "ayah-editions/en.transliteration.part-6.json",
+        "ayah-editions/en.transliteration.part-7.json",
+        "ayah-editions/en.transliteration.part-8.json",
+        "ayah-editions/en.transliteration.part-9.json",
+        "ayah-editions/en.transliteration.part-10.json",
+        "ayah-editions/en.transliteration.part-11.json",
+        "ayah-editions/en.transliteration.part-12.json",
+        "ayah-editions/en.transliteration.part-13.json"
       ]
     },
     "en.walk": {
@@ -498,7 +522,19 @@
       "format": "text",
       "row_count": 6236,
       "files": [
-        "ayah-editions/es.asad.json"
+        "ayah-editions/es.asad.part-1.json",
+        "ayah-editions/es.asad.part-2.json",
+        "ayah-editions/es.asad.part-3.json",
+        "ayah-editions/es.asad.part-4.json",
+        "ayah-editions/es.asad.part-5.json",
+        "ayah-editions/es.asad.part-6.json",
+        "ayah-editions/es.asad.part-7.json",
+        "ayah-editions/es.asad.part-8.json",
+        "ayah-editions/es.asad.part-9.json",
+        "ayah-editions/es.asad.part-10.json",
+        "ayah-editions/es.asad.part-11.json",
+        "ayah-editions/es.asad.part-12.json",
+        "ayah-editions/es.asad.part-13.json"
       ]
     },
     "es.cortes": {
@@ -628,7 +664,19 @@
       "format": "text",
       "row_count": 6236,
       "files": [
-        "ayah-editions/fr.hamidullah.json"
+        "ayah-editions/fr.hamidullah.part-1.json",
+        "ayah-editions/fr.hamidullah.part-2.json",
+        "ayah-editions/fr.hamidullah.part-3.json",
+        "ayah-editions/fr.hamidullah.part-4.json",
+        "ayah-editions/fr.hamidullah.part-5.json",
+        "ayah-editions/fr.hamidullah.part-6.json",
+        "ayah-editions/fr.hamidullah.part-7.json",
+        "ayah-editions/fr.hamidullah.part-8.json",
+        "ayah-editions/fr.hamidullah.part-9.json",
+        "ayah-editions/fr.hamidullah.part-10.json",
+        "ayah-editions/fr.hamidullah.part-11.json",
+        "ayah-editions/fr.hamidullah.part-12.json",
+        "ayah-editions/fr.hamidullah.part-13.json"
       ]
     },
     "fr.leclerc": {
@@ -678,7 +726,19 @@
       "format": "text",
       "row_count": 6236,
       "files": [
-        "ayah-editions/id.indonesian.json"
+        "ayah-editions/id.indonesian.part-1.json",
+        "ayah-editions/id.indonesian.part-2.json",
+        "ayah-editions/id.indonesian.part-3.json",
+        "ayah-editions/id.indonesian.part-4.json",
+        "ayah-editions/id.indonesian.part-5.json",
+        "ayah-editions/id.indonesian.part-6.json",
+        "ayah-editions/id.indonesian.part-7.json",
+        "ayah-editions/id.indonesian.part-8.json",
+        "ayah-editions/id.indonesian.part-9.json",
+        "ayah-editions/id.indonesian.part-10.json",
+        "ayah-editions/id.indonesian.part-11.json",
+        "ayah-editions/id.indonesian.part-12.json",
+        "ayah-editions/id.indonesian.part-13.json"
       ]
     },
     "id.muntakhab": {
@@ -938,7 +998,19 @@
       "format": "text",
       "row_count": 6236,
       "files": [
-        "ayah-editions/ru.kuliev.json"
+        "ayah-editions/ru.kuliev.part-1.json",
+        "ayah-editions/ru.kuliev.part-2.json",
+        "ayah-editions/ru.kuliev.part-3.json",
+        "ayah-editions/ru.kuliev.part-4.json",
+        "ayah-editions/ru.kuliev.part-5.json",
+        "ayah-editions/ru.kuliev.part-6.json",
+        "ayah-editions/ru.kuliev.part-7.json",
+        "ayah-editions/ru.kuliev.part-8.json",
+        "ayah-editions/ru.kuliev.part-9.json",
+        "ayah-editions/ru.kuliev.part-10.json",
+        "ayah-editions/ru.kuliev.part-11.json",
+        "ayah-editions/ru.kuliev.part-12.json",
+        "ayah-editions/ru.kuliev.part-13.json"
       ]
     },
     "ru.muntahab": {
@@ -1118,7 +1190,19 @@
       "format": "text",
       "row_count": 6236,
       "files": [
-        "ayah-editions/tr.diyanet.json"
+        "ayah-editions/tr.diyanet.part-1.json",
+        "ayah-editions/tr.diyanet.part-2.json",
+        "ayah-editions/tr.diyanet.part-3.json",
+        "ayah-editions/tr.diyanet.part-4.json",
+        "ayah-editions/tr.diyanet.part-5.json",
+        "ayah-editions/tr.diyanet.part-6.json",
+        "ayah-editions/tr.diyanet.part-7.json",
+        "ayah-editions/tr.diyanet.part-8.json",
+        "ayah-editions/tr.diyanet.part-9.json",
+        "ayah-editions/tr.diyanet.part-10.json",
+        "ayah-editions/tr.diyanet.part-11.json",
+        "ayah-editions/tr.diyanet.part-12.json",
+        "ayah-editions/tr.diyanet.part-13.json"
       ]
     },
     "tr.golpinarli": {
@@ -1278,7 +1362,19 @@
       "format": "text",
       "row_count": 6236,
       "files": [
-        "ayah-editions/ur.maududi.json"
+        "ayah-editions/ur.maududi.part-1.json",
+        "ayah-editions/ur.maududi.part-2.json",
+        "ayah-editions/ur.maududi.part-3.json",
+        "ayah-editions/ur.maududi.part-4.json",
+        "ayah-editions/ur.maududi.part-5.json",
+        "ayah-editions/ur.maududi.part-6.json",
+        "ayah-editions/ur.maududi.part-7.json",
+        "ayah-editions/ur.maududi.part-8.json",
+        "ayah-editions/ur.maududi.part-9.json",
+        "ayah-editions/ur.maududi.part-10.json",
+        "ayah-editions/ur.maududi.part-11.json",
+        "ayah-editions/ur.maududi.part-12.json",
+        "ayah-editions/ur.maududi.part-13.json"
       ]
     },
     "ur.qadri": {
@@ -1339,6 +1435,28 @@
       "row_count": 6236,
       "files": [
         "ayah-editions/zh.mazhonggang.json"
+      ]
+    },
+    "ar.qurtubi": {
+      "edition_id": 135,
+      "language": "ar",
+      "type": "tafsir",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.qurtubi.part-1.json",
+        "ayah-editions/ar.qurtubi.part-2.json",
+        "ayah-editions/ar.qurtubi.part-3.json",
+        "ayah-editions/ar.qurtubi.part-4.json",
+        "ayah-editions/ar.qurtubi.part-5.json",
+        "ayah-editions/ar.qurtubi.part-6.json",
+        "ayah-editions/ar.qurtubi.part-7.json",
+        "ayah-editions/ar.qurtubi.part-8.json",
+        "ayah-editions/ar.qurtubi.part-9.json",
+        "ayah-editions/ar.qurtubi.part-10.json",
+        "ayah-editions/ar.qurtubi.part-11.json",
+        "ayah-editions/ar.qurtubi.part-12.json",
+        "ayah-editions/ar.qurtubi.part-13.json"
       ]
     }
   }

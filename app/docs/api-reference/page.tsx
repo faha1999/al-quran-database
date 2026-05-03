@@ -43,6 +43,16 @@ const endpoints = [
   },
   {
     method: 'GET',
+    path: '/reciters',
+    description: 'Get list of available reciters for audio streaming references.',
+  },
+  {
+    method: 'GET',
+    path: '/duas',
+    description: 'Get all supplications (Duas) extracted from the Quran. Supports pagination.',
+  },
+  {
+    method: 'GET',
     path: '/search?q=[query]',
     description: 'Search ayahs. Supports edition, language, page, and limit query params.',
   },

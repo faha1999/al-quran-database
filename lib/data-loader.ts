@@ -33,6 +33,9 @@ const rubs = readJson<Rub[]>(path.join(DATA_DIR, 'rubs.json'));
 const pages = readJson<Page[]>(path.join(DATA_DIR, 'pages.json'));
 const words = readJson<Word[]>(path.join(DATA_DIR, 'words.json'));
 const editionManifest = readJson<EditionManifest>(path.join(DATA_DIR, 'edition-manifest.json'));
+const reciters = readJson<any[]>(path.join(DATA_DIR, 'reciters.json'));
+const duas = readJson<any[]>(path.join(DATA_DIR, 'duas.json'));
+const extraContext = readJson<any>(path.join(DATA_DIR, 'extra_context.json'));
 
 const DEFAULT_TRANSLATION_IDENTIFIER = editionManifest.default_translation_identifier;
 
@@ -474,4 +477,22 @@ export function validateLanguageFilter(language: string | null): string | null {
   }
 
   return language;
+}
+
+export function getReciters() {
+  return reciters;
+}
+
+export function getDuas(page?: number, limit?: number) {
+  if (page && limit) {
+    return paginate(duas, page, limit);
+  }
+  return { items: duas, meta: { total: duas.length } };
+}
+
+export function getExtraContextByAyah(ayahId: number) {
+  return {
+    asbab: extraContext.asbab_al_nuzul.filter((item: any) => item.ayah_id === ayahId),
+    hadith: extraContext.hadith_references.filter((item: any) => item.ayah_id === ayahId),
+  };
 }

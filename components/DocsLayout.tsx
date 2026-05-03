@@ -10,6 +10,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
     { title: 'Juz', href: '/docs/juz' },
     { title: 'Search', href: '/docs/search' },
     { title: 'Database & Exports', href: '/docs/database' },
+    { title: 'Data Expansion', href: '/docs/data-expansion' },
     { title: 'FAQ', href: '/docs/faq' },
   ];
 
