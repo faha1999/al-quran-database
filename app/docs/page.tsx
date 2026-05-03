@@ -54,6 +54,31 @@ export default function DocsPage() {
         </section>
 
         <section className="space-y-4">
+          <h2 className="text-2xl font-bold">Developer SDK (New)</h2>
+          <p className="text-gray-400">
+            For JavaScript/TypeScript developers, we provide a lightweight SDK to interact with the platform effortlessly.
+          </p>
+          <div className="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
+            <pre className="text-sm text-gray-300">
+{`import { quran } from '@/lib/sdk';
+
+// Search for ayahs
+const results = await quran.search('mercy', { language: 'en' });
+
+// Get a specific surah
+const surah = await quran.getSurah(1, 'en.sahih');`}
+            </pre>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold">Rate Limiting</h2>
+          <p className="text-gray-400">
+            To ensure platform stability, we enforce a rate limit of <span className="text-white font-bold">100 requests per minute</span> per IP.
+          </p>
+        </section>
+
+        <section className="space-y-4">
           <h2 className="text-2xl font-bold">Response Format</h2>
           <p className="text-gray-400">
             All responses are returned in JSON format with a consistent structure:

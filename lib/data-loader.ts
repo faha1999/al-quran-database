@@ -14,6 +14,7 @@ import type {
   SearchResultAyah,
   Surah,
 } from '@/lib/quran-types';
+import { advancedSearch } from './search-engine';
 
 const DATA_DIR = path.join(process.cwd(), 'lib', 'data');
 const readJson = <T>(filePath: string): T => JSON.parse(readFileSync(filePath, 'utf8')) as T;
@@ -202,13 +203,26 @@ function searchWithLanguage(query: string, language: string): SearchResultAyah[]
 }
 
 function searchDefault(query: string): SearchResultAyah[] {
-  const translationMap = getDefaultTranslationMap();
+  const ayahIds = advancedSearch(query);
+  
+  if (ayahIds.length === 0) {
+    // Fallback to basic search if FlexSearch returns nothing (e.g. very short queries)
+    const translationMap = getDefaultTranslationMap();
+    return ayahs
+      .filter((ayah) => matchesQuery(ayah.text, query) || matchesQuery(translationMap.get(ayah.id)?.data, query))
+      .slice(0, 50)
+      .map((ayah) => ({
+        ...attachEdition(ayah),
+        matched_identifiers: ['core.ar', DEFAULT_TRANSLATION_IDENTIFIER],
+      }));
+  }
 
-  return ayahs
-    .filter((ayah) => matchesQuery(ayah.text, query) || matchesQuery(translationMap.get(ayah.id)?.data, query))
+  return ayahIds
+    .map(id => ayahs.find(a => a.id === id))
+    .filter((a): a is Ayah => !!a)
     .map((ayah) => ({
       ...attachEdition(ayah),
-      matched_identifiers: ['core.ar', DEFAULT_TRANSLATION_IDENTIFIER],
+      matched_identifiers: ['flexsearch'],
     }));
 }
 
