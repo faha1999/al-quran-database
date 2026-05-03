@@ -4,22 +4,27 @@ const endpoints = [
   {
     method: 'GET',
     path: '/surahs',
-    description: 'Get a list of all 114 Surahs.',
+    description: 'Get all 114 Surahs. Supports optional page and limit query params.',
   },
   {
     method: 'GET',
     path: '/surahs/[id]',
-    description: 'Get details of a specific Surah by its ID (1-114), including all its Ayahs.',
+    description: 'Get one Surah by ID or number. Supports optional edition query param.',
   },
   {
     method: 'GET',
     path: '/ayahs/[id]',
-    description: 'Get a specific Ayah by its global number (1-6236).',
+    description: 'Get one Ayah by global number (1-6236). Supports optional edition query param.',
+  },
+  {
+    method: 'GET',
+    path: '/juz/[id]',
+    description: 'Get one juz by ID (1-30), including derived ayah and page ranges.',
   },
   {
     method: 'GET',
     path: '/search?q=[query]',
-    description: 'Search for Ayahs containing a specific keyword.',
+    description: 'Search ayahs. Supports edition, language, page, and limit query params.',
   },
 ];
 
@@ -30,8 +35,27 @@ export default function ApiReference() {
         <section>
           <h1 className="text-4xl font-bold mb-4">API Reference</h1>
           <p className="text-gray-400 text-lg">
-            Detailed information about all available endpoints.
+            Core endpoints stay simple. Filters open up multi-edition JSON data without changing the default response shape.
           </p>
+        </section>
+
+        <section className="grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+            <h2 className="mb-3 text-xl font-bold">Query Rules</h2>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li>`edition` and `language` cannot be used together on search.</li>
+              <li>`page` and `limit` must be positive integers.</li>
+              <li>Unknown editions or languages return HTTP `400`.</li>
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+            <h2 className="mb-3 text-xl font-bold">Default Text</h2>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li>Arabic source stays in `ayahs.text`.</li>
+              <li>Default translation stays `en.sahih` in `translation`.</li>
+              <li>Optional `edition_content` appears when an edition filter is used.</li>
+            </ul>
+          </div>
         </section>
 
         <div className="grid gap-6">
@@ -51,7 +75,8 @@ export default function ApiReference() {
                 <pre className="bg-black/50 p-4 rounded-lg text-xs text-gray-400 overflow-x-auto">
 {`{
   "success": true,
-  "data": { ... }
+  "data": { ... },
+  "meta": { ... }
 }`}
                 </pre>
               </div>

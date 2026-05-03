@@ -1,0 +1,1345 @@
+{
+  "default_translation_identifier": "en.sahih",
+  "editions": {
+    "ar.abdulbasitmurattal": {
+      "edition_id": 106,
+      "language": "ar",
+      "type": "translation",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.abdulbasitmurattal.json"
+      ]
+    },
+    "ar.abdullahbasfar": {
+      "edition_id": 107,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.abdullahbasfar.json"
+      ]
+    },
+    "ar.abdulsamad": {
+      "edition_id": 109,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.abdulsamad.json"
+      ]
+    },
+    "ar.abdurrahmaansudais": {
+      "edition_id": 108,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.abdurrahmaansudais.json"
+      ]
+    },
+    "ar.ahmedajamy": {
+      "edition_id": 111,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.ahmedajamy.json"
+      ]
+    },
+    "ar.alafasy": {
+      "edition_id": 112,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.alafasy.json"
+      ]
+    },
+    "ar.hanirifai": {
+      "edition_id": 113,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.hanirifai.json"
+      ]
+    },
+    "ar.hudhaify": {
+      "edition_id": 116,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.hudhaify.json"
+      ]
+    },
+    "ar.husary": {
+      "edition_id": 114,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.husary.json"
+      ]
+    },
+    "ar.husarymujawwad": {
+      "edition_id": 115,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.husarymujawwad.json"
+      ]
+    },
+    "ar.ibrahimakhbar": {
+      "edition_id": 117,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.ibrahimakhbar.json"
+      ]
+    },
+    "ar.jalalayn": {
+      "edition_id": 103,
+      "language": "ar",
+      "type": "tafsir",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.jalalayn.json"
+      ]
+    },
+    "ar.mahermuaiqly": {
+      "edition_id": 118,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.mahermuaiqly.json"
+      ]
+    },
+    "ar.minshawi": {
+      "edition_id": 119,
+      "language": "ar",
+      "type": "translation",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.minshawi.json"
+      ]
+    },
+    "ar.minshawimujawwad": {
+      "edition_id": 120,
+      "language": "ar",
+      "type": "translation",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.minshawimujawwad.json"
+      ]
+    },
+    "ar.muhammadayyoub": {
+      "edition_id": 121,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.muhammadayyoub.json"
+      ]
+    },
+    "ar.muhammadjibreel": {
+      "edition_id": 122,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.muhammadjibreel.json"
+      ]
+    },
+    "ar.muyassar": {
+      "edition_id": 1,
+      "language": "ar",
+      "type": "tafsir",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.muyassar.json"
+      ]
+    },
+    "ar.parhizgar": {
+      "edition_id": 126,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.parhizgar.json"
+      ]
+    },
+    "ar.saoodshuraym": {
+      "edition_id": 123,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.saoodshuraym.json"
+      ]
+    },
+    "ar.shaatree": {
+      "edition_id": 110,
+      "language": "ar",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ar.shaatree.json"
+      ]
+    },
+    "az.mammadaliyev": {
+      "edition_id": 2,
+      "language": "az",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/az.mammadaliyev.json"
+      ]
+    },
+    "az.musayev": {
+      "edition_id": 3,
+      "language": "az",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/az.musayev.json"
+      ]
+    },
+    "bg.theophanov": {
+      "edition_id": 83,
+      "language": "bg",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/bg.theophanov.json"
+      ]
+    },
+    "bn.bengali": {
+      "edition_id": 4,
+      "language": "bn",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/bn.bengali.json"
+      ]
+    },
+    "bs.korkut": {
+      "edition_id": 102,
+      "language": "bs",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/bs.korkut.json"
+      ]
+    },
+    "bs.mlivo": {
+      "edition_id": 84,
+      "language": "bs",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/bs.mlivo.json"
+      ]
+    },
+    "cs.hrbek": {
+      "edition_id": 5,
+      "language": "cs",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/cs.hrbek.json"
+      ]
+    },
+    "cs.nykl": {
+      "edition_id": 6,
+      "language": "cs",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/cs.nykl.json"
+      ]
+    },
+    "de.aburida": {
+      "edition_id": 7,
+      "language": "de",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/de.aburida.json"
+      ]
+    },
+    "de.bubenheim": {
+      "edition_id": 8,
+      "language": "de",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/de.bubenheim.json"
+      ]
+    },
+    "de.khoury": {
+      "edition_id": 9,
+      "language": "de",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/de.khoury.json"
+      ]
+    },
+    "de.zaidan": {
+      "edition_id": 10,
+      "language": "de",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/de.zaidan.json"
+      ]
+    },
+    "dv.divehi": {
+      "edition_id": 11,
+      "language": "dv",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/dv.divehi.json"
+      ]
+    },
+    "en.ahmedali": {
+      "edition_id": 12,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.ahmedali.json"
+      ]
+    },
+    "en.ahmedraza": {
+      "edition_id": 13,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.ahmedraza.json"
+      ]
+    },
+    "en.arberry": {
+      "edition_id": 14,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.arberry.json"
+      ]
+    },
+    "en.asad": {
+      "edition_id": 15,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.asad.json"
+      ]
+    },
+    "en.daryabadi": {
+      "edition_id": 16,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.daryabadi.json"
+      ]
+    },
+    "en.hilali": {
+      "edition_id": 17,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.hilali.json"
+      ]
+    },
+    "en.maududi": {
+      "edition_id": 72,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.maududi.json"
+      ]
+    },
+    "en.pickthall": {
+      "edition_id": 18,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.pickthall.json"
+      ]
+    },
+    "en.qaribullah": {
+      "edition_id": 19,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.qaribullah.json"
+      ]
+    },
+    "en.sahih": {
+      "edition_id": 20,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.sahih.json"
+      ]
+    },
+    "en.sarwar": {
+      "edition_id": 21,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.sarwar.json"
+      ]
+    },
+    "en.shakir": {
+      "edition_id": 73,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.shakir.json"
+      ]
+    },
+    "en.transliteration": {
+      "edition_id": 74,
+      "language": "en",
+      "type": "transliteration",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.transliteration.json"
+      ]
+    },
+    "en.walk": {
+      "edition_id": 124,
+      "language": "en",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.walk.json"
+      ]
+    },
+    "en.yusufali": {
+      "edition_id": 22,
+      "language": "en",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/en.yusufali.json"
+      ]
+    },
+    "es.asad": {
+      "edition_id": 86,
+      "language": "es",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/es.asad.json"
+      ]
+    },
+    "es.cortes": {
+      "edition_id": 75,
+      "language": "es",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/es.cortes.json"
+      ]
+    },
+    "fa.ansarian": {
+      "edition_id": 76,
+      "language": "fa",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fa.ansarian.json"
+      ]
+    },
+    "fa.ayati": {
+      "edition_id": 23,
+      "language": "fa",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fa.ayati.json"
+      ]
+    },
+    "fa.bahrampour": {
+      "edition_id": 85,
+      "language": "fa",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fa.bahrampour.json"
+      ]
+    },
+    "fa.fooladvand": {
+      "edition_id": 24,
+      "language": "fa",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fa.fooladvand.json"
+      ]
+    },
+    "fa.ghomshei": {
+      "edition_id": 25,
+      "language": "fa",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fa.ghomshei.json"
+      ]
+    },
+    "fa.hedayatfarfooladvand": {
+      "edition_id": 125,
+      "language": "fa",
+      "type": "translation",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fa.hedayatfarfooladvand.json"
+      ]
+    },
+    "fa.khorramdel": {
+      "edition_id": 100,
+      "language": "fa",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fa.khorramdel.json"
+      ]
+    },
+    "fa.khorramshahi": {
+      "edition_id": 87,
+      "language": "fa",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fa.khorramshahi.json"
+      ]
+    },
+    "fa.makarem": {
+      "edition_id": 26,
+      "language": "fa",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fa.makarem.json"
+      ]
+    },
+    "fa.moezzi": {
+      "edition_id": 101,
+      "language": "fa",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fa.moezzi.json"
+      ]
+    },
+    "fa.mojtabavi": {
+      "edition_id": 88,
+      "language": "fa",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fa.mojtabavi.json"
+      ]
+    },
+    "fr.hamidullah": {
+      "edition_id": 27,
+      "language": "fr",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fr.hamidullah.json"
+      ]
+    },
+    "fr.leclerc": {
+      "edition_id": 129,
+      "language": "fr",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/fr.leclerc.json"
+      ]
+    },
+    "ha.gumi": {
+      "edition_id": 28,
+      "language": "ha",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ha.gumi.json"
+      ]
+    },
+    "hi.farooq": {
+      "edition_id": 89,
+      "language": "hi",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/hi.farooq.json"
+      ]
+    },
+    "hi.hindi": {
+      "edition_id": 29,
+      "language": "hi",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/hi.hindi.json"
+      ]
+    },
+    "id.indonesian": {
+      "edition_id": 30,
+      "language": "id",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/id.indonesian.json"
+      ]
+    },
+    "id.muntakhab": {
+      "edition_id": 90,
+      "language": "id",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/id.muntakhab.json"
+      ]
+    },
+    "it.piccardo": {
+      "edition_id": 31,
+      "language": "it",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/it.piccardo.json"
+      ]
+    },
+    "ja.japanese": {
+      "edition_id": 32,
+      "language": "ja",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ja.japanese.json"
+      ]
+    },
+    "ko.korean": {
+      "edition_id": 33,
+      "language": "ko",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ko.korean.json"
+      ]
+    },
+    "ku.asan": {
+      "edition_id": 34,
+      "language": "ku",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ku.asan.json"
+      ]
+    },
+    "ml.abdulhameed": {
+      "edition_id": 35,
+      "language": "ml",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ml.abdulhameed.json"
+      ]
+    },
+    "ms.basmeih": {
+      "edition_id": 91,
+      "language": "ms",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ms.basmeih.json"
+      ]
+    },
+    "nl.keyzer": {
+      "edition_id": 36,
+      "language": "nl",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/nl.keyzer.json"
+      ]
+    },
+    "no.berg": {
+      "edition_id": 37,
+      "language": "no",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/no.berg.json"
+      ]
+    },
+    "pl.bielawskiego": {
+      "edition_id": 38,
+      "language": "pl",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/pl.bielawskiego.json"
+      ]
+    },
+    "pt.elhayek": {
+      "edition_id": 39,
+      "language": "pt",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/pt.elhayek.json"
+      ]
+    },
+    "quran-buck": {
+      "edition_id": 133,
+      "language": "ar",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/quran-buck.json"
+      ]
+    },
+    "quran-corpus-qd": {
+      "edition_id": 131,
+      "language": "ar",
+      "type": "quran",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/quran-corpus-qd.json"
+      ]
+    },
+    "quran-kids": {
+      "edition_id": 130,
+      "language": "ar",
+      "type": "quran",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/quran-kids.json"
+      ]
+    },
+    "quran-simple": {
+      "edition_id": 77,
+      "language": "ar",
+      "type": "quran",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/quran-simple.json"
+      ]
+    },
+    "quran-simple-clean": {
+      "edition_id": 78,
+      "language": "ar",
+      "type": "quran",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/quran-simple-clean.json"
+      ]
+    },
+    "quran-simple-enhanced": {
+      "edition_id": 79,
+      "language": "ar",
+      "type": "quran",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/quran-simple-enhanced.json"
+      ]
+    },
+    "quran-simple-min": {
+      "edition_id": 80,
+      "language": "ar",
+      "type": "quran",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/quran-simple-min.json"
+      ]
+    },
+    "quran-tajweed": {
+      "edition_id": 104,
+      "language": "ar",
+      "type": "quran",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/quran-tajweed.json"
+      ]
+    },
+    "quran-uthmani": {
+      "edition_id": 82,
+      "language": "ar",
+      "type": "quran",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/quran-uthmani.json"
+      ]
+    },
+    "quran-uthmani-min": {
+      "edition_id": 81,
+      "language": "ar",
+      "type": "quran",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/quran-uthmani-min.json"
+      ]
+    },
+    "quran-wordbyword": {
+      "edition_id": 105,
+      "language": "ar",
+      "type": "quran",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/quran-wordbyword.json"
+      ]
+    },
+    "ro.grigore": {
+      "edition_id": 40,
+      "language": "ro",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ro.grigore.json"
+      ]
+    },
+    "ru.abuadel": {
+      "edition_id": 92,
+      "language": "ru",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ru.abuadel.json"
+      ]
+    },
+    "ru.krachkovsky": {
+      "edition_id": 93,
+      "language": "ru",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ru.krachkovsky.json"
+      ]
+    },
+    "ru.kuliev": {
+      "edition_id": 41,
+      "language": "ru",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ru.kuliev.json"
+      ]
+    },
+    "ru.muntahab": {
+      "edition_id": 94,
+      "language": "ru",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ru.muntahab.json"
+      ]
+    },
+    "ru.osmanov": {
+      "edition_id": 42,
+      "language": "ru",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ru.osmanov.json"
+      ]
+    },
+    "ru.porokhova": {
+      "edition_id": 43,
+      "language": "ru",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ru.porokhova.json"
+      ]
+    },
+    "ru.sablukov": {
+      "edition_id": 95,
+      "language": "ru",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ru.sablukov.json"
+      ]
+    },
+    "sd.amroti": {
+      "edition_id": 44,
+      "language": "sd",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/sd.amroti.json"
+      ]
+    },
+    "si.naseemismail": {
+      "edition_id": 132,
+      "language": "si",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/si.naseemismail.json"
+      ]
+    },
+    "so.abduh": {
+      "edition_id": 45,
+      "language": "so",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/so.abduh.json"
+      ]
+    },
+    "sq.ahmeti": {
+      "edition_id": 46,
+      "language": "sq",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/sq.ahmeti.json"
+      ]
+    },
+    "sq.mehdiu": {
+      "edition_id": 47,
+      "language": "sq",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/sq.mehdiu.json"
+      ]
+    },
+    "sq.nahi": {
+      "edition_id": 48,
+      "language": "sq",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/sq.nahi.json"
+      ]
+    },
+    "sv.bernstrom": {
+      "edition_id": 49,
+      "language": "sv",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/sv.bernstrom.json"
+      ]
+    },
+    "sw.barwani": {
+      "edition_id": 50,
+      "language": "sw",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/sw.barwani.json"
+      ]
+    },
+    "ta.tamil": {
+      "edition_id": 51,
+      "language": "ta",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ta.tamil.json"
+      ]
+    },
+    "tg.ayati": {
+      "edition_id": 52,
+      "language": "tg",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/tg.ayati.json"
+      ]
+    },
+    "th.thai": {
+      "edition_id": 53,
+      "language": "th",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/th.thai.json"
+      ]
+    },
+    "tr.ates": {
+      "edition_id": 54,
+      "language": "tr",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/tr.ates.json"
+      ]
+    },
+    "tr.bulac": {
+      "edition_id": 55,
+      "language": "tr",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/tr.bulac.json"
+      ]
+    },
+    "tr.diyanet": {
+      "edition_id": 56,
+      "language": "tr",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/tr.diyanet.json"
+      ]
+    },
+    "tr.golpinarli": {
+      "edition_id": 57,
+      "language": "tr",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/tr.golpinarli.json"
+      ]
+    },
+    "tr.ozturk": {
+      "edition_id": 58,
+      "language": "tr",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/tr.ozturk.json"
+      ]
+    },
+    "tr.transliteration": {
+      "edition_id": 59,
+      "language": "tr",
+      "type": "transliteration",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/tr.transliteration.json"
+      ]
+    },
+    "tr.vakfi": {
+      "edition_id": 60,
+      "language": "tr",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/tr.vakfi.json"
+      ]
+    },
+    "tr.yazir": {
+      "edition_id": 61,
+      "language": "tr",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/tr.yazir.json"
+      ]
+    },
+    "tr.yildirim": {
+      "edition_id": 62,
+      "language": "tr",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/tr.yildirim.json"
+      ]
+    },
+    "tr.yuksel": {
+      "edition_id": 63,
+      "language": "tr",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/tr.yuksel.json"
+      ]
+    },
+    "tt.nugman": {
+      "edition_id": 64,
+      "language": "tt",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/tt.nugman.json"
+      ]
+    },
+    "ug.saleh": {
+      "edition_id": 65,
+      "language": "ug",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ug.saleh.json"
+      ]
+    },
+    "ur.ahmedali": {
+      "edition_id": 66,
+      "language": "ur",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ur.ahmedali.json"
+      ]
+    },
+    "ur.jalandhry": {
+      "edition_id": 67,
+      "language": "ur",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ur.jalandhry.json"
+      ]
+    },
+    "ur.jawadi": {
+      "edition_id": 68,
+      "language": "ur",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ur.jawadi.json"
+      ]
+    },
+    "ur.junagarhi": {
+      "edition_id": 96,
+      "language": "ur",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ur.junagarhi.json"
+      ]
+    },
+    "ur.kanzuliman": {
+      "edition_id": 69,
+      "language": "ur",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ur.kanzuliman.json"
+      ]
+    },
+    "ur.khan": {
+      "edition_id": 127,
+      "language": "ur",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ur.khan.json"
+      ]
+    },
+    "ur.maududi": {
+      "edition_id": 97,
+      "language": "ur",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ur.maududi.json"
+      ]
+    },
+    "ur.qadri": {
+      "edition_id": 70,
+      "language": "ur",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/ur.qadri.json"
+      ]
+    },
+    "uz.sodik": {
+      "edition_id": 71,
+      "language": "uz",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/uz.sodik.json"
+      ]
+    },
+    "zh.chinese": {
+      "edition_id": 128,
+      "language": "zh",
+      "type": "versebyverse",
+      "format": "audio",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/zh.chinese.json"
+      ]
+    },
+    "zh.jian": {
+      "edition_id": 98,
+      "language": "zh",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/zh.jian.json"
+      ]
+    },
+    "zh.majian": {
+      "edition_id": 99,
+      "language": "zh",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/zh.majian.json"
+      ]
+    },
+    "zh.mazhonggang": {
+      "edition_id": 134,
+      "language": "zh",
+      "type": "translation",
+      "format": "text",
+      "row_count": 6236,
+      "files": [
+        "ayah-editions/zh.mazhonggang.json"
+      ]
+    }
+  }
+}

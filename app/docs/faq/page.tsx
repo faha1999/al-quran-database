@@ -7,11 +7,11 @@ const faqs = [
   },
   {
     question: 'Where does the data come from?',
-    answer: 'The data is sourced from established open-source Quranic databases and verified for accuracy.',
+    answer: 'The data comes from the local Quran SQL dump, then goes through a deterministic conversion and verification pipeline before JSON is shipped.',
   },
   {
     question: 'Can I contribute more translations?',
-    answer: 'Absolutely! We encourage contributions. Please check our GitHub repository for the data structure.',
+    answer: 'Yes. The dataset now stores edition metadata separately from ayah-edition content, so new editions can fit the same normalized JSON layout.',
   },
   {
     question: 'Is there a rate limit?',

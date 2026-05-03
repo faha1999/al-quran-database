@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface ApiCardProps {
   method: string;
   path: string;

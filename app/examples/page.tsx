@@ -4,17 +4,27 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, Loader2 } from 'lucide-react';
 
+import type { Surah } from '@/lib/quran-types';
+
+interface SurahsResponse {
+  success: boolean;
+  data: Surah[];
+}
+
 export default function ExamplesPage() {
-  const [surahs, setSurahs] = useState<any[]>([]);
+  const [surahs, setSurahs] = useState<Surah[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/surahs')
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json() as Promise<SurahsResponse>)
+      .then((data) => {
         if (data.success) {
-          setSurahs(data.data.slice(0, 10)); // Show only first 10 for example
+          setSurahs(data.data.slice(0, 10));
         }
+        setLoading(false);
+      })
+      .catch(() => {
         setLoading(false);
       });
   }, []);

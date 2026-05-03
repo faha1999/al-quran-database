@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "data:convert": "python3 scripts/convert_quran_sql.py",
+    "data:verify": "python3 scripts/verify_quran_data.py"
   },
   "dependencies": {
     "clsx": "2.1.1",

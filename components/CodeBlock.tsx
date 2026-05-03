@@ -1,4 +1,3 @@
-import React from 'react';
 import { Copy } from 'lucide-react';
 
 interface CodeBlockProps {
@@ -13,6 +12,9 @@ export default function CodeBlock({ code, language = 'bash' }: CodeBlockProps) {
 
   return (
     <div className="relative group">
+      <span className="absolute left-3 top-3 rounded-md bg-zinc-800 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400">
+        {language}
+      </span>
       <pre className="bg-black border border-zinc-800 rounded-xl p-4 overflow-x-auto text-sm font-mono text-zinc-300">
         <code>{code}</code>
       </pre>

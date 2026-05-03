@@ -1,12 +1,13 @@
-import React from 'react';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 
-export default function DocsLayout({ children }: { children: React.ReactNode }) {
+export default function DocsLayout({ children }: { children: ReactNode }) {
   const navItems = [
     { title: 'Getting Started', href: '/docs' },
     { title: 'API Reference', href: '/docs/api-reference' },
     { title: 'Surahs', href: '/docs/surahs' },
     { title: 'Ayahs', href: '/docs/ayahs' },
+    { title: 'Juz', href: '/docs/juz' },
     { title: 'Search', href: '/docs/search' },
     { title: 'FAQ', href: '/docs/faq' },
   ];

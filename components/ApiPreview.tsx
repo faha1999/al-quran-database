@@ -1,18 +1,19 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Play, Check, Copy } from 'lucide-react';
 
 interface ApiPreviewProps {
   endpoint: string;
   method?: string;
-  initialData?: any;
+  initialData?: unknown;
 }
 
 export default function ApiPreview({ endpoint, method = 'GET', initialData }: ApiPreviewProps) {
-  const [data, setData] = useState<any>(initialData || null);
+  const [data, setData] = useState<unknown>(initialData ?? null);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const hasData = data !== null;
 
   const fetchData = async () => {
     setLoading(true);
@@ -20,7 +21,7 @@ export default function ApiPreview({ endpoint, method = 'GET', initialData }: Ap
       const res = await fetch(endpoint);
       const json = await res.json();
       setData(json);
-    } catch (error) {
+    } catch {
       setData({ error: 'Failed to fetch data' });
     }
     setLoading(false);
@@ -54,7 +55,7 @@ export default function ApiPreview({ endpoint, method = 'GET', initialData }: Ap
             )}
             Run
           </button>
-          {data && (
+          {hasData ? (
             <button
               onClick={copyData}
               className="p-1.5 hover:bg-zinc-800 rounded-lg transition-colors text-zinc-400"
@@ -62,16 +63,16 @@ export default function ApiPreview({ endpoint, method = 'GET', initialData }: Ap
             >
               {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
             </button>
-          )}
+          ) : null}
         </div>
       </div>
       <div className="p-4 max-h-[300px] overflow-y-auto font-mono text-[11px] leading-relaxed">
-        {data ? (
+        {hasData ? (
           <pre className="text-blue-400">
             {JSON.stringify(data, null, 2)}
           </pre>
         ) : (
-          <p className="text-zinc-600 italic">Click "Run" to see live API response...</p>
+          <p className="text-zinc-600 italic">Click &quot;Run&quot; to see live API response...</p>
         )}
       </div>
     </div>
