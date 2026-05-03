@@ -9,29 +9,37 @@ To empower developers to build beautiful and intelligent Islamic applications by
 
 ## ✨ Key Features
 - **Clean REST API**: Structured JSON responses for Surahs and Ayahs.
-- **Fast Search**: Instant keyword search powered by FlexSearch.
+- **Fast Search**: Instant keyword search and ranking powered by FlexSearch.
 - **Modern Docs**: Built with Next.js App Router for maximum speed.
-- **Developer First**: Copy-paste friendly examples and live API playground.
-- **Edge Ready**: Optimized for global, low-latency delivery.
+- **Developer First**: Copy-paste friendly examples and a robust JS/TS SDK.
+- **Relational Exports**: Direct downloads for PostgreSQL and indexed SQLite databases.
+- **Edge Ready**: Optimized for global, low-latency delivery with sharded JSON loading.
 
 ## 🛠️ Tech Stack
-- **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS
-- **Search**: FlexSearch
-- **Data**: Static Optimized JSON
+- **Framework**: Next.js 16.2 (App Router)
+- **Styling**: Tailwind CSS v4
+- **Search**: FlexSearch (Ranked, Fuzzy)
+- **Data**: Sharded Optimized JSON (Edge-ready)
 - **Deployment**: Vercel
 
 ## 📖 API Documentation
 
 ### Endpoints
 - `GET /api/surahs`: List all 114 Surahs.
-- `GET /api/surahs/[id]`: Get Surah details with all Ayahs.
 - `GET /api/ayahs/[id]`: Get Ayah by global number (1-6236).
-- `GET /api/search?q=query`: High-performance keyword search.
+- `GET /api/juz/[id]`: Get Juz details (1-30).
+- `GET /api/hizb/[id]`: Get Hizb details (1-60).
+- `GET /api/rub/[id]`: Get Rub (Quarter) details (1-480).
+- `GET /api/pages/[id]`: Get Mushaf page details (1-604).
+- `GET /api/words?ayah_id=[id]`: Get word-by-word breakdown.
+- `GET /api/search?q=query`: High-performance ranked search.
 
-### Quick Start
-```bash
-curl https://quran-dev.vercel.app/api/surahs/1
+### JS/TS SDK
+```typescript
+import { quran } from './lib/sdk';
+
+const ayah = await quran.getAyah(1);
+console.log(ayah.text);
 ```
 
 ## 🏗️ Local Development
@@ -43,22 +51,26 @@ curl https://quran-dev.vercel.app/api/surahs/1
    pnpm install
    ```
 
-2. **Run Dev Server**:
+2. **Data Pipeline**:
+   The project uses a Python-based pipeline to convert SQL data into sharded JSON.
+   ```bash
+   python scripts/convert_quran_sql.py
+   python scripts/generate_word_data.py
+   python scripts/export_sql.py
+   ```
+
+3. **Run Dev Server**:
    ```bash
    pnpm dev
    ```
 
-3. **Build for Production**:
-   ```bash
-   pnpm build
-   ```
-
 ## 🗺️ Roadmap
-- [x] REST API Layer
-- [x] Documentation Site
-- [x] Keyword Search
+- [x] REST API Layer & Sharded Data
+- [x] JS/TS Developer SDK
+- [x] Relational SQL Exports (Postgres/SQLite)
+- [x] Word-by-Word linguistic data
+- [x] Advanced Ranked Search
 - [ ] Semantic Search (Embeddings)
-- [ ] Multi-language Translations
 - [ ] Developer Playground
 
 ## 🤝 Contributing
