@@ -61,6 +61,7 @@ def generated_counts(output_dir: Path) -> dict[str, object]:
     editions = load_json(output_dir / "editions.json")
     juzs = load_json(output_dir / "juzs.json")
     hizbs = load_json(output_dir / "hizbs.json")
+    rubs = load_json(output_dir / "rubs.json")
     manifest = load_json(output_dir / "edition-manifest.json")
 
     ayah_ids = {int(ayah["id"]) for ayah in ayahs}
@@ -100,6 +101,8 @@ def generated_counts(output_dir: Path) -> dict[str, object]:
         raise AssertionError("Derived juz count mismatch")
     if len(hizbs) != len({int(ayah["hizb_id"]) for ayah in ayahs}):
         raise AssertionError("Derived hizb count mismatch")
+    if len(rubs) != len({int(ayah["rub_id"]) for ayah in ayahs}):
+        raise AssertionError("Derived rub count mismatch")
 
     return {
         "surahs": len(surahs),

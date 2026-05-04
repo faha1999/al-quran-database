@@ -15,6 +15,7 @@ export interface Ayah {
   page: number;
   surah_id: number;
   hizb_id: number;
+  rub_id: number;
   juz_id: number;
   sajda: boolean;
   words?: Word[];

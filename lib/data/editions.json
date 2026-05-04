@@ -1204,14 +1204,5 @@
     "englishName": "马仲刚",
     "format": "text",
     "type": "translation"
-  },
-  {
-    "id": 135,
-    "identifier": "ar.qurtubi",
-    "language": "ar",
-    "name": "تفسير القرطبي",
-    "englishName": "Tafseer Al Qurtubi",
-    "format": "text",
-    "type": "tafsir"
   }
 ]

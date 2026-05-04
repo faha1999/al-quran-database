@@ -355,18 +355,14 @@ export function getAyahsByJuz(id: number, identifier?: string): ResolvedAyah[] {
 
 export function getAyahsByHizb(id: number, identifier?: string): ResolvedAyah[] {
   return resolveAyahs(
-    ayahs.filter((ayah) => {
-      const rubId = ayah.hizb_id;
-      const hizbId = Math.floor((rubId - 1) / 4) + 1;
-      return hizbId === id;
-    }),
+    ayahs.filter((ayah) => ayah.hizb_id === id),
     identifier,
   );
 }
 
 export function getAyahsByRub(id: number, identifier?: string): ResolvedAyah[] {
   return resolveAyahs(
-    ayahs.filter((ayah) => ayah.hizb_id === id),
+    ayahs.filter((ayah) => ayah.rub_id === id),
     identifier,
   );
 }

@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "eslint .",
     "data:convert": "python3 scripts/convert_quran_sql.py",
-    "data:verify": "python3 scripts/verify_quran_data.py"
+    "data:verify": "python3 scripts/verify_quran_data.py",
+    "data:export": "python3 scripts/export_sql.py",
+    "data:migrate": "python3 scripts/migrate_db.py",
+    "data:seed": "python3 scripts/seed_data.py",
+    "data:bench": "python3 scripts/performance_metrics.py"
   },
   "dependencies": {
     "clsx": "2.1.1",
