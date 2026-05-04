@@ -6,6 +6,7 @@ import {
   validateLanguageFilter,
   validateSearchEditionFilter,
 } from '@/lib/data-loader';
+import { logger } from '@/lib/logger';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -18,9 +19,12 @@ export async function GET(request: Request) {
     );
   }
 
+  let editionParam: string | null = null;
+  let languageParam: string | null = null;
+
   try {
-    const editionParam = searchParams.get('edition');
-    const languageParam = searchParams.get('language');
+    editionParam = searchParams.get('edition');
+    languageParam = searchParams.get('language');
 
     if (editionParam && languageParam) {
       return NextResponse.json(
@@ -55,9 +59,11 @@ export async function GET(request: Request) {
         : 500;
 
     if (status === 400) {
+      logger.warn(`Search validation error: ${message}`, { query, editionParam, languageParam });
       return NextResponse.json({ success: false, error: message }, { status });
     }
 
+    logger.error('Search API internal error', { error: message, stack: error instanceof Error ? error.stack : undefined, query });
     return NextResponse.json({ success: false, error: 'Search failed' }, { status: 500 });
   }
 }

@@ -35,7 +35,7 @@ export default function Home() {
         </h1>
       </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left gap-4">
+      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left gap-4 mt-12">
         <Link
           href="/docs"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-zinc-700 hover:bg-zinc-800/30"
@@ -106,7 +106,7 @@ export default function Home() {
         <div className="flex flex-col items-center text-center p-6 bg-zinc-900/50 rounded-2xl border border-zinc-800">
           <Zap className="w-10 h-10 mb-4 text-yellow-500" />
           <h3 className="text-xl font-bold mb-2">Edge Ready</h3>
-          <p className="text-gray-400 text-sm">Optimized for Vercel Edge and static delivery.</p>
+          <p className="text-gray-400 text-sm">Optimized for static delivery on GitHub Pages.</p>
         </div>
         <div className="flex flex-col items-center text-center p-6 bg-zinc-900/50 rounded-2xl border border-zinc-800">
           <Code className="w-10 h-10 mb-4 text-green-500" />

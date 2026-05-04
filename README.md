@@ -20,7 +20,7 @@ To empower developers to build beautiful and intelligent Islamic applications by
 - **Styling**: Tailwind CSS v4
 - **Search**: FlexSearch (Ranked, Fuzzy)
 - **Data**: Sharded Optimized JSON (Edge-ready)
-- **Deployment**: Vercel
+- **Deployment**: GitHub Pages
 
 ## 📖 API Documentation
 

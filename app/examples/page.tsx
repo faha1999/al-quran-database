@@ -81,7 +81,7 @@ export default function ExamplesPage() {
           <h2 className="text-2xl font-bold">Code Example (Next.js)</h2>
           <pre className="bg-zinc-900 p-6 rounded-2xl border border-zinc-800 text-sm overflow-x-auto text-gray-300">
 {`async function getSurahs() {
-  const res = await fetch('https://quran-dev.vercel.app/api/surahs');
+  const res = await fetch('https://faha1999.github.io/al-quran-database/api/surahs');
   const data = await res.json();
   
   if (data.success) {

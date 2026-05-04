@@ -12,7 +12,12 @@
     "data:export": "python3 scripts/export_sql.py",
     "data:migrate": "python3 scripts/migrate_db.py",
     "data:seed": "python3 scripts/seed_data.py",
-    "data:bench": "python3 scripts/performance_metrics.py"
+    "data:bench": "python3 scripts/performance_metrics.py",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "format": "prettier --write .",
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
     "clsx": "2.1.1",
@@ -26,12 +31,17 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.2.4",
-    "@types/node": "25.6.0",
+    "@types/node": "^25.6.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "@vitest/ui": "^4.1.5",
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.3",
     "tailwindcss": "4.2.4",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "vitest": "^4.1.5"
   }
 }

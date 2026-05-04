@@ -2,27 +2,43 @@
 
 We love your input! We want to make contributing to this project as easy and transparent as possible.
 
-## Pull Requests
+## Our Tech Stack
+- **Framework**: Next.js 16+ (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Testing**: Vitest
+- **Linting**: ESLint + Prettier
 
-1. Fork the repo and create your branch from `main`.
-2. If you've added code that should be tested, add tests.
-3. If you've changed APIs, update the documentation.
-4. Ensure the test suite passes.
-5. Make sure your code lints.
+## Contribution Workflow
+
+1. **Fork the repo** and create your branch from `main`.
+2. **Setup environment**:
+   ```bash
+   npm install
+   ```
+3. **Make your changes**:
+   - Follow the [Coding Style Guide](docs/coding-style.md).
+   - Ensure all functions have proper TSDoc comments.
+   - Use absolute imports (e.g., `@/lib/...`).
+4. **Test your changes**:
+   ```bash
+   npm test
+   ```
+5. **Format & Lint**:
+   ```bash
+   npm run format
+   npm run lint:fix
+   ```
+6. **Update Documentation**:
+   - If you've changed APIs, update the `/docs` pages.
+7. **Submit a Pull Request**.
 
 ## Data Contributions
 
 If you are contributing new translations or editions:
 1. Ensure the data is in JSON format matching our schema.
-2. Include the source and license of the data.
-3. Verify the accuracy of the text.
-
-## Development
-
-```bash
-pnpm install
-pnpm dev
-```
+2. Use the `scripts/verify_quran_data.py` to validate your data.
+3. Include the source and license of the data.
 
 ## License
 

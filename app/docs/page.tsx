@@ -24,7 +24,7 @@ export default function DocsPage() {
             </div>
             <pre className="bg-black p-4 rounded-md overflow-x-auto">
               <code className="text-blue-400">
-                curl https://quran-dev.vercel.app/api/search?q=mercy
+                curl https://faha1999.github.io/al-quran-database/api/search?q=mercy
               </code>
             </pre>
           </div>

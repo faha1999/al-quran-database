@@ -103,10 +103,17 @@ export default function ApiReference() {
               <div className="pt-4 border-t border-zinc-800">
                 <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Example Response</h4>
                 <pre className="bg-black/50 p-4 rounded-lg text-xs text-gray-400 overflow-x-auto">
-{`{
+{`// Success Response
+{
   "success": true,
   "data": { ... },
   "meta": { ... }
+}
+
+// Error Response
+{
+  "success": false,
+  "error": "Error message description"
 }`}
                 </pre>
               </div>
