@@ -27,7 +27,6 @@ npm run build
 ## SDK auto-publish
 
 - GitHub Actions publishes the SDK from `main` via `.github/workflows/publish-sdk.yml`.
-- Store an npm automation token in repository secret `NPM_TOKEN`.
 - Qualifying `main` branch changes auto-publish the SDK with the next patch version from npm.
 - SDK release scope is limited to `packages/sdk/**`, root npm/installability files, and the publish workflow itself.
 - The workflow verifies the tarball first, computes the next patch from npm registry state, stages a temporary publish directory, and publishes from CI.

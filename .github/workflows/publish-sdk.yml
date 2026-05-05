@@ -24,12 +24,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
           registry-url: https://registry.npmjs.org
 
@@ -38,17 +38,6 @@ jobs:
 
       - name: Verify SDK package
         run: npm run verify:sdk
-
-      - name: Check npm token presence
-        id: auth
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          if [ -n "$NODE_AUTH_TOKEN" ]; then
-            echo "has_token=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "has_token=false" >> "$GITHUB_OUTPUT"
-          fi
 
       - name: Read package metadata
         id: pkg
@@ -117,9 +106,6 @@ jobs:
           echo "publish_dir=$PUBLISH_DIR" >> "$GITHUB_OUTPUT"
 
       - name: Publish package
-        if: ${{ steps.auth.outputs.has_token == 'true' }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           set -euo pipefail
 
@@ -155,7 +141,7 @@ jobs:
           publish_once() {
             VERSION="$1"
             stage_version "$VERSION"
-            if (cd "$PUBLISH_DIR" && npm publish --access public --provenance 2>&1 | tee "$RUNNER_TEMP/sdk-publish.log"); then
+            if (cd "$PUBLISH_DIR" && npm publish --access public 2>&1 | tee "$RUNNER_TEMP/sdk-publish.log"); then
               write_summary "$VERSION" "published"
               return 0
             fi
@@ -183,16 +169,17 @@ jobs:
             fi
           fi
 
+          if grep -Eq 'EOTP|ENEEDAUTH|Unable to authenticate|requires a one-time password' "$RUNNER_TEMP/sdk-publish.log"; then
+            {
+              echo "## SDK publish"
+              echo
+              echo "- package: \`$PACKAGE_NAME\`"
+              echo "- version: \`$TARGET_VERSION\`"
+              echo "- status: failed authentication"
+              echo "- action: configure npm Trusted Publisher for repo \`faha1999/al-quran-database\` and workflow \`.github/workflows/publish-sdk.yml\`"
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
           write_summary "$TARGET_VERSION" "failed"
           exit 1
-
-      - name: Skip publish because token missing
-        if: ${{ steps.auth.outputs.has_token != 'true' }}
-        run: |
-          echo "NPM_TOKEN secret missing. Skipping npm publish."
-          {
-            echo "## SDK publish"
-            echo
-            echo "- package: \`${{ steps.pkg.outputs.name }}\`"
-            echo "- status: skipped (missing \`NPM_TOKEN\`)"
-          } >> "$GITHUB_STEP_SUMMARY"
