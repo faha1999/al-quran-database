@@ -112,7 +112,7 @@ jobs:
           cp packages/sdk/README.md "$PUBLISH_DIR/README.md"
           cp packages/sdk/LICENSE "$PUBLISH_DIR/LICENSE"
 
-          node -e 'const fs = require("node:fs"); const path = require("node:path"); const pkgPath = path.join(process.cwd(), "packages/sdk/package.json"); const outPath = path.join(process.env.PUBLISH_DIR, "package.json"); const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8")); pkg.version = process.env.NEXT_VERSION; fs.writeFileSync(outPath, `${JSON.stringify(pkg, null, 2)}\n`);'
+          node -e 'const fs = require("node:fs"); const path = require("node:path"); const pkgPath = path.join(process.cwd(), "packages/sdk/package.json"); const outPath = path.join(process.env.PUBLISH_DIR, "package.json"); const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8")); pkg.version = process.env.NEXT_VERSION; delete pkg.scripts; fs.writeFileSync(outPath, `${JSON.stringify(pkg, null, 2)}\n`);'
 
           echo "publish_dir=$PUBLISH_DIR" >> "$GITHUB_OUTPUT"
 
