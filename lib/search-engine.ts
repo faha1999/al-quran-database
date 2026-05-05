@@ -2,6 +2,7 @@ import { Document } from 'flexsearch';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import type { Ayah, AyahEdition, EditionManifest } from './quran-types';
+import { logger } from './logger';
 
 const DATA_DIR = path.join(process.cwd(), 'lib', 'data');
 const readJson = <T>(filePath: string): T => JSON.parse(readFileSync(filePath, 'utf8')) as T;
@@ -13,11 +14,11 @@ const defaultTranslationIdentifier = editionManifest.default_translation_identif
 
 // Load default translation content
 const defaultTranslationFiles = editionManifest.editions[defaultTranslationIdentifier].files;
-const defaultTranslationData = defaultTranslationFiles.flatMap(file => 
-  readJson<AyahEdition[]>(path.join(DATA_DIR, file))
+const defaultTranslationData = defaultTranslationFiles.flatMap((file) =>
+  readJson<AyahEdition[]>(path.join(DATA_DIR, file)),
 );
 
-const translationMap = new Map(defaultTranslationData.map(item => [item.ayah_id, item.data]));
+const translationMap = new Map(defaultTranslationData.map((item) => [item.ayah_id, item.data]));
 
 interface SearchDoc {
   id: number;
@@ -25,8 +26,7 @@ interface SearchDoc {
   translation: string;
   surah_id: number;
   ayah_number: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
+  [key: string]: string | number;
 }
 
 // Create FlexSearch Document Index
@@ -34,25 +34,25 @@ const index = new Document<SearchDoc>({
   document: {
     id: 'id',
     index: ['text', 'translation'],
-    store: ['id', 'surah_id', 'ayah_number']
+    store: ['id', 'surah_id', 'ayah_number'],
   },
   tokenize: 'full',
   context: true,
-  cache: true
+  cache: true,
 });
 
 // Initialize Index
-console.log('Initializing Search Index...');
+logger.debug('Initializing search index');
 ayahs.forEach((ayah) => {
   index.add({
     id: ayah.id,
     text: ayah.text,
     translation: translationMap.get(ayah.id) || '',
     surah_id: ayah.surah_id,
-    ayah_number: ayah.number_in_surah
+    ayah_number: ayah.number_in_surah,
   });
 });
-console.log('Search Index Ready.');
+logger.debug('Search index ready', { totalAyahs: ayahs.length });
 
 interface SearchResult {
   id: number;
@@ -63,17 +63,17 @@ export function advancedSearch(query: string, limit: number = 20) {
   const results = index.search(query, {
     limit,
     enrich: true,
-    suggest: true
+    suggest: true,
   });
 
   const mergedResults = new Map<number, SearchDoc>();
 
-  results.forEach(fieldResult => {
+  results.forEach((fieldResult) => {
     fieldResult.result.forEach((item: unknown) => {
       const searchResult = item as SearchResult;
       const doc = searchResult.doc;
       const docId = searchResult.id;
-      
+
       if (!mergedResults.has(docId)) {
         mergedResults.set(docId, doc);
       }

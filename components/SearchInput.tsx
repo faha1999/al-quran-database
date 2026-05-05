@@ -8,7 +8,13 @@ interface SearchInputProps {
   loading?: boolean;
 }
 
-export default function SearchInput({ value, onChange, onSearch, placeholder, loading }: SearchInputProps) {
+export default function SearchInput({
+  value,
+  onChange,
+  onSearch,
+  placeholder,
+  loading,
+}: SearchInputProps) {
   return (
     <div className="relative group w-full">
       <input
@@ -16,7 +22,7 @@ export default function SearchInput({ value, onChange, onSearch, placeholder, lo
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && onSearch()}
-        placeholder={placeholder || "Search..."}
+        placeholder={placeholder || 'Search...'}
         className="w-full bg-zinc-900 border border-zinc-800 rounded-xl py-3 px-12 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-sm"
       />
       <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 group-focus-within:text-blue-500 transition-colors" />

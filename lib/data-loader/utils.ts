@@ -1,4 +1,4 @@
-import { Ayah, Edition, EditionSummary, ResolvedAyah } from '@/lib/quran-types';
+import { Ayah, AyahEdition, Edition, EditionSummary, ResolvedAyah } from '@/lib/quran-types';
 import { DEFAULT_TRANSLATION_IDENTIFIER, editionsByIdentifier } from './core';
 import { loadEditionContent } from './cache';
 
@@ -44,7 +44,7 @@ export function attachEdition(
   identifier?: string,
   selectedText?: string | null,
 ): ResolvedAyah {
-  const selectedEdition = identifier ? editionsByIdentifier.get(identifier) ?? null : null;
+  const selectedEdition = identifier ? (editionsByIdentifier.get(identifier) ?? null) : null;
   const resolvedSelectedText =
     typeof selectedText === 'string'
       ? selectedText
@@ -61,7 +61,7 @@ export function attachEdition(
 }
 
 export function resolveAyahs(ayahList: Ayah[], identifier?: string): ResolvedAyah[] {
-  let editionMap: Map<number, any> | null = null;
+  let editionMap: Map<number, AyahEdition> | null = null;
   if (identifier) {
     editionMap = loadEditionContent(identifier);
   }

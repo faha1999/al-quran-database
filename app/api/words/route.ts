@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { createErrorResponse, createSuccessResponse, handleRouteError } from '@/lib/api-response';
 import { getWordsByAyah } from '@/lib/data-loader';
 
 export async function GET(request: Request) {
@@ -7,19 +7,22 @@ export async function GET(request: Request) {
     const ayahId = Number.parseInt(searchParams.get('ayah_id') || '', 10);
 
     if (Number.isNaN(ayahId)) {
-      return NextResponse.json({ success: false, error: 'ayah_id is required' }, { status: 400 });
+      return createErrorResponse({ error: 'ayah_id is required', status: 400 });
     }
 
     const words = getWordsByAyah(ayahId);
 
-    return NextResponse.json({
-      success: true,
+    return createSuccessResponse({
       data: words,
       meta: {
         count: words.length,
       },
     });
   } catch (error) {
-    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
+    return handleRouteError({
+      error,
+      fallbackMessage: 'Internal server error',
+      logMessage: 'Words API error',
+    });
   }
 }

@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "data:convert": "python3 scripts/convert_quran_sql.py",
     "data:verify": "python3 scripts/verify_quran_data.py",
     "data:export": "python3 scripts/export_sql.py",
@@ -17,7 +18,9 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "format": "prettier --write .",
-    "lint:fix": "next lint --fix"
+    "format:check": "prettier --check .",
+    "lint:fix": "eslint . --fix",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "clsx": "2.1.1",
@@ -30,6 +33,7 @@
     "tailwind-merge": "3.5.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "4.2.4",
     "@types/node": "^25.6.0",
     "@types/react": "19.2.14",

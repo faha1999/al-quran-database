@@ -1,17 +1,20 @@
-import { NextResponse } from 'next/server';
+import { createSuccessResponse, handleRouteError } from '@/lib/api-response';
 import { getReciters } from '@/lib/data-loader';
 
 export async function GET() {
   try {
     const reciters = getReciters();
-    return NextResponse.json({
-      success: true,
+    return createSuccessResponse({
       data: reciters,
       meta: {
-        total: reciters.length
-      }
+        total: reciters.length,
+      },
     });
   } catch (error) {
-    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
+    return handleRouteError({
+      error,
+      fallbackMessage: 'Internal server error',
+      logMessage: 'Reciters API error',
+    });
   }
 }

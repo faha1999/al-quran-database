@@ -30,12 +30,13 @@ import {
   searchWithEditionIdentifier,
   searchWithLanguage,
 } from './search';
-import {
-  validateEditionFilter,
-  validateLanguageFilter,
-  validateSearchEditionFilter,
-} from './validation';
-import { ResolvedAyah, SearchFilters, SearchResultAyah } from '@/lib/quran-types';
+import type {
+  AsbabAlNuzulEntry,
+  HadithReferenceEntry,
+  ResolvedAyah,
+  SearchFilters,
+  SearchResultAyah,
+} from '@/lib/quran-types';
 
 export * from './core';
 export * from './utils';
@@ -105,11 +106,15 @@ export function getWordsByAyah(ayahId: number) {
 /**
  * Get a single ayah by ID with optional edition and words
  */
-export function getAyah(id: number, edition?: string, includeWords: boolean = false): ResolvedAyah | null {
+export function getAyah(
+  id: number,
+  edition?: string,
+  includeWords: boolean = false,
+): ResolvedAyah | null {
   const ayah = ayahs.find((a) => a.id === id);
   if (!ayah) return null;
 
-  let resolvedAyah: ResolvedAyah = { ...ayah, translation: null };
+  const resolvedAyah: ResolvedAyah = { ...ayah, translation: null };
 
   if (edition) {
     const content = getAyahTextForEdition(id, edition);
@@ -216,7 +221,7 @@ export function getPageById(id: number, identifier?: string) {
 }
 
 export function getSupportedLanguagesList() {
-  return [...supportedLanguages].sort();
+  return Array.from(supportedLanguages).sort();
 }
 
 /**
@@ -275,7 +280,9 @@ export function getDuas(page?: number, limit?: number) {
  */
 export function getExtraContextByAyah(ayahId: number) {
   return {
-    asbab: extraContext.asbab_al_nuzul.filter((item: any) => item.ayah_id === ayahId),
-    hadith: extraContext.hadith_references.filter((item: any) => item.ayah_id === ayahId),
+    asbab: extraContext.asbab_al_nuzul.filter((item: AsbabAlNuzulEntry) => item.ayah_id === ayahId),
+    hadith: extraContext.hadith_references.filter(
+      (item: HadithReferenceEntry) => item.ayah_id === ayahId,
+    ),
   };
 }

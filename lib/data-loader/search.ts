@@ -56,7 +56,7 @@ export function searchWithLanguage(query: string, language: string): SearchResul
     }
   }
 
-  return [...matches.values()];
+  return Array.from(matches.values());
 }
 
 export function searchDefault(query: string): SearchResultAyah[] {

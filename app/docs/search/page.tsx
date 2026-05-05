@@ -8,7 +8,8 @@ export default function DocsSearch() {
         <section>
           <h1 className="text-4xl font-bold mb-4">Search API</h1>
           <p className="text-gray-400 text-lg">
-            Search defaults to Arabic core text plus `en.sahih`. Optional filters narrow search to one edition or one language.
+            Search defaults to Arabic core text plus `en.sahih`. Optional filters narrow search to
+            one edition or one language.
           </p>
         </section>
 
@@ -22,9 +23,7 @@ export default function DocsSearch() {
 
         <section className="space-y-4">
           <h2 className="text-2xl font-bold">Search One Edition</h2>
-          <p className="text-gray-400">
-            Limit matching to one text edition by identifier.
-          </p>
+          <p className="text-gray-400">Limit matching to one text edition by identifier.</p>
           <ApiPreview endpoint="/api/search?q=allah&edition=en.yusufali" />
         </section>
 

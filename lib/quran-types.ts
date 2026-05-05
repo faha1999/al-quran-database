@@ -48,6 +48,40 @@ export interface AyahEdition {
   is_audio: boolean;
 }
 
+export interface Reciter {
+  id: number;
+  name: string;
+  identifier: string;
+  type: string;
+  bitrate: string;
+}
+
+export interface Dua {
+  ayah_id: number;
+  surah_id: number;
+  ayah_number: number;
+  text: string;
+}
+
+export interface AsbabAlNuzulEntry {
+  ayah_id: number;
+  surah_id: number;
+  content: string;
+  source: string;
+}
+
+export interface HadithReferenceEntry {
+  ayah_id: number;
+  surah_id: number;
+  hadith: string;
+  source: string;
+}
+
+export interface ExtraContext {
+  asbab_al_nuzul: AsbabAlNuzulEntry[];
+  hadith_references: HadithReferenceEntry[];
+}
+
 export interface Page {
   id: number;
   ayah_count: number;
@@ -126,4 +160,9 @@ export interface SearchFilters {
 
 export interface SearchResultAyah extends ResolvedAyah {
   matched_identifiers: string[];
+}
+
+export interface SearchFilterState {
+  edition: string;
+  language: string;
 }

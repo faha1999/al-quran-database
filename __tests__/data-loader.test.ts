@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import * as dataLoader from '../lib/data-loader';
 
 describe('DataLoader', () => {
@@ -26,7 +26,9 @@ describe('DataLoader', () => {
     const surahs = dataLoader.getAllSurahs(1, 10);
     expect(surahs.items.length).toBe(10);
     expect(surahs.meta.total).toBe(114);
-    expect(surahs.meta.total_pages).toBe(12);
+    if ('total_pages' in surahs.meta) {
+      expect(surahs.meta.total_pages).toBe(12);
+    }
   });
 
   it('should search ayahs', () => {

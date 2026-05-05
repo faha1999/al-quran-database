@@ -3,8 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, Loader2, Search as SearchIcon } from 'lucide-react';
+import SearchInput from '@/components/SearchInput';
 import type { SearchResultAyah } from '@/lib/quran-types';
 import { AdvancedFilters } from '@/components/AdvancedFilters';
+import { applyLanguageFilter } from '@/lib/search-filters';
+import { QuickLanguageFilters } from '@/components/search/QuickLanguageFilters';
 
 interface SearchMeta {
   total: number;
@@ -22,9 +25,6 @@ interface SearchResponse {
   meta?: SearchMeta;
   error?: string;
 }
-
-
-
 export default function SearchPage() {
   const [query, setQuery] = useState('');
   const [edition, setEdition] = useState('');
@@ -75,10 +75,19 @@ export default function SearchPage() {
     navigator.clipboard.writeText(text);
   };
 
+  const updateLanguage = (value: string) => {
+    const next = applyLanguageFilter({ edition, language }, value);
+    setEdition(next.edition);
+    setLanguage(next.language);
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] px-6 py-12 text-white md:px-12">
       <div className="mx-auto max-w-5xl space-y-12">
-        <Link href="/" className="flex items-center gap-2 text-gray-400 transition-colors hover:text-white">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-gray-400 transition-colors hover:text-white"
+        >
           <ChevronLeft className="h-4 w-4" />
           Back to Home
         </Link>
@@ -88,22 +97,24 @@ export default function SearchPage() {
             Search <span className="text-blue-500">Quran</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-gray-400">
-            High-performance search powered by <span className="text-white font-mono text-sm bg-zinc-800 px-1.5 py-0.5 rounded">FlexSearch</span>. 
-            Ranked results for Arabic and Translations.
+            High-performance search powered by{' '}
+            <span className="rounded bg-zinc-800 px-1.5 py-0.5 font-mono text-sm text-white">
+              FlexSearch
+            </span>
+            . Ranked results for Arabic and Translations.
           </p>
         </section>
 
         <section className="space-y-6">
           <form onSubmit={handleSearch} className="space-y-6">
-            <div className="group relative">
-              <input
-                type="text"
+            <div className="relative">
+              <SearchInput
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={'Search for "patience", "mercy", or "knowledge"...'}
-                className="w-full rounded-2xl border border-zinc-800 bg-zinc-900/50 px-12 py-5 text-xl transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/50 shadow-2xl"
+                onChange={setQuery}
+                onSearch={() => undefined}
+                placeholder='Search for "patience", "mercy", or "knowledge"...'
+                loading={loading}
               />
-              <SearchIcon className="absolute left-4 top-1/2 h-6 w-6 -translate-y-1/2 text-gray-500 transition-colors group-focus-within:text-blue-500" />
               <button
                 type="submit"
                 disabled={loading}
@@ -113,37 +124,7 @@ export default function SearchPage() {
               </button>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mr-2">Quick Filters:</span>
-              <button 
-                type="button"
-                onClick={() => { setLanguage('en'); setEdition(''); }}
-                className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${language === 'en' ? 'bg-blue-500 text-white' : 'bg-zinc-900 border border-zinc-800 hover:border-zinc-700'}`}
-              >
-                English
-              </button>
-              <button 
-                type="button"
-                onClick={() => { setLanguage('bn'); setEdition(''); }}
-                className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${language === 'bn' ? 'bg-green-600 text-white' : 'bg-zinc-900 border border-zinc-800 hover:border-zinc-700'}`}
-              >
-                Bangla
-              </button>
-              <button 
-                type="button"
-                onClick={() => { setLanguage('ar'); setEdition(''); }}
-                className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${language === 'ar' ? 'bg-amber-600 text-white' : 'bg-zinc-900 border border-zinc-800 hover:border-zinc-700'}`}
-              >
-                Arabic Only
-              </button>
-              <button 
-                type="button"
-                onClick={() => { setLanguage(''); setEdition(''); }}
-                className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${!language && !edition ? 'bg-zinc-700 text-white' : 'bg-zinc-900 border border-zinc-800 hover:border-zinc-700'}`}
-              >
-                All
-              </button>
-            </div>
+            <QuickLanguageFilters activeLanguage={language} onSelect={updateLanguage} />
 
             <AdvancedFilters
               edition={edition}
@@ -170,8 +151,8 @@ export default function SearchPage() {
                   </span>
                 ) : null}
               </div>
-              
-              <button 
+
+              <button
                 onClick={() => {
                   const params = new URLSearchParams({ q: query });
                   if (edition) params.set('edition', edition);
@@ -207,20 +188,28 @@ export default function SearchPage() {
                         {result.surah_id}:{result.number_in_surah}
                       </span>
                       <div>
-                        <p className="text-xs font-bold uppercase tracking-widest text-zinc-500">Ayah {result.number}</p>
+                        <p className="text-xs font-bold uppercase tracking-widest text-zinc-500">
+                          Ayah {result.number}
+                        </p>
                         <p className="text-xs text-zinc-600">Global ID: {result.id}</p>
                       </div>
                     </div>
                     <div className="flex gap-2">
-                      {result.matched_identifiers.map(id => (
-                        <span key={id} className="rounded-lg border border-zinc-800 bg-zinc-950 px-2.5 py-1 text-[10px] font-mono text-zinc-400 group-hover:border-zinc-700 transition-colors">
+                      {result.matched_identifiers.map((id) => (
+                        <span
+                          key={id}
+                          className="rounded-lg border border-zinc-800 bg-zinc-950 px-2.5 py-1 text-[10px] font-mono text-zinc-400 transition-colors group-hover:border-zinc-700"
+                        >
                           {id}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  <p className="mb-8 text-right font-arabic text-3xl leading-[2.2] text-zinc-100" dir="rtl">
+                  <p
+                    className="mb-8 text-right font-arabic text-3xl leading-[2.2] text-zinc-100"
+                    dir="rtl"
+                  >
                     {result.text}
                   </p>
 
@@ -231,13 +220,20 @@ export default function SearchPage() {
                     <div className="mt-4 flex items-center justify-between border-t border-zinc-800/50 pt-4">
                       <p className="text-[10px] uppercase tracking-widest text-zinc-500">
                         {result.edition ? (
-                          <>Edition: <span className="text-blue-400">{result.edition.identifier}</span> ({result.edition.englishName})</>
+                          <>
+                            Edition:{' '}
+                            <span className="text-blue-400">{result.edition.identifier}</span> (
+                            {result.edition.englishName})
+                          </>
                         ) : (
-                          <>Default Translation: <span className="text-zinc-300">Sahih International</span></>
+                          <>
+                            Default Translation:{' '}
+                            <span className="text-zinc-300">Sahih International</span>
+                          </>
                         )}
                       </p>
-                      
-                      <Link 
+
+                      <Link
                         href={`/api/ayahs/${result.id}`}
                         className="text-[10px] uppercase tracking-widest text-blue-500 hover:text-blue-400 transition-colors"
                       >
@@ -254,25 +250,35 @@ export default function SearchPage() {
                 <SearchIcon className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-bold text-zinc-400">No results found</h3>
-              <p className="text-zinc-600">Try searching for different keywords or check your filters.</p>
+              <p className="text-zinc-600">
+                Try searching for different keywords or check your filters.
+              </p>
             </div>
-          ) : !query && (
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          ) : (
+            !query && (
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                 {[
-                  { q: "patience", t: "Patience (Sabr)" },
-                  { q: "knowledge", t: "Knowledge ('Ilm)" },
-                  { q: "paradise", t: "Paradise (Jannah)" }
-                ].map(item => (
-                  <button 
+                  { q: 'patience', t: 'Patience (Sabr)' },
+                  { q: 'knowledge', t: "Knowledge ('Ilm)" },
+                  { q: 'paradise', t: 'Paradise (Jannah)' },
+                ].map((item) => (
+                  <button
                     key={item.q}
-                    onClick={() => { setQuery(item.q); }}
-                    className="p-8 rounded-3xl border border-zinc-800 bg-zinc-900/20 hover:bg-zinc-900/40 hover:border-blue-500/30 transition-all text-center group"
+                    onClick={() => {
+                      setQuery(item.q);
+                    }}
+                    className="group rounded-3xl border border-zinc-800 bg-zinc-900/20 p-8 text-center transition-all hover:border-blue-500/30 hover:bg-zinc-900/40"
                   >
-                    <p className="text-sm text-zinc-500 uppercase tracking-widest mb-2">Try searching</p>
-                    <p className="text-lg font-bold text-zinc-200 group-hover:text-blue-400 transition-colors">{item.t}</p>
+                    <p className="mb-2 text-sm uppercase tracking-widest text-zinc-500">
+                      Try searching
+                    </p>
+                    <p className="text-lg font-bold text-zinc-200 transition-colors group-hover:text-blue-400">
+                      {item.t}
+                    </p>
                   </button>
                 ))}
-             </div>
+              </div>
+            )
           )}
         </section>
       </div>

@@ -54,13 +54,16 @@ export class QuranDevSDK {
   /**
    * Search for ayahs
    */
-  async search(query: string, filters: { edition?: string; language?: string; page?: number; limit?: number } = {}) {
+  async search(
+    query: string,
+    filters: { edition?: string; language?: string; page?: number; limit?: number } = {},
+  ) {
     const params = new URLSearchParams({ q: query });
     if (filters.edition) params.set('edition', filters.edition);
     if (filters.language) params.set('language', filters.language);
     if (filters.page) params.set('page', filters.page.toString());
     if (filters.limit) params.set('limit', filters.limit.toString());
-    
+
     return this.fetcher<SearchResultAyah[]>(`/api/search?${params.toString()}`);
   }
 

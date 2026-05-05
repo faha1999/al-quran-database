@@ -1,97 +1,91 @@
 import DocsLayout from '@/components/DocsLayout';
-import { Terminal } from 'lucide-react';
+
+const quickLinks = [
+  {
+    title: 'REST API',
+    body: 'Typed JSON contracts for surahs, ayahs, juz, pages, rub, words, reciters, duas.',
+  },
+  {
+    title: 'Search System',
+    body: 'Arabic-first search with edition and language filters, pagination, validation rules.',
+  },
+  {
+    title: 'SDK Usage',
+    body: 'Lightweight JS/TS client for consuming local or deployed API endpoints.',
+  },
+  {
+    title: 'Delivery Flow',
+    body: 'Lint, typecheck, unit tests, integration tests, e2e smoke tests, production build.',
+  },
+];
 
 export default function DocsPage() {
   return (
     <DocsLayout>
-      <div className="space-y-8">
-        <section>
-          <h1 className="text-4xl font-bold mb-4">Getting Started</h1>
-          <p className="text-gray-400 text-lg">
-            Welcome to the Quran Developer Platform. The API now serves normalized JSON generated from the local Quran SQL dump.
-          </p>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold">Quick Start</h2>
-          <p className="text-gray-400">
-            You can start making requests immediately. No API key is required for this project.
-          </p>
-          <div className="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
-            <div className="flex items-center gap-2 mb-4 text-gray-400">
-              <Terminal className="w-4 h-4" />
-              <span className="text-xs font-mono">Terminal</span>
-            </div>
-            <pre className="bg-black p-4 rounded-md overflow-x-auto">
-              <code className="text-blue-400">
-                curl https://faha1999.github.io/al-quran-database/api/search?q=mercy
-              </code>
-            </pre>
+      <div className="space-y-10">
+        <section className="space-y-5">
+          <div className="inline-flex rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-blue-300">
+            Developer Platform
           </div>
+          <h1 className="max-w-3xl text-4xl font-bold tracking-tight md:text-5xl">
+            Quran data, API, docs, SDK. One system. Clean contracts.
+          </h1>
+          <p className="max-w-3xl text-lg leading-8 text-zinc-400">
+            This project serves sharded Quran JSON through typed Next.js API routes, a reusable
+            JS/TS SDK, searchable docs, SQL export pipeline, and production-ready quality gates.
+          </p>
         </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold">Base URL</h2>
-          <p className="text-gray-400">
-            The base URL for all API endpoints is:
-          </p>
-          <code className="bg-zinc-800 px-3 py-1 rounded text-blue-400">
-            /api
-          </code>
+        <section className="grid gap-4 md:grid-cols-2">
+          {quickLinks.map((item) => (
+            <article
+              key={item.title}
+              className="rounded-3xl border border-zinc-800 bg-zinc-900/40 p-6"
+            >
+              <h2 className="mb-3 text-xl font-semibold text-zinc-100">{item.title}</h2>
+              <p className="text-sm leading-6 text-zinc-400">{item.body}</p>
+            </article>
+          ))}
         </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold">New Filters</h2>
-          <p className="text-gray-400">
-            Use `edition` on ayah, surah, and juz endpoints. Use `edition` or `language` on search endpoints.
-          </p>
-          <pre className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 text-sm text-gray-300">
-{`/api/surahs/1?edition=en.sahih
-/api/ayahs/1?edition=en.yusufali
-/api/juz/1?edition=en.sahih
-/api/search?q=allah&language=en`}
-          </pre>
-        </section>
+        <section className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+          <article className="rounded-3xl border border-zinc-800 bg-zinc-950/70 p-6">
+            <h2 className="mb-4 text-2xl font-semibold">Quick Start</h2>
+            <pre className="overflow-x-auto rounded-2xl bg-black/50 p-5 text-sm text-zinc-300">
+              <code>{`npm install
+npm run dev
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold">Developer SDK (New)</h2>
-          <p className="text-gray-400">
-            For JavaScript/TypeScript developers, we provide a lightweight SDK to interact with the platform effortlessly.
-          </p>
-          <div className="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
-            <pre className="text-sm text-gray-300">
-{`import { quran } from '@/lib/sdk';
+curl "http://localhost:3000/api/search?q=mercy&language=en"
 
-// Search for ayahs
-const results = await quran.search('mercy', { language: 'en' });
-
-// Get a specific surah
-const surah = await quran.getSurah(1, 'en.sahih');`}
+import { quran } from '@/lib/sdk';
+const surah = await quran.getSurah(1, 'en.sahih');`}</code>
             </pre>
-          </div>
-        </section>
+          </article>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold">Rate Limiting</h2>
-          <p className="text-gray-400">
-            To ensure platform stability, we enforce a rate limit of <span className="text-white font-bold">100 requests per minute</span> per IP.
-          </p>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold">Response Format</h2>
-          <p className="text-gray-400">
-            All responses are returned in JSON format with a consistent structure:
-          </p>
-          <pre className="bg-zinc-900 p-6 rounded-xl border border-zinc-800 text-sm text-gray-300">
-{`{
+          <article className="rounded-3xl border border-zinc-800 bg-zinc-900/40 p-6">
+            <h2 className="mb-4 text-2xl font-semibold">Response Contract</h2>
+            <pre className="overflow-x-auto rounded-2xl bg-black/50 p-5 text-sm text-zinc-300">
+              <code>{`{
   "success": true,
   "data": [...],
   "meta": {
     "total": 114
   }
-}`}
-          </pre>
+}`}</code>
+            </pre>
+          </article>
+        </section>
+
+        <section className="rounded-3xl border border-zinc-800 bg-gradient-to-br from-zinc-950 via-zinc-950 to-blue-950/30 p-6">
+          <h2 className="mb-4 text-2xl font-semibold">Quality Gates</h2>
+          <div className="grid gap-3 text-sm text-zinc-300 md:grid-cols-2">
+            <p>`npm run lint` enforces ESLint + Prettier.</p>
+            <p>`npm run typecheck` keeps strict TypeScript green.</p>
+            <p>`npm test` covers core loader + route integration behavior.</p>
+            <p>`npm run test:e2e` smoke-tests docs, search, and API in browser.</p>
+            <p>`npm run build` proves production compile succeeds.</p>
+            <p>GitHub Actions runs same checks for every pull request.</p>
+          </div>
         </section>
       </div>
     </DocsLayout>

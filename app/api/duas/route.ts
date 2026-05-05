@@ -1,18 +1,24 @@
-import { NextResponse } from 'next/server';
+import { parsePositiveInteger } from '@/lib/api-utils';
+import { createSuccessResponse, handleRouteError } from '@/lib/api-response';
 import { getDuas } from '@/lib/data-loader';
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const page = Number.parseInt(searchParams.get('page') || '1', 10);
-    const limit = Number.parseInt(searchParams.get('limit') || '50', 10);
+    const page = parsePositiveInteger(searchParams.get('page'), 'page') ?? 1;
+    const limit = parsePositiveInteger(searchParams.get('limit'), 'limit') ?? 50;
 
     const result = getDuas(page, limit);
-    return NextResponse.json({
-      success: true,
-      ...result
+    return createSuccessResponse({
+      data: result.items,
+      meta: result.meta,
     });
   } catch (error) {
-    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
+    return handleRouteError({
+      error,
+      fallbackMessage: 'Internal server error',
+      validationPrefixes: ['Invalid "'],
+      logMessage: 'Duas API error',
+    });
   }
 }
