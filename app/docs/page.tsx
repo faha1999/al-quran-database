@@ -8,27 +8,27 @@ import Link from 'next/link';
 const quickLinks = [
   {
     title: 'REST API v1',
-    body: 'Stable, versioned contracts for surahs, ayahs, search, and divisions.',
+    body: 'Stable `/api/v1/*` contracts for surahs, ayahs, search, divisions, and metadata.',
     icon: <Terminal className="w-5 h-5 text-blue-400" />,
     href: '/docs/api-reference',
   },
   {
     title: 'GraphQL API',
-    body: 'Flexible query layer for multi-entity fetching in a single round-trip.',
+    body: 'Flexible query layer for multi-entity reads with GET debug support and POST app usage.',
     icon: <Code className="w-5 h-5 text-indigo-400" />,
     href: '/docs/api-reference',
   },
   {
-    title: 'Knowledge Base',
-    body: 'Scholarly metadata including thematic tags, fiqh, and linguistic notes.',
+    title: 'SDK Guide',
+    body: 'ESM npm package with typed methods for REST, GraphQL, metadata, and research refs.',
     icon: <Database className="w-5 h-5 text-emerald-400" />,
-    href: '/docs/faq',
+    href: '/docs/sdk',
   },
   {
-    title: 'Search System',
-    body: 'Ranked keyword search with fuzzy matching and text normalization.',
+    title: 'Database Exports',
+    body: 'SQLite and PostgreSQL artifacts generated from committed JSON source of truth.',
     icon: <Zap className="w-5 h-5 text-amber-400" />,
-    href: '/docs/search',
+    href: '/docs/database',
   },
 ];
 
@@ -67,8 +67,8 @@ export default function DocsPage() {
               Infinite Possibilities.
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-zinc-400">
-              The definitive Quranic data platform. Sharded JSON sources, typed API contracts,
-              robust SDK, and deep scholarly metadata — all engineered for production.
+              Sharded JSON source, versioned API contracts, verified npm SDK, and reproducible
+              database exports for production apps, docs, and research tooling.
             </p>
           </motion.div>
         </section>
@@ -119,13 +119,12 @@ export default function DocsPage() {
                 </span>
               </div>
               <pre className="p-6 text-[13px] font-mono leading-relaxed text-zinc-300 overflow-x-auto">
-                <code>{`import { QuranDevSDK } from '@faha1999/al-quran-database';
+                <code>{`npm install @faha1999/al-quran-database
 
-const quran = new QuranDevSDK({
-  baseUrl: 'https://al-quran-database.vercel.app',
-});
+import { QuranDevSDK } from '@faha1999/al-quran-database';
 
-const data = await quran.getSurah(1);`}</code>
+const quran = new QuranDevSDK({ baseUrl: 'https://al-quran-database.vercel.app' });
+const data = await quran.getSurah(1, 'en.sahih');`}</code>
               </pre>
             </div>
           </div>
@@ -145,14 +144,18 @@ const data = await quran.getSurah(1);`}</code>
                 </span>
               </div>
               <pre className="p-6 text-[13px] font-mono leading-relaxed text-zinc-400 overflow-x-auto">
-                <code>{`query {
-  ayah(id: 1) {
+                <code>{`query GetMetaAndAyah($id: Int!) {
+  meta {
+    dataset {
+      counts {
+        ayahs
+      }
+    }
+  }
+  ayah(id: $id, includeWords: true) {
     text
     knowledge {
       themes
-      scientific_references {
-        title
-      }
     }
   }
 }`}</code>
@@ -165,7 +168,8 @@ const data = await quran.getSurah(1);`}</code>
         <section className="rounded-3xl border border-zinc-800 bg-gradient-to-br from-zinc-950 via-zinc-950 to-blue-900/10 p-10 text-center">
           <h2 className="text-xl font-bold text-zinc-100 mb-2">Production Ready.</h2>
           <p className="text-sm text-zinc-500 mb-8">
-            Built with Redis caching, strict TypeScript, and a deterministic data pipeline.
+            Built around `v1` contracts, cache headers, strict TypeScript, and deterministic JSON to
+            SQL export pipeline.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -175,10 +179,10 @@ const data = await quran.getSurah(1);`}</code>
               Read API Docs
             </Link>
             <Link
-              href="/docs/architecture"
+              href="/docs/sdk"
               className="rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-2.5 text-sm font-bold text-zinc-300 transition-colors hover:bg-zinc-800"
             >
-              View Architecture
+              Open SDK Guide
             </Link>
           </div>
         </section>

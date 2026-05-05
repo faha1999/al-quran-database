@@ -53,7 +53,7 @@ export default function DatabaseDocsClient({
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">
             The source of truth resides in sharded JSON. Conversion is deterministic, verification
-            is cryptographically secure, and relational exports are fully automated.
+            is hash-backed, and relational exports are regenerated from committed dataset artifacts.
           </p>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -151,6 +151,8 @@ export default function DatabaseDocsClient({
               'npm run data:verify -- --check-determinism',
               'npm run data:export',
               'npm run data:migrate',
+              'npm run data:seed',
+              'npm run data:bench',
             ].map((cmd) => (
               <code
                 key={cmd}
@@ -161,6 +163,30 @@ export default function DatabaseDocsClient({
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="grid gap-6 md:grid-cols-3">
+        <article className="rounded-3xl border border-zinc-800 bg-zinc-900/10 p-8">
+          <h2 className="mb-3 text-lg font-bold text-zinc-100">Build Artifacts</h2>
+          <p className="text-sm leading-relaxed text-zinc-500">
+            Download links point at `/quran_indexed.sqlite` and `/quran_postgres.sql` from public
+            build output.
+          </p>
+        </article>
+        <article className="rounded-3xl border border-zinc-800 bg-zinc-900/10 p-8">
+          <h2 className="mb-3 text-lg font-bold text-zinc-100">Versioned Runtime</h2>
+          <p className="text-sm leading-relaxed text-zinc-500">
+            App traffic reads versioned API contracts under `/api/v1/*`. Database exports track same
+            committed JSON source used by docs and SDK.
+          </p>
+        </article>
+        <article className="rounded-3xl border border-zinc-800 bg-zinc-900/10 p-8">
+          <h2 className="mb-3 text-lg font-bold text-zinc-100">Deployment Note</h2>
+          <p className="text-sm leading-relaxed text-zinc-500">
+            Docker is intentionally out of scope in current pass. Self-host docs should assume
+            standard Next.js deployment plus optional Redis cache.
+          </p>
+        </article>
       </section>
 
       {/* Technical Features */}

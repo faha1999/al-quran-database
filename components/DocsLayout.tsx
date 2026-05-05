@@ -26,8 +26,8 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
               href="/"
               className="group flex items-center gap-2 text-2xl font-bold tracking-tight"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 font-black text-white shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-transform group-hover:scale-110">
-                Q
+              <div className="flex h-16 w-16 items-center justify-center shadow-[0_0_15px_rgba(37,99,235,0.4)]">
+                <img src="/logo.png" alt="Quran Dev Logo" />
               </div>
               <span>
                 Quran <span className="text-blue-500">Dev</span>

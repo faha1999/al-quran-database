@@ -17,7 +17,7 @@ TypeScript, Next.js App Router, and a lightweight JS/TS SDK.
 - Search UI with composable edition and language filters
 - SQL conversion, migration, export, validation, and performance scripts
 - Repo docs for architecture, coding standards, roadmap, review policy, and release flow
-- Next.js docs pages for API reference, SDK usage, frontend guidance, and data expansion
+- Next.js docs pages for getting started, API reference, SDK usage, database exports, frontend guidance, and data expansion
 
 ## Stack
 
@@ -40,6 +40,9 @@ npm run dev
 Open:
 
 - Docs: [http://localhost:3000/docs](http://localhost:3000/docs)
+- SDK guide: [http://localhost:3000/docs/sdk](http://localhost:3000/docs/sdk)
+- API reference: [http://localhost:3000/docs/api-reference](http://localhost:3000/docs/api-reference)
+- Database exports: [http://localhost:3000/docs/database](http://localhost:3000/docs/database)
 - Search UI: [http://localhost:3000/search](http://localhost:3000/search)
 - REST example: [http://localhost:3000/api/v1/search?q=mercy&language=en](http://localhost:3000/api/v1/search?q=mercy&language=en)
 - GraphQL example: `POST /api/v1/graphql`
@@ -51,6 +54,25 @@ npm install @faha1999/al-quran-database
 ```
 
 Package source lives in [`packages/sdk`](./packages/sdk).
+
+Hosted SDK setup:
+
+```ts
+import { QuranDevSDK } from '@faha1999/al-quran-database';
+
+const quran = new QuranDevSDK({
+  baseUrl: 'https://al-quran-database.vercel.app',
+  apiVersion: 'v1',
+});
+```
+
+Same-origin setup:
+
+```ts
+import { quran } from '@faha1999/al-quran-database';
+
+const ayah = await quran.getAyah(1, 'en.sahih', true);
+```
 
 ## Commands
 
@@ -92,6 +114,8 @@ npm run data:bench
 - GraphQL endpoint supports composing `surah`, `ayah`, `search`, `faqs`, `knowledge`, and `meta`
   in one request.
 - Preferred GraphQL write path is `POST /api/v1/graphql`. Legacy `/api/graphql` alias remains.
+- GraphQL `GET /api/v1/graphql?query=...` is also supported for quick debugging and cached reads.
+- Search accepts either `edition` or `language`; sending both returns validation error.
 - Set `REDIS_URL` to enable shared cache. Without it, in-memory cache still accelerates hot reads.
 
 ## Docs
@@ -101,6 +125,8 @@ npm run data:bench
 - Repo docs: [`docs/api-reference.md`](./docs/api-reference.md), [`docs/sdk-guide.md`](./docs/sdk-guide.md),
   [`docs/architecture.md`](./docs/architecture.md), [`docs/frontend-guide.md`](./docs/frontend-guide.md),
   [`docs/roadmap.md`](./docs/roadmap.md)
+- Live docs: [https://al-quran-database.vercel.app/docs](https://al-quran-database.vercel.app/docs)
+- Live SDK docs: [https://al-quran-database.vercel.app/docs/sdk](https://al-quran-database.vercel.app/docs/sdk)
 
 ## Quality gates
 
@@ -113,6 +139,8 @@ npm run data:bench
 
 - SDK npm releases are published from `main` by GitHub Actions.
 - Qualifying SDK-related changes auto-bump the next patch version from the npm registry state.
+- Current public exports: `QuranDevSDK`, `quran`, `QuranApiOptions`, `GraphqlRequest`,
+  `MetaPayload`, and public entity/response types from `packages/sdk/src/quran-types.ts`.
 
 ## License
 

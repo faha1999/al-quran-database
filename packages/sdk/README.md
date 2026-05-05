@@ -15,6 +15,7 @@ import { QuranDevSDK } from '@faha1999/al-quran-database';
 
 const quran = new QuranDevSDK({
   baseUrl: 'https://al-quran-database.vercel.app',
+  apiVersion: 'v1',
 });
 
 const surah = await quran.getSurah(1, 'en.sahih');
@@ -27,11 +28,22 @@ console.log(duas[0]?.text);
 console.log(reciters[0]?.name);
 ```
 
+Same-origin usage:
+
+```ts
+import { quran } from '@faha1999/al-quran-database';
+
+const ayah = await quran.getAyah(1, 'en.sahih', true);
+console.log(ayah.words?.[0]?.text);
+```
+
 ## Default behavior
 
 - `baseUrl` defaults to same-origin, which is useful inside browser apps deployed alongside the API.
 - `apiVersion` defaults to `v1`.
 - The package ships as ESM only and targets Node.js 18+ environments with native `fetch`.
+- REST helpers throw on non-2xx responses and unsuccessful API envelopes.
+- GraphQL helper throws on HTTP failures or GraphQL `errors`.
 
 ## Exports
 
@@ -49,6 +61,47 @@ console.log(reciters[0]?.name);
 - Words, duas, reciters, FAQs, knowledge entries, metadata
 - GraphQL requests
 
+Public methods:
+
+- `getSurahs(page?, limit?)`
+- `getSurah(id, edition?)`
+- `getAyah(id, edition?, includeWords?)`
+- `search(query, filters?)`
+- `getJuz(id, edition?)`
+- `getHizb(id, edition?)`
+- `getRub(id, edition?)`
+- `getPage(id, edition?)`
+- `getWords(ayahId)`
+- `getDuas(page?, limit?)`
+- `getReciters()`
+- `getFaqs()`
+- `getKnowledge(ayahId)`
+- `getMeta()`
+- `getResearchReferences()`
+- `graphql({ query, variables? })`
+
+GraphQL example:
+
+```ts
+const data = await quran.graphql<{
+  meta: { dataset: { counts: { ayahs: number } } };
+}>({
+  query: `
+    query Meta {
+      meta {
+        dataset {
+          counts {
+            ayahs
+          }
+        }
+      }
+    }
+  `,
+});
+
+console.log(data.meta.dataset.counts.ayahs);
+```
+
 ## Source of truth
 
 - Published package source: [`packages/sdk`](https://github.com/faha1999/al-quran-database/tree/main/packages/sdk)
@@ -58,4 +111,5 @@ console.log(reciters[0]?.name);
 
 - Docs: [https://al-quran-database.vercel.app/docs/sdk](https://al-quran-database.vercel.app/docs/sdk)
 - API docs: [https://al-quran-database.vercel.app/docs/api-reference](https://al-quran-database.vercel.app/docs/api-reference)
+- Database docs: [https://al-quran-database.vercel.app/docs/database](https://al-quran-database.vercel.app/docs/database)
 - Repository: [https://github.com/faha1999/al-quran-database](https://github.com/faha1999/al-quran-database)
