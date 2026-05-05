@@ -40,7 +40,13 @@ Thumbs.db
 
 # Local data files
 /quran.sql
+/backups/
+/lib/data/sample/
+/public/quran_indexed.sqlite
+/public/quran_postgres.sql
 
 # prd and manual
 /prd.md
 /manual.md 
+/next-todos.md
+/roadmap.md

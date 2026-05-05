@@ -10,3 +10,7 @@ export function parsePositiveInteger(value: string | null, field: string): numbe
 
   return parsed;
 }
+
+export function parseOptionalBoolean(value: string | null): boolean {
+  return value === 'true';
+}

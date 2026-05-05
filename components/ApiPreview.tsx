@@ -61,16 +61,18 @@ export default function ApiPreview({ endpoint, method = 'GET', initialData }: Ap
               className="p-1.5 hover:bg-zinc-800 rounded-lg transition-colors text-zinc-400"
               title="Copy JSON"
             >
-              {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
+              {copied ? (
+                <Check className="w-3.5 h-3.5 text-green-500" />
+              ) : (
+                <Copy className="w-3.5 h-3.5" />
+              )}
             </button>
           ) : null}
         </div>
       </div>
       <div className="p-4 max-h-[300px] overflow-y-auto font-mono text-[11px] leading-relaxed">
         {hasData ? (
-          <pre className="text-blue-400">
-            {JSON.stringify(data, null, 2)}
-          </pre>
+          <pre className="text-blue-400">{JSON.stringify(data, null, 2)}</pre>
         ) : (
           <p className="text-zinc-600 italic">Click &quot;Run&quot; to see live API response...</p>
         )}

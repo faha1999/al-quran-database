@@ -1,71 +1,103 @@
-# 📖 Quran Developer Platform (MVP)
+# Quran Developer Platform
 
-> A high-performance, developer-first Quran platform with a clean REST API, world-class documentation, and real-world examples.
+Developer-first Quran dataset and API platform built on canonical sharded JSON, strict
+TypeScript, Next.js App Router, and a lightweight JS/TS SDK.
 
-![Landing Page](screenshots/landing.png)
+## What ships
 
-## 🚀 Vision
-To empower developers to build beautiful and intelligent Islamic applications by providing the most accessible and performant Quranic data layer.
+- Clean REST API for surahs, ayahs, juz, hizb, rub, pages, words, duas, reciters, and search
+- Versioned REST under `/api/v1/*` plus legacy `/api/*` aliases
+- GraphQL endpoint for flexible multi-entity queries
+- Sharded JSON architecture for fast local reads and edge-friendly deployment
+- Canonical JSON-first workflow: `quran.sql` stays local, committed data lives in `lib/data/*`
+- Deterministic SQL → JSON verification with source SHA-256 metadata
+- Normalized PostgreSQL + SQLite exports including knowledge/context tables
+- Optional Redis cache layer with in-memory fallback for hot API routes
+- JS/TS SDK in [`lib/sdk.ts`](al-quran-database/lib/sdk.ts)
+- Search UI with composable edition and language filters
+- SQL conversion, migration, export, validation, and performance scripts
+- Repo docs for architecture, coding standards, roadmap, review policy, and release flow
 
-## ✨ Key Features
-- **Clean REST API**: Structured JSON responses for Surahs and Ayahs.
-- **Fast Search**: Instant keyword search powered by FlexSearch.
-- **Modern Docs**: Built with Next.js App Router for maximum speed.
-- **Developer First**: Copy-paste friendly examples and live API playground.
-- **Edge Ready**: Optimized for global, low-latency delivery.
+## Stack
 
-## 🛠️ Tech Stack
-- **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS
-- **Search**: FlexSearch
-- **Data**: Static Optimized JSON
-- **Deployment**: Vercel
+- Next.js 16
+- React 19
+- TypeScript strict mode
+- Tailwind CSS v4
+- FlexSearch
+- Vitest
+- Playwright
+- ESLint + Prettier
 
-## 📖 API Documentation
+## Local setup
 
-### Endpoints
-- `GET /api/surahs`: List all 114 Surahs.
-- `GET /api/surahs/[id]`: Get Surah details with all Ayahs.
-- `GET /api/ayahs/[id]`: Get Ayah by global number (1-6236).
-- `GET /api/search?q=query`: High-performance keyword search.
-
-### Quick Start
 ```bash
-curl https://quran-dev.vercel.app/api/surahs/1
+npm install
+npm run dev
 ```
 
-## 🏗️ Local Development
+Open:
 
-1. **Clone & Install**:
-   ```bash
-   git clone https://github.com/faha1999/al-quran-database.git
-   cd al-quran-database
-   pnpm install
-   ```
+- Docs: [http://localhost:3000/docs](http://localhost:3000/docs)
+- Search UI: [http://localhost:3000/search](http://localhost:3000/search)
+- REST example: [http://localhost:3000/api/v1/search?q=mercy&language=en](http://localhost:3000/api/v1/search?q=mercy&language=en)
+- GraphQL example: `POST /api/v1/graphql`
 
-2. **Run Dev Server**:
-   ```bash
-   pnpm dev
-   ```
+## Commands
 
-3. **Build for Production**:
-   ```bash
-   pnpm build
-   ```
+```bash
+npm run lint
+npm run typecheck
+npm test
+npm run test:e2e
+npm run build
+```
 
-## 🗺️ Roadmap
-- [x] REST API Layer
-- [x] Documentation Site
-- [x] Keyword Search
-- [ ] Semantic Search (Embeddings)
-- [ ] Multi-language Translations
-- [ ] Developer Playground
+Data pipeline:
 
-## 🤝 Contributing
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+```bash
+npm run data:convert
+npm run data:verify -- --check-determinism
+npm run data:export
+npm run data:migrate
+npm run data:seed
+npm run data:bench
+```
 
-## 📜 License
-MIT License. Quran text is in the Public Domain.
+## Canonical data model
 
----
-Built with ❤️ by **Kawsar Ahmed Fahad**
+- `quran.sql` is local-only and ignored by Git because source dump is too large for healthy repo
+  workflows.
+- `lib/data/*` is committed source-of-truth.
+- `scripts/convert_quran_sql.py` derives JSON, sharded edition payloads, pages/juz/hizb/rub
+  groupings, and dataset metadata.
+- `scripts/verify_quran_data.py` proves row counts, shard integrity, and deterministic rebuilds.
+- `scripts/export_sql.py` regenerates downloadable PostgreSQL and SQLite artifacts from committed
+  JSON.
+
+## API platform notes
+
+- Versioned REST lives under `/api/v1/*`.
+- Legacy `/api/*` aliases remain for backward compatibility during migration.
+- GraphQL endpoint supports composing `surah`, `ayah`, `search`, `faqs`, `knowledge`, and `meta`
+  in one request.
+- Set `REDIS_URL` to enable shared cache. Without it, in-memory cache still accelerates hot reads.
+
+## Docs
+
+- Product docs UI: [`app/docs/*`](al-quran-database/app/docs)
+- Repo docs: [`docs/architecture.md`](al-quran-database/docs/architecture.md),
+  [`docs/roadmap.md`](al-quran-database/docs/roadmap.md),
+  [`docs/review-process.md`](al-quran-database/docs/review-process.md),
+  [`docs/coding-style.md`](al-quran-database/docs/coding-style.md)
+
+## Quality gates
+
+- All API routes return `{ success, data?, error?, meta? }`
+- Shared route helpers centralize validation and error logging
+- CI runs format check, lint, typecheck, unit/integration tests, e2e smoke tests, build
+- PR template + CODEOWNERS support review discipline before merge
+
+## License
+
+MIT. See [`LICENSE`](al-quran-database/LICENSE).

@@ -1,6 +1,7 @@
-import { NextResponse } from 'next/server';
+import { buildApiCacheKey, getCacheHeaders, withApiCache } from '@/lib/api-cache';
 import { getAllSurahs } from '@/lib/data-loader';
 import { parsePositiveInteger } from '@/lib/api-utils';
+import { createSuccessResponse, handleRouteError } from '@/lib/api-response';
 
 export async function GET(request: Request) {
   try {
@@ -10,21 +11,24 @@ export async function GET(request: Request) {
     const usePagination = pageParam !== null || limitParam !== null;
     const page = pageParam ?? 1;
     const limit = limitParam ?? 20;
-    const { items, meta } = usePagination ? getAllSurahs(page, limit) : getAllSurahs();
+    const cached = await withApiCache(
+      buildApiCacheKey('surahs', JSON.stringify({ usePagination, page, limit })),
+      300,
+      () => (usePagination ? getAllSurahs(page, limit) : getAllSurahs()),
+    );
+    const { items, meta } = cached.value;
 
-    return NextResponse.json({
-      success: true,
+    return createSuccessResponse({
       data: items,
       meta,
+      headers: getCacheHeaders(cached.cacheStatus),
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Failed to fetch surahs';
-    const status = message.startsWith('Invalid "') ? 400 : 500;
-
-    if (status === 400) {
-      return NextResponse.json({ success: false, error: message }, { status });
-    }
-
-    return NextResponse.json({ success: false, error: 'Failed to fetch surahs' }, { status: 500 });
+    return handleRouteError({
+      error,
+      fallbackMessage: 'Failed to fetch surahs',
+      validationPrefixes: ['Invalid "'],
+      logMessage: 'Surahs API error',
+    });
   }
 }

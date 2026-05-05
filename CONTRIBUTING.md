@@ -1,29 +1,54 @@
-# Contributing to Quran Developer Platform
+# Contributing
 
-We love your input! We want to make contributing to this project as easy and transparent as possible.
-
-## Pull Requests
-
-1. Fork the repo and create your branch from `main`.
-2. If you've added code that should be tested, add tests.
-3. If you've changed APIs, update the documentation.
-4. Ensure the test suite passes.
-5. Make sure your code lints.
-
-## Data Contributions
-
-If you are contributing new translations or editions:
-1. Ensure the data is in JSON format matching our schema.
-2. Include the source and license of the data.
-3. Verify the accuracy of the text.
-
-## Development
+## Setup
 
 ```bash
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
+
+## Before opening pull request
+
+1. Branch from `main`.
+2. Keep changes scoped. Separate data, API, UI, and docs work when possible.
+3. Update docs in [`app/docs/*`](al-quran-database/app/docs) and
+   [`docs/*`](al-quran-database/docs) when behavior changes.
+4. Run full quality gate:
+
+```bash
+npm run format
+npm run lint
+npm run typecheck
+npm test
+npm run test:e2e
+npm run build
+```
+
+## Engineering rules
+
+- Use strict TypeScript. Avoid `any`.
+- Use shared helpers from `lib/` before adding route-local logic.
+- Keep API responses in `{ success, data?, error?, meta? }` shape.
+- Prefer focused components and utilities over large page files.
+- Add tests for new behavior and edge cases.
+- Document exported shared modules with concise TSDoc.
+
+## Review process
+
+- Every PR needs at least one reviewer approval before merge.
+- Do not self-merge while checks are red.
+- Use PR template sections completely: scope, test plan, docs impact, rollout risk.
+- CODEOWNERS should review shared API, loader, and workflow changes.
+
+See [`docs/review-process.md`](al-quran-database/docs/review-process.md)
+for merge policy detail.
+
+## Data contributions
+
+- Validate source provenance and license before adding new editions.
+- Run `npm run data:verify` after modifying source data or conversion scripts.
+- Include schema impact and source references in PR description.
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under its MIT License.
+By contributing, you agree contributions are licensed under MIT.

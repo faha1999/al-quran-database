@@ -21,10 +21,7 @@ export function proxy(request: NextRequest) {
   ipCache.set(ip, userData);
 
   if (userData.count > RATE_LIMIT) {
-    return NextResponse.json(
-      { success: false, error: 'Too many requests' },
-      { status: 429 }
-    );
+    return NextResponse.json({ success: false, error: 'Too many requests' }, { status: 429 });
   }
 
   const response = NextResponse.next();
@@ -34,7 +31,10 @@ export function proxy(request: NextRequest) {
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('X-XSS-Protection', '1; mode=block');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  response.headers.set('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;");
+  response.headers.set(
+    'Content-Security-Policy',
+    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;",
+  );
   response.headers.set('X-RateLimit-Limit', '100');
 
   return response;

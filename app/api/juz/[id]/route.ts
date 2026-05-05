@@ -1,36 +1,40 @@
-import { NextResponse } from 'next/server';
-
+import { buildApiCacheKey, getCacheHeaders, withApiCache } from '@/lib/api-cache';
+import { createErrorResponse, createSuccessResponse, handleRouteError } from '@/lib/api-response';
 import { getJuzById, validateEditionFilter } from '@/lib/data-loader';
 
-export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  let routeId = 'unknown';
+
   try {
     const { id } = await params;
+    routeId = id;
     const juzId = Number.parseInt(id, 10);
     const edition = validateEditionFilter(new URL(request.url).searchParams.get('edition'));
-    const juz = getJuzById(juzId, edition ?? undefined);
+    const cached = await withApiCache(
+      buildApiCacheKey('juz', JSON.stringify({ juzId, edition })),
+      300,
+      () => getJuzById(juzId, edition ?? undefined),
+    );
+    const juz = cached.value;
 
     if (!juz) {
-      return NextResponse.json({ success: false, error: 'Juz not found' }, { status: 404 });
+      return createErrorResponse({ error: 'Juz not found', status: 404 });
     }
 
-    return NextResponse.json({
-      success: true,
+    return createSuccessResponse({
       data: juz,
       meta: {
         ayah_count: juz.ayah_count,
       },
+      headers: getCacheHeaders(cached.cacheStatus),
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Internal server error';
-    const status = message.startsWith('Unknown edition') ? 400 : 500;
-
-    if (status === 400) {
-      return NextResponse.json({ success: false, error: message }, { status });
-    }
-
-    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
+    return handleRouteError({
+      error,
+      fallbackMessage: 'Internal server error',
+      validationPrefixes: ['Unknown edition'],
+      logMessage: 'Juz API error',
+      context: { id: routeId },
+    });
   }
 }

@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
 import tempfile
+from datetime import datetime, timezone
 from pathlib import Path
 
 from quran_sql_common import (
@@ -31,6 +33,7 @@ def build_surah(row: list[object]) -> dict[str, object]:
 
 
 def build_ayah(row: list[object]) -> dict[str, object]:
+    rub_id = int(row[6])
     return {
         "id": int(row[0]),
         "number": int(row[1]),
@@ -38,7 +41,8 @@ def build_ayah(row: list[object]) -> dict[str, object]:
         "number_in_surah": int(row[3]),
         "page": int(row[4]),
         "surah_id": int(row[5]),
-        "hizb_id": int(row[6]),
+        "rub_id": rub_id,
+        "hizb_id": ((rub_id - 1) // 4) + 1,
         "juz_id": int(row[7]),
         "sajda": bool(int(row[8])),
     }
@@ -110,6 +114,8 @@ def stage_core_data(sql_path: Path, stage_dir: Path) -> tuple[list[dict[str, obj
     write_json(stage_dir / "editions.json", editions, pretty=True)
     write_json(stage_dir / "juzs.json", derive_groups(ayahs, "juz_id"), pretty=True)
     write_json(stage_dir / "hizbs.json", derive_groups(ayahs, "hizb_id"), pretty=True)
+    write_json(stage_dir / "rubs.json", derive_groups(ayahs, "rub_id"), pretty=True)
+    write_json(stage_dir / "pages.json", derive_groups(ayahs, "page"), pretty=True)
 
     return surahs, ayahs, editions
 
@@ -201,6 +207,27 @@ def write_edition_payloads(stage_dir: Path, editions: list[dict[str, object]], r
     shutil.rmtree(lines_dir, ignore_errors=True)
 
 
+def compute_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def write_dataset_metadata(stage_dir: Path, sql_path: Path, counts: dict[str, int]) -> None:
+    metadata = {
+        "source": {
+            "sql_path": str(sql_path),
+            "sha256": compute_sha256(sql_path),
+            "size_bytes": sql_path.stat().st_size,
+        },
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "counts": counts,
+    }
+    write_json(stage_dir / "dataset-metadata.json", metadata, pretty=True)
+
+
 def publish_stage(stage_dir: Path, output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     stale_paths = (
@@ -209,7 +236,10 @@ def publish_stage(stage_dir: Path, output_dir: Path) -> None:
         "editions.json",
         "juzs.json",
         "hizbs.json",
+        "rubs.json",
+        "pages.json",
         "edition-manifest.json",
+        "dataset-metadata.json",
         "ayah-editions",
     )
 
@@ -230,9 +260,22 @@ def convert(sql_path: Path, output_dir: Path) -> None:
     stage_dir.mkdir(parents=True, exist_ok=True)
 
     try:
-        _, _, editions = stage_core_data(sql_path, stage_dir)
+        surahs, ayahs, editions = stage_core_data(sql_path, stage_dir)
         row_counts = stage_edition_lines(sql_path, stage_dir, editions)
         write_edition_payloads(stage_dir, editions, row_counts)
+        write_dataset_metadata(
+            stage_dir,
+            sql_path,
+            {
+                "surahs": len(surahs),
+                "ayahs": len(ayahs),
+                "editions": len(editions),
+                "juzs": len(derive_groups(ayahs, "juz_id")),
+                "hizbs": len(derive_groups(ayahs, "hizb_id")),
+                "rubs": len(derive_groups(ayahs, "rub_id")),
+                "pages": len(derive_groups(ayahs, "page")),
+            },
+        )
         publish_stage(stage_dir, output_dir)
     finally:
         shutil.rmtree(stage_root, ignore_errors=True)
