@@ -32,6 +32,8 @@ To empower developers to build beautiful and intelligent Islamic applications by
 - `GET /api/rub/[id]`: Get Rub (Quarter) details (1-480).
 - `GET /api/pages/[id]`: Get Mushaf page details (1-604).
 - `GET /api/words?ayah_id=[id]`: Get word-by-word breakdown.
+- `GET /api/duas`: Get extracted Quranic supplications.
+- `GET /api/reciters`: Get supported reciters.
 - `GET /api/search?q=query`: High-performance ranked search.
 
 ### JS/TS SDK
@@ -65,11 +67,12 @@ console.log(ayah.text);
    ```
 
 ## 🗺️ Roadmap
-- [x] REST API Layer & Sharded Data
-- [x] JS/TS Developer SDK
-- [x] Relational SQL Exports (Postgres/SQLite)
-- [x] Word-by-Word linguistic data
-- [x] Advanced Ranked Search
+- [x] REST API Layer & Sharded Data [✔]
+- [x] JS/TS Developer SDK [✔]
+- [x] Relational SQL Exports (Postgres/SQLite) [✔]
+- [x] Word-by-Word linguistic data [✔]
+- [x] Advanced Ranked Search [✔]
+- [x] Scholarly Data Expansion (Tafsir, Transliterations, Translations, Duas, Hadith) [✔]
 - [ ] Semantic Search (Embeddings)
 - [ ] Developer Playground
 
