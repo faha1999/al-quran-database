@@ -39,17 +39,6 @@ jobs:
       - name: Verify SDK package
         run: npm run verify:sdk
 
-      - name: Check npm token presence
-        id: auth
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          if [ -n "$NODE_AUTH_TOKEN" ]; then
-            echo "has_token=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "has_token=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Read package metadata
         id: pkg
         run: |
@@ -117,7 +106,6 @@ jobs:
           echo "publish_dir=$PUBLISH_DIR" >> "$GITHUB_OUTPUT"
 
       - name: Publish package
-        if: ${{ steps.auth.outputs.has_token == 'true' }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
@@ -128,10 +116,18 @@ jobs:
           PUBLISH_DIR="${{ steps.prepare.outputs.publish_dir }}"
           LATEST_BEFORE="${{ steps.registry.outputs.latest_version }}"
           export PACKAGE_NAME TARGET_VERSION PUBLISH_DIR
+          export NPM_CONFIG_USERCONFIG="$PUBLISH_DIR/.npmrc"
 
           if [ -z "$LATEST_BEFORE" ]; then
             LATEST_BEFORE="none"
           fi
+
+          {
+            echo 'registry=https://registry.npmjs.org/'
+            if [ -n "${NODE_AUTH_TOKEN:-}" ]; then
+              echo '//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}'
+            fi
+          } > "$NPM_CONFIG_USERCONFIG"
 
           write_summary() {
             {
@@ -190,7 +186,7 @@ jobs:
               echo "- package: \`$PACKAGE_NAME\`"
               echo "- version: \`$TARGET_VERSION\`"
               echo "- status: failed authentication"
-              echo "- action: rotate repository secret \`NPM_TOKEN\` with publish permission and 2FA bypass enabled"
+              echo "- action: configure npm trusted publishing for \`.github/workflows/publish-sdk.yml\` or rotate \`NPM_TOKEN\` with read/write package access and bypass 2FA enabled"
             } >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
@@ -202,21 +198,10 @@ jobs:
               echo "- package: \`$PACKAGE_NAME\`"
               echo "- version: \`$TARGET_VERSION\`"
               echo "- status: failed authorization"
-              echo "- action: confirm secret \`NPM_TOKEN\` belongs to an npm owner or maintainer of \`$PACKAGE_NAME\`"
+              echo "- action: confirm trusted publishing is configured for this package or that \`NPM_TOKEN\` belongs to an npm owner or maintainer of \`$PACKAGE_NAME\`"
             } >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
 
           write_summary "$TARGET_VERSION" "failed"
           exit 1
-
-      - name: Skip publish because token missing
-        if: ${{ steps.auth.outputs.has_token != 'true' }}
-        run: |
-          echo "NPM_TOKEN secret missing. Skipping npm publish."
-          {
-            echo "## SDK publish"
-            echo
-            echo "- package: \`${{ steps.pkg.outputs.name }}\`"
-            echo "- status: skipped (missing \`NPM_TOKEN\`)"
-          } >> "$GITHUB_STEP_SUMMARY"
