@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { isHostedApiDisabledHost } from '@/lib/site-config';
 
 // Simple in-memory rate limiter (not shared across instances, but good enough for Phase 2)
 const ipCache = new Map<string, { count: number; lastReset: number }>();
@@ -7,6 +8,24 @@ const RATE_LIMIT = 100; // 100 requests per minute
 const WINDOW_SIZE = 60 * 1000; // 1 minute
 
 export function proxy(request: NextRequest) {
+  const requestHost =
+    request.headers.get('x-forwarded-host') ??
+    request.headers.get('host') ??
+    request.nextUrl.host ??
+    request.nextUrl.hostname;
+  const normalizedHost = requestHost.toLowerCase();
+
+  if (isHostedApiDisabledHost(normalizedHost)) {
+    return NextResponse.json(
+      {
+        success: false,
+        error:
+          'The hosted API is private right now. Run the repository locally or deploy your own copy to use the API.',
+      },
+      { status: 403 },
+    );
+  }
+
   const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
   const now = Date.now();
   const userData = ipCache.get(ip) || { count: 0, lastReset: now };

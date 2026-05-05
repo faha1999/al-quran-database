@@ -14,7 +14,7 @@ npm install @faha1999/al-quran-database
 import { QuranDevSDK } from '@faha1999/al-quran-database';
 
 const quran = new QuranDevSDK({
-  baseUrl: 'https://al-quran-database.vercel.app',
+  baseUrl: 'http://localhost:3000',
   apiVersion: 'v1',
 });
 
@@ -26,6 +26,14 @@ const { data: duas } = await quran.getDuas(1, 5);
 const { data: reciters } = await quran.getReciters();
 console.log(duas[0]?.text);
 console.log(reciters[0]?.name);
+```
+
+Self-hosted production usage:
+
+```ts
+const quran = new QuranDevSDK({
+  baseUrl: 'https://your-domain.example',
+});
 ```
 
 Same-origin usage:
@@ -113,3 +121,4 @@ console.log(data.meta.dataset.counts.ayahs);
 - API docs: [https://al-quran-database.vercel.app/docs/api-reference](https://al-quran-database.vercel.app/docs/api-reference)
 - Database docs: [https://al-quran-database.vercel.app/docs/database](https://al-quran-database.vercel.app/docs/database)
 - Repository: [https://github.com/faha1999/al-quran-database](https://github.com/faha1999/al-quran-database)
+- npm package: [https://www.npmjs.com/package/@faha1999/al-quran-database](https://www.npmjs.com/package/@faha1999/al-quran-database)

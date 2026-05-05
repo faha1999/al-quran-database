@@ -6,7 +6,7 @@ import { createPageMetadata, createWebApiSchema } from '@/lib/seo';
 export const metadata: Metadata = createPageMetadata({
   title: 'Quran REST API & GraphQL API Reference',
   description:
-    'Review the full Al-Quran Database REST and GraphQL API reference, including endpoints, parameters, response envelopes, and search rules.',
+    'Review the full Al-Quran Database REST and GraphQL API reference for local and self-hosted deployments, including endpoints, parameters, response envelopes, and search rules.',
   path: '/docs/api-reference',
   keywords: [
     'quran rest api',

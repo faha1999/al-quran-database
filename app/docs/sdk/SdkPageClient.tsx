@@ -3,6 +3,7 @@
 import DocsLayout from '@/components/DocsLayout';
 import { motion } from 'framer-motion';
 import { BookOpen, Code, Package, Radio, Shield, Terminal, Zap } from 'lucide-react';
+import { localDevBaseUrl, npmPackageName, selfHostPlaceholderUrl } from '@/lib/site-config';
 
 const sdkMethods = [
   'getSurahs(page?, limit?)',
@@ -62,11 +63,11 @@ export default function SdkPageClient() {
               Install
             </h2>
             <pre className="overflow-x-auto rounded-2xl border border-zinc-800/60 bg-black/40 p-5 text-sm text-zinc-300">
-              <code>npm install @faha1999/al-quran-database</code>
+              <code>{`npm install ${npmPackageName}`}</code>
             </pre>
             <p className="mt-4 text-sm leading-relaxed text-zinc-500">
               Use inside browser apps, Next.js servers, edge runtimes, or Node services with native
-              fetch.
+              fetch against your own local or self-hosted API instance.
             </p>
           </article>
 
@@ -94,24 +95,27 @@ export default function SdkPageClient() {
           </h2>
           <div className="grid gap-6 lg:grid-cols-2">
             <article className="rounded-3xl border border-zinc-800 bg-zinc-900/20 p-8">
-              <h3 className="mb-4 text-lg font-bold text-zinc-200">Hosted API</h3>
+              <h3 className="mb-4 text-lg font-bold text-zinc-200">Local Development</h3>
               <pre className="overflow-x-auto rounded-2xl border border-zinc-800/50 bg-black/40 p-5 text-xs leading-relaxed text-zinc-400">
-                <code>{`import { QuranDevSDK } from '@faha1999/al-quran-database';
+                <code>{`import { QuranDevSDK } from '${npmPackageName}';
 
 const quran = new QuranDevSDK({
-  baseUrl: 'https://al-quran-database.vercel.app',
+  baseUrl: '${localDevBaseUrl}',
   apiVersion: 'v1',
 });`}</code>
               </pre>
             </article>
 
             <article className="rounded-3xl border border-zinc-800 bg-zinc-900/20 p-8">
-              <h3 className="mb-4 text-lg font-bold text-zinc-200">Same-Origin App</h3>
+              <h3 className="mb-4 text-lg font-bold text-zinc-200">Self-Hosted API</h3>
               <pre className="overflow-x-auto rounded-2xl border border-zinc-800/50 bg-black/40 p-5 text-xs leading-relaxed text-zinc-400">
-                <code>{`import { quran } from '@faha1999/al-quran-database';
+                <code>{`import { QuranDevSDK } from '${npmPackageName}';
 
-const surah = await quran.getSurah(1);
-console.log(surah.name_en);`}</code>
+const quran = new QuranDevSDK({
+  baseUrl: '${selfHostPlaceholderUrl}',
+});
+
+const surah = await quran.getSurah(1);`}</code>
               </pre>
             </article>
           </div>

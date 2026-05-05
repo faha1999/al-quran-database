@@ -23,7 +23,7 @@ export default function SearchInput({
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && onSearch()}
         placeholder={placeholder || 'Search...'}
-        className="w-full bg-zinc-900 border border-zinc-800 rounded-xl py-3 pl-12 pr-28 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-sm"
+        className="min-h-12 w-full rounded-xl border border-zinc-800 bg-zinc-900 py-3 pl-12 pr-12 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/50"
       />
       <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 group-focus-within:text-blue-500 transition-colors" />
       {loading && (

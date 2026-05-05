@@ -152,8 +152,9 @@ export default function ApiReferencePageClient() {
             transition={{ delay: 0.1 }}
             className="max-w-3xl text-lg leading-relaxed text-zinc-400"
           >
-            Stable public contract lives under `/api/v1/*`. Legacy `/api/*` aliases still work, but
-            new clients should target v1 paths directly.
+            Stable contracts live under `/api/v1/*`, with legacy `/api/*` aliases retained for
+            compatibility. The official hosted domain keeps these endpoints private for now, so use
+            them from a local or self-hosted deployment.
           </motion.p>
         </section>
 
@@ -210,7 +211,7 @@ export default function ApiReferencePageClient() {
               </div>
               <p className="text-sm leading-relaxed text-zinc-500">
                 `POST` is recommended for app traffic. `GET` with `query` and optional `variables`
-                query params also works for debugging and cached reads.
+                query params also works for debugging and cached reads in your own deployment.
               </p>
             </div>
 

@@ -1,14 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { ChevronLeft, Loader2, Search as SearchIcon } from 'lucide-react';
+import { ChevronLeft, Loader2, Search as SearchIcon, Shield } from 'lucide-react';
 import SearchInput from '@/components/SearchInput';
 import type { SearchResultAyah } from '@/lib/quran-types';
 import { AdvancedFilters } from '@/components/AdvancedFilters';
 import { applyLanguageFilter } from '@/lib/search-filters';
 import { QuickLanguageFilters } from '@/components/search/QuickLanguageFilters';
+import { isHostedApiDisabledHost } from '@/lib/site-config';
 
 interface SearchMeta {
   total: number;
@@ -45,14 +46,29 @@ export default function SearchPageClient({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [meta, setMeta] = useState<SearchMeta | null>(null);
+  const [isHostedSite, setIsHostedSite] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+
+  useEffect(() => {
+    setIsHostedSite(isHostedApiDisabledHost(window.location.hostname));
+  }, []);
 
   const runSearch = async (nextQuery: string, nextEdition: string, nextLanguage: string) => {
     if (!nextQuery.trim()) {
       setResults([]);
       setMeta(null);
       setError(null);
+      setLoading(false);
+      return;
+    }
+
+    if (isHostedSite) {
+      setResults([]);
+      setMeta(null);
+      setError(
+        'Hosted API search is disabled on this domain. Run the repository locally or self-host it to execute search requests.',
+      );
       setLoading(false);
       return;
     }
@@ -141,9 +157,22 @@ export default function SearchPageClient({
           </p>
         </section>
 
+        {isHostedSite ? (
+          <section className="rounded-3xl border border-amber-500/20 bg-amber-500/10 p-5 text-sm leading-7 text-amber-100">
+            <div className="flex items-start gap-3">
+              <Shield className="mt-0.5 h-5 w-5 shrink-0" />
+              <p>
+                The official hosted domain keeps the API private, so interactive search execution is
+                disabled here. Clone the repository or deploy your own copy to use this search UI
+                against a working API runtime.
+              </p>
+            </div>
+          </section>
+        ) : null}
+
         <section className="space-y-6">
           <form onSubmit={handleSearch} className="space-y-6">
-            <div className="relative">
+            <div className="flex flex-col gap-3 sm:flex-row">
               <SearchInput
                 value={query}
                 onChange={setQuery}
@@ -154,7 +183,7 @@ export default function SearchPageClient({
               <button
                 type="submit"
                 disabled={loading}
-                className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-bold transition-all hover:bg-blue-500 active:scale-95 disabled:opacity-50"
+                className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold transition-all hover:bg-blue-500 active:scale-95 disabled:opacity-50 sm:w-auto"
               >
                 {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Search'}
               </button>
@@ -253,7 +282,7 @@ export default function SearchPageClient({
                     <p className="text-lg leading-relaxed text-zinc-300">
                       {result.edition_content ?? result.translation ?? 'No text available'}
                     </p>
-                    <div className="mt-4 flex items-center justify-between border-t border-zinc-800/50 pt-4">
+                    <div className="mt-4 flex flex-col gap-3 border-t border-zinc-800/50 pt-4 sm:flex-row sm:items-center sm:justify-between">
                       <p className="text-[10px] uppercase tracking-widest text-zinc-500">
                         {result.edition ? (
                           <>
