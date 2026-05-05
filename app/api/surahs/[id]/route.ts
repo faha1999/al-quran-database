@@ -1,3 +1,4 @@
+import { buildApiCacheKey, getCacheHeaders, withApiCache } from '@/lib/api-cache';
 import { createErrorResponse, createSuccessResponse, handleRouteError } from '@/lib/api-response';
 import { getSurahById, validateEditionFilter } from '@/lib/data-loader';
 
@@ -9,7 +10,12 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     routeId = id;
     const surahId = Number.parseInt(id, 10);
     const edition = validateEditionFilter(new URL(request.url).searchParams.get('edition'));
-    const surah = getSurahById(surahId, edition ?? undefined);
+    const cached = await withApiCache(
+      buildApiCacheKey('surah', JSON.stringify({ surahId, edition })),
+      300,
+      () => getSurahById(surahId, edition ?? undefined),
+    );
+    const surah = cached.value;
 
     if (!surah) {
       return createErrorResponse({ error: 'Surah not found', status: 404 });
@@ -17,6 +23,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
 
     return createSuccessResponse({
       data: surah,
+      headers: getCacheHeaders(cached.cacheStatus),
     });
   } catch (error) {
     return handleRouteError({

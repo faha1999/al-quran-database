@@ -1,3 +1,4 @@
+import { buildApiCacheKey, getCacheHeaders, withApiCache } from '@/lib/api-cache';
 import { createErrorResponse, createSuccessResponse, handleRouteError } from '@/lib/api-response';
 import { getHizbById, validateEditionFilter } from '@/lib/data-loader';
 
@@ -9,7 +10,12 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     routeId = id;
     const hizbId = Number.parseInt(id, 10);
     const edition = validateEditionFilter(new URL(request.url).searchParams.get('edition'));
-    const hizb = getHizbById(hizbId, edition ?? undefined);
+    const cached = await withApiCache(
+      buildApiCacheKey('hizb', JSON.stringify({ hizbId, edition })),
+      300,
+      () => getHizbById(hizbId, edition ?? undefined),
+    );
+    const hizb = cached.value;
 
     if (!hizb) {
       return createErrorResponse({ error: 'Hizb not found', status: 404 });
@@ -20,6 +26,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
       meta: {
         ayah_count: hizb.ayah_count,
       },
+      headers: getCacheHeaders(cached.cacheStatus),
     });
   } catch (error) {
     return handleRouteError({

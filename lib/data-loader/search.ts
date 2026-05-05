@@ -1,15 +1,16 @@
 import { Ayah, SearchResultAyah } from '@/lib/quran-types';
 import { advancedSearch } from '../search-engine';
+import { normalizeSearchText } from '../text-normalization';
 import { ayahs, DEFAULT_TRANSLATION_IDENTIFIER, editionsByIdentifier } from './core';
 import { loadEditionContent } from './cache';
 import { attachEdition } from './utils';
 
 export function normalizeQuery(query: string): string {
-  return query.trim().toLowerCase();
+  return normalizeSearchText(query);
 }
 
 export function matchesQuery(value: string | null | undefined, query: string): boolean {
-  return Boolean(value && value.toLowerCase().includes(query));
+  return Boolean(value && normalizeSearchText(value).includes(query));
 }
 
 export function searchWithEditionIdentifier(query: string, identifier: string): SearchResultAyah[] {

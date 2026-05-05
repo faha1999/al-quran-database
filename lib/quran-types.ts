@@ -248,6 +248,21 @@ export interface ResolvedAyah extends Ayah {
   knowledge?: AyahKnowledgeEntry | null;
 }
 
+export interface ResolvedSurah extends Surah {
+  ayahs: ResolvedAyah[];
+}
+
+export interface ResolvedDivision {
+  id: number;
+  ayah_count: number;
+  start_ayah_number: number;
+  end_ayah_number: number;
+  start_page: number;
+  end_page: number;
+  surah_ids: number[];
+  ayahs: ResolvedAyah[];
+}
+
 export interface SearchFilters {
   edition?: string;
   language?: string;
@@ -257,6 +272,25 @@ export interface SearchFilters {
 
 export interface SearchResultAyah extends ResolvedAyah {
   matched_identifiers: string[];
+}
+
+export interface PaginationMeta {
+  total: number;
+  page?: number;
+  limit?: number;
+  total_pages?: number;
+  has_next_page?: boolean;
+}
+
+export interface SearchMeta extends PaginationMeta {
+  edition?: string | null;
+  language?: string | null;
+}
+
+export interface ApiEnvelope<T, TMeta = Record<string, unknown> | undefined> {
+  success: boolean;
+  data: T;
+  meta?: TMeta;
 }
 
 export interface SearchFilterState {

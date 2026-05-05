@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import type { Ayah, AyahEdition, EditionManifest } from './quran-types';
 import { logger } from './logger';
+import { normalizeSearchText } from './text-normalization';
 
 const DATA_DIR = path.join(process.cwd(), 'lib', 'data');
 const readJson = <T>(filePath: string): T => JSON.parse(readFileSync(filePath, 'utf8')) as T;
@@ -46,8 +47,8 @@ logger.debug('Initializing search index');
 ayahs.forEach((ayah) => {
   index.add({
     id: ayah.id,
-    text: ayah.text,
-    translation: translationMap.get(ayah.id) || '',
+    text: normalizeSearchText(ayah.text),
+    translation: normalizeSearchText(translationMap.get(ayah.id) || ''),
     surah_id: ayah.surah_id,
     ayah_number: ayah.number_in_surah,
   });
@@ -60,7 +61,7 @@ interface SearchResult {
 }
 
 export function advancedSearch(query: string, limit: number = 20) {
-  const results = index.search(query, {
+  const results = index.search(normalizeSearchText(query), {
     limit,
     enrich: true,
     suggest: true,

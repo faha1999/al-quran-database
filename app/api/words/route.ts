@@ -1,3 +1,4 @@
+import { buildApiCacheKey, getCacheHeaders, withApiCache } from '@/lib/api-cache';
 import { createErrorResponse, createSuccessResponse, handleRouteError } from '@/lib/api-response';
 import { getWordsByAyah } from '@/lib/data-loader';
 
@@ -10,13 +11,19 @@ export async function GET(request: Request) {
       return createErrorResponse({ error: 'ayah_id is required', status: 400 });
     }
 
-    const words = getWordsByAyah(ayahId);
+    const cached = await withApiCache(
+      buildApiCacheKey('words', JSON.stringify({ ayahId })),
+      300,
+      () => getWordsByAyah(ayahId),
+    );
+    const words = cached.value;
 
     return createSuccessResponse({
       data: words,
       meta: {
         count: words.length,
       },
+      headers: getCacheHeaders(cached.cacheStatus),
     });
   } catch (error) {
     return handleRouteError({

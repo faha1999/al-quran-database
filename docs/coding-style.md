@@ -11,6 +11,7 @@
 
 - Validate query params at boundary.
 - Return normalized JSON shape: `{ success, data?, error?, meta? }`.
+- New REST endpoints belong under `app/api/v1/*`; legacy aliases may re-export them.
 - Reuse shared response helpers from `lib/api-response.ts`.
 - Log validation as `warn`, unexpected failures as `error`.
 
@@ -25,6 +26,7 @@
 
 - Keep filter logic composable and framework-agnostic where possible.
 - Use cached edition loaders for repeated reads.
+- Use shared API cache helper for hot routes; Redis optional, memory fallback required.
 - Prefer domain helpers in `lib/data-loader/*` over route-local data traversal.
 
 ## Formatting

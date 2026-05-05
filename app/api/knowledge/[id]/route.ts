@@ -1,3 +1,4 @@
+import { buildApiCacheKey, getCacheHeaders, withApiCache } from '@/lib/api-cache';
 import { createErrorResponse, createSuccessResponse, handleRouteError } from '@/lib/api-response';
 import { getKnowledgeByAyah } from '@/lib/data-loader';
 
@@ -8,13 +9,21 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     const { id } = await params;
     routeId = id;
     const ayahId = Number.parseInt(id, 10);
-    const knowledge = getKnowledgeByAyah(ayahId);
+    const cached = await withApiCache(
+      buildApiCacheKey('knowledge', JSON.stringify({ ayahId })),
+      900,
+      () => getKnowledgeByAyah(ayahId),
+    );
+    const knowledge = cached.value;
 
     if (!knowledge) {
       return createErrorResponse({ error: 'Knowledge entry not found', status: 404 });
     }
 
-    return createSuccessResponse({ data: knowledge });
+    return createSuccessResponse({
+      data: knowledge,
+      headers: getCacheHeaders(cached.cacheStatus),
+    });
   } catch (error) {
     return handleRouteError({
       error,

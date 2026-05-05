@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { GET as AyahGET } from '@/app/api/ayahs/[id]/route';
 import { GET as FaqGET } from '@/app/api/faqs/route';
+import { GET as GraphqlGET } from '@/app/api/graphql/route';
 import { GET as KnowledgeGET } from '@/app/api/knowledge/[id]/route';
 import { GET as MetaGET } from '@/app/api/meta/route';
 import { GET as SearchGET } from '@/app/api/search/route';
 import { GET as SurahsGET } from '@/app/api/surahs/route';
+import { GET as V1SurahsGET } from '@/app/api/v1/surahs/route';
 import { GET as WordsGET } from '@/app/api/words/route';
 
 describe('API integration', () => {
@@ -36,6 +38,15 @@ describe('API integration', () => {
       expect(payload.success).toBe(true);
       expect(payload.data.length).toBeLessThanOrEqual(5);
       expect(payload.meta).toBeDefined();
+    });
+
+    it('returns Arabic results for Arabic query', async () => {
+      const response = await SearchGET(new Request('http://localhost/api/search?q=الله&limit=5'));
+      const payload = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(payload.success).toBe(true);
+      expect(payload.data.length).toBeGreaterThan(0);
     });
   });
 
@@ -74,6 +85,14 @@ describe('API integration', () => {
       expect(payload.data).toHaveLength(10);
       expect(payload.meta.page).toBe(2);
       expect(payload.meta.total).toBe(114);
+    });
+
+    it('supports versioned alias', async () => {
+      const response = await V1SurahsGET(new Request('http://localhost/api/v1/surahs?limit=5'));
+      const payload = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(payload.data).toHaveLength(5);
     });
   });
 
@@ -118,6 +137,20 @@ describe('API integration', () => {
       expect(response.status).toBe(200);
       expect(payload.data.dataset.counts.ayahs).toBe(6236);
       expect(payload.data.knowledge.ayah_entries).toBeGreaterThan(0);
+    });
+  });
+
+  describe('/api/graphql', () => {
+    it('executes GET query', async () => {
+      const query = encodeURIComponent(
+        '{ meta { dataset { counts { ayahs } } } surah(id: 1) { name_en ayahs { id } } }',
+      );
+      const response = await GraphqlGET(new Request(`http://localhost/api/graphql?query=${query}`));
+      const payload = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(payload.data.meta.dataset.counts.ayahs).toBe(6236);
+      expect(payload.data.surah.name_en).toBe('Al-Faatiha');
     });
   });
 });

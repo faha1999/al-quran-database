@@ -5,6 +5,7 @@
 - Canonical JSON-first workflow with local-only `quran.sql`
 - Deterministic SQL → JSON verification and dataset metadata hashing
 - Normalized SQLite/PostgreSQL exports with foreign keys, indexes, and enrichment tables
+- Versioned REST, GraphQL endpoint, and optional Redis-backed API cache
 - Shared API response helpers
 - Reusable search filter architecture
 - Unit + integration + e2e baseline coverage

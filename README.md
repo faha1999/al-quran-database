@@ -6,10 +6,13 @@ TypeScript, Next.js App Router, and a lightweight JS/TS SDK.
 ## What ships
 
 - Clean REST API for surahs, ayahs, juz, hizb, rub, pages, words, duas, reciters, and search
+- Versioned REST under `/api/v1/*` plus legacy `/api/*` aliases
+- GraphQL endpoint for flexible multi-entity queries
 - Sharded JSON architecture for fast local reads and edge-friendly deployment
 - Canonical JSON-first workflow: `quran.sql` stays local, committed data lives in `lib/data/*`
 - Deterministic SQL → JSON verification with source SHA-256 metadata
 - Normalized PostgreSQL + SQLite exports including knowledge/context tables
+- Optional Redis cache layer with in-memory fallback for hot API routes
 - JS/TS SDK in [`lib/sdk.ts`](al-quran-database/lib/sdk.ts)
 - Search UI with composable edition and language filters
 - SQL conversion, migration, export, validation, and performance scripts
@@ -37,7 +40,8 @@ Open:
 
 - Docs: [http://localhost:3000/docs](http://localhost:3000/docs)
 - Search UI: [http://localhost:3000/search](http://localhost:3000/search)
-- API example: [http://localhost:3000/api/search?q=mercy&language=en](http://localhost:3000/api/search?q=mercy&language=en)
+- REST example: [http://localhost:3000/api/v1/search?q=mercy&language=en](http://localhost:3000/api/v1/search?q=mercy&language=en)
+- GraphQL example: `POST /api/v1/graphql`
 
 ## Commands
 
@@ -70,6 +74,14 @@ npm run data:bench
 - `scripts/verify_quran_data.py` proves row counts, shard integrity, and deterministic rebuilds.
 - `scripts/export_sql.py` regenerates downloadable PostgreSQL and SQLite artifacts from committed
   JSON.
+
+## API platform notes
+
+- Versioned REST lives under `/api/v1/*`.
+- Legacy `/api/*` aliases remain for backward compatibility during migration.
+- GraphQL endpoint supports composing `surah`, `ayah`, `search`, `faqs`, `knowledge`, and `meta`
+  in one request.
+- Set `REDIS_URL` to enable shared cache. Without it, in-memory cache still accelerates hot reads.
 
 ## Docs
 

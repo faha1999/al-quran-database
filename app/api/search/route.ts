@@ -1,3 +1,4 @@
+import { buildApiCacheKey, getCacheHeaders, withApiCache } from '@/lib/api-cache';
 import { parsePositiveInteger } from '@/lib/api-utils';
 import { createErrorResponse, createSuccessResponse, handleRouteError } from '@/lib/api-response';
 import {
@@ -35,12 +36,19 @@ export async function GET(request: Request) {
     const language = validateLanguageFilter(languageParam);
     const page = parsePositiveInteger(searchParams.get('page'), 'page') ?? 1;
     const limit = parsePositiveInteger(searchParams.get('limit'), 'limit') ?? 50;
-    const { items, meta } = searchAyahs(query, {
-      edition: edition ?? undefined,
-      language: language ?? undefined,
-      page,
-      limit,
-    });
+    const cacheKey = buildApiCacheKey(
+      'search',
+      JSON.stringify({ query, edition, language, page, limit }),
+    );
+    const cached = await withApiCache(cacheKey, 120, () =>
+      searchAyahs(query, {
+        edition: edition ?? undefined,
+        language: language ?? undefined,
+        page,
+        limit,
+      }),
+    );
+    const { items, meta } = cached.value;
 
     return createSuccessResponse({
       data: items,
@@ -49,6 +57,7 @@ export async function GET(request: Request) {
         edition,
         language,
       },
+      headers: getCacheHeaders(cached.cacheStatus),
     });
   } catch (error) {
     return handleRouteError({

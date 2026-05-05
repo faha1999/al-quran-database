@@ -2,76 +2,82 @@ import DocsLayout from '@/components/DocsLayout';
 
 const endpoints = [
   {
+    method: 'POST',
+    path: '/v1/graphql',
+    description:
+      'Flexible GraphQL endpoint for typed query composition across surahs, ayahs, search, knowledge, FAQs, and metadata.',
+  },
+  {
     method: 'GET',
-    path: '/surahs',
+    path: '/v1/surahs',
     description: 'Get all 114 Surahs. Supports optional page and limit query params.',
   },
   {
     method: 'GET',
-    path: '/surahs/[id]',
+    path: '/v1/surahs/[id]',
     description: 'Get one Surah by ID or number. Supports optional edition query param.',
   },
   {
     method: 'GET',
-    path: '/ayahs/[id]',
+    path: '/v1/ayahs/[id]',
     description:
       'Get one Ayah by global number (1-6236). Supports optional edition and include_words params, plus context and knowledge hydration.',
   },
   {
     method: 'GET',
-    path: '/juz/[id]',
+    path: '/v1/juz/[id]',
     description: 'Get one juz by ID (1-30), including derived ayah and page ranges.',
   },
   {
     method: 'GET',
-    path: '/hizb/[id]',
+    path: '/v1/hizb/[id]',
     description: 'Get one hizb by ID (1-60), containing all ayahs in that division.',
   },
   {
     method: 'GET',
-    path: '/rub/[id]',
+    path: '/v1/rub/[id]',
     description: 'Get one Rub (Quarter) by ID (1-480).',
   },
   {
     method: 'GET',
-    path: '/pages/[id]',
+    path: '/v1/pages/[id]',
     description: 'Get ayahs for a specific Mushaf page (1-604).',
   },
   {
     method: 'GET',
-    path: '/words?ayah_id=[id]',
+    path: '/v1/words?ayah_id=[id]',
     description: 'Get word-by-word breakdown (Arabic tokens) for a specific ayah.',
   },
   {
     method: 'GET',
-    path: '/reciters',
+    path: '/v1/reciters',
     description: 'Get list of available reciters for audio streaming references.',
   },
   {
     method: 'GET',
-    path: '/duas',
+    path: '/v1/duas',
     description: 'Get all supplications (Duas) extracted from the Quran. Supports pagination.',
   },
   {
     method: 'GET',
-    path: '/knowledge/[id]',
+    path: '/v1/knowledge/[id]',
     description:
       'Get curated knowledge entry for an ayah: themes, cross refs, legal/scientific/linguistic notes, and misinterpretation guidance.',
   },
   {
     method: 'GET',
-    path: '/faqs',
+    path: '/v1/faqs',
     description: 'Get canonical FAQ entries stored in the knowledge layer.',
   },
   {
     method: 'GET',
-    path: '/meta',
+    path: '/v1/meta',
     description:
       'Get dataset metadata, source hash, canonical counts, and knowledge coverage summary.',
   },
   {
     method: 'GET',
-    path: '/search?q=[query]',
+    path: '/v1/search?q=[query]',
     description: 'Search ayahs. Supports edition, language, page, and limit query params.',
   },
 ];
@@ -83,12 +89,12 @@ export default function ApiReference() {
         <section>
           <h1 className="text-4xl font-bold mb-4">API Reference</h1>
           <p className="text-gray-400 text-lg">
-            Core endpoints stay simple. Filters open up multi-edition JSON data without changing the
-            default response shape.
+            REST stays versioned under `/api/v1`. GraphQL sits beside it for flexible query
+            composition. Legacy `/api/*` aliases stay for backward compatibility.
           </p>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-2">
+        <section className="grid gap-4 md:grid-cols-3">
           <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
             <h2 className="mb-3 text-xl font-bold">Query Rules</h2>
             <ul className="space-y-2 text-sm text-gray-400">
@@ -107,6 +113,35 @@ export default function ApiReference() {
               <li>Optional `knowledge` appears when curated coverage exists for an ayah.</li>
             </ul>
           </div>
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+            <h2 className="mb-3 text-xl font-bold">Cache + Version</h2>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li>Responses include `X-API-Version` and `X-API-Latest-Version`.</li>
+              <li>
+                Hot endpoints expose `X-Cache` as `miss`, `hit-memory`, `hit-redis`, or `skip`.
+              </li>
+              <li>Redis cache activates when `REDIS_URL` exists; memory cache remains fallback.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+          <h2 className="mb-4 text-xl font-bold">GraphQL Example</h2>
+          <pre className="bg-black/50 p-4 rounded-lg text-xs text-gray-400 overflow-x-auto">
+            {`query HomePayload {
+  meta {
+    dataset { counts { ayahs editions } }
+  }
+  surah(id: 1) {
+    name_en
+    ayahs { id number_in_surah translation }
+  }
+  search(query: "mercy", limit: 3) {
+    items { id translation matched_identifiers }
+    meta { total page limit }
+  }
+}`}
+          </pre>
         </section>
 
         <div className="grid gap-6">
