@@ -41,4 +41,16 @@ describe('DataLoader', () => {
     expect(() => dataLoader.validateLanguageFilter('non-existent')).toThrow();
     expect(dataLoader.validateLanguageFilter('en')).toBe('en');
   });
+
+  it('should expose knowledge entry for seeded ayah', () => {
+    const knowledge = dataLoader.getKnowledgeByAyah(255);
+    expect(knowledge).not.toBeNull();
+    expect(knowledge?.themes).toContain('creed');
+  });
+
+  it('should expose dataset metadata', () => {
+    const metadata = dataLoader.getDatasetMetadata();
+    expect(metadata.counts.surahs).toBe(114);
+    expect(metadata.counts.pages).toBe(604);
+  });
 });

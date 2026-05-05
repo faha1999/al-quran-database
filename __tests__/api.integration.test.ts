@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { GET as AyahGET } from '@/app/api/ayahs/[id]/route';
+import { GET as FaqGET } from '@/app/api/faqs/route';
+import { GET as KnowledgeGET } from '@/app/api/knowledge/[id]/route';
+import { GET as MetaGET } from '@/app/api/meta/route';
 import { GET as SearchGET } from '@/app/api/search/route';
 import { GET as SurahsGET } from '@/app/api/surahs/route';
 import { GET as WordsGET } from '@/app/api/words/route';
@@ -81,6 +84,40 @@ describe('API integration', () => {
 
       expect(response.status).toBe(400);
       expect(payload.error).toContain('ayah_id');
+    });
+  });
+
+  describe('/api/knowledge/[id]', () => {
+    it('returns knowledge entry when seeded', async () => {
+      const response = await KnowledgeGET(new Request('http://localhost/api/knowledge/255'), {
+        params: Promise.resolve({ id: '255' }),
+      });
+      const payload = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(payload.data.ayah_id).toBe(255);
+    });
+  });
+
+  describe('/api/faqs', () => {
+    it('returns canonical faq payload', async () => {
+      const response = await FaqGET();
+      const payload = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(payload.success).toBe(true);
+      expect(payload.meta.total).toBeGreaterThan(0);
+    });
+  });
+
+  describe('/api/meta', () => {
+    it('returns dataset metadata and coverage', async () => {
+      const response = await MetaGET();
+      const payload = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(payload.data.dataset.counts.ayahs).toBe(6236);
+      expect(payload.data.knowledge.ayah_entries).toBeGreaterThan(0);
     });
   });
 });

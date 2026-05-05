@@ -1,15 +1,21 @@
 import {
   ayahs,
   ayahsByNumber,
+  datasetMetadata,
   duas,
   editions,
   editionsByIdentifier,
   extraContext,
   hizbs,
   juzs,
+  knowledgeBase,
+  knowledgeByAyahId,
+  knowledgeFaqs,
   pages,
   reciters,
+  researchReferences,
   rubs,
+  surahProfilesById,
   supportedLanguages,
   surahs,
   surahsById,
@@ -32,10 +38,14 @@ import {
 } from './search';
 import type {
   AsbabAlNuzulEntry,
+  AyahKnowledgeEntry,
   HadithReferenceEntry,
+  KnowledgeFaqEntry,
+  ResearchReference,
   ResolvedAyah,
   SearchFilters,
   SearchResultAyah,
+  SurahProfile,
 } from '@/lib/quran-types';
 
 export * from './core';
@@ -132,6 +142,8 @@ export function getAyah(
     resolvedAyah.words = getWordsByAyah(id);
   }
 
+  resolvedAyah.knowledge = getKnowledgeByAyah(id);
+
   return resolvedAyah;
 }
 
@@ -141,7 +153,10 @@ export function getAyah(
 export function getAyahByNumber(number: number, identifier?: string) {
   const ayah = ayahsByNumber.get(number) ?? null;
   if (!ayah) return null;
-  return attachEdition(ayah, identifier);
+  return {
+    ...attachEdition(ayah, identifier),
+    knowledge: getKnowledgeByAyah(ayah.id),
+  };
 }
 
 /**
@@ -285,4 +300,28 @@ export function getExtraContextByAyah(ayahId: number) {
       (item: HadithReferenceEntry) => item.ayah_id === ayahId,
     ),
   };
+}
+
+export function getKnowledgeByAyah(ayahId: number): AyahKnowledgeEntry | null {
+  return knowledgeByAyahId.get(ayahId) ?? null;
+}
+
+export function getSurahProfile(id: number): SurahProfile | null {
+  return surahProfilesById.get(id) ?? null;
+}
+
+export function getKnowledgeCoverage() {
+  return knowledgeBase.coverage;
+}
+
+export function getKnowledgeFaqs(): KnowledgeFaqEntry[] {
+  return knowledgeFaqs;
+}
+
+export function getResearchReferences(): ResearchReference[] {
+  return researchReferences;
+}
+
+export function getDatasetMetadata() {
+  return datasetMetadata;
 }

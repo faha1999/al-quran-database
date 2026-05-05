@@ -12,6 +12,18 @@ from pathlib import Path
 from quran_sql_common import DEFAULT_TRANSLATION_IDENTIFIER, HARD_FILE_LIMIT_BYTES, iter_table_rows
 
 QURAN_TABLES = ("surahs", "ayahs", "editions", "ayah_edition")
+GENERATED_HASH_PREFIXES = (
+    "surahs.json",
+    "ayahs.json",
+    "editions.json",
+    "juzs.json",
+    "hizbs.json",
+    "rubs.json",
+    "pages.json",
+    "edition-manifest.json",
+    "dataset-metadata.json",
+    "ayah-editions/",
+)
 
 
 def load_json(path: Path):
@@ -62,7 +74,9 @@ def generated_counts(output_dir: Path) -> dict[str, object]:
     juzs = load_json(output_dir / "juzs.json")
     hizbs = load_json(output_dir / "hizbs.json")
     rubs = load_json(output_dir / "rubs.json")
+    pages = load_json(output_dir / "pages.json")
     manifest = load_json(output_dir / "edition-manifest.json")
+    metadata = load_json(output_dir / "dataset-metadata.json")
 
     ayah_ids = {int(ayah["id"]) for ayah in ayahs}
     edition_ids = {int(edition["id"]) for edition in editions}
@@ -103,16 +117,23 @@ def generated_counts(output_dir: Path) -> dict[str, object]:
         raise AssertionError("Derived hizb count mismatch")
     if len(rubs) != len({int(ayah["rub_id"]) for ayah in ayahs}):
         raise AssertionError("Derived rub count mismatch")
+    if len(pages) != len({int(ayah["page"]) for ayah in ayahs}):
+        raise AssertionError("Derived page count mismatch")
 
     return {
         "surahs": len(surahs),
         "ayahs": len(ayahs),
         "editions": len(editions),
+        "juzs": len(juzs),
+        "hizbs": len(hizbs),
+        "rubs": len(rubs),
+        "pages": len(pages),
         "ayah_edition": emitted_rows,
         "en_sahih_ayah_ids": sahih_ayah_ids,
         "manifest": manifest,
         "ayah_ids": ayah_ids,
         "edition_ids": edition_ids,
+        "metadata": metadata,
     }
 
 
@@ -122,7 +143,16 @@ def hash_tree(root: Path) -> dict[str, str]:
         if path.is_dir():
             continue
         relative_path = str(path.relative_to(root))
-        hashes[relative_path] = hashlib.sha256(path.read_bytes()).hexdigest()
+        if relative_path == "dataset-metadata.json":
+            payload = load_json(path)
+            payload["generated_at"] = "__normalized__"
+            hashes[relative_path] = hashlib.sha256(
+                json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode(
+                    "utf-8"
+                )
+            ).hexdigest()
+        else:
+            hashes[relative_path] = hashlib.sha256(path.read_bytes()).hexdigest()
     return hashes
 
 
@@ -134,8 +164,16 @@ def verify_determinism(sql_path: Path, output_dir: Path) -> None:
             [sys.executable, "scripts/convert_quran_sql.py", "--sql-path", str(sql_path), "--output-dir", str(temp_output)],
             check=True,
         )
-        current_hashes = hash_tree(output_dir)
-        regenerated_hashes = hash_tree(temp_output)
+        current_hashes = {
+            key: value
+            for key, value in hash_tree(output_dir).items()
+            if key.startswith(GENERATED_HASH_PREFIXES)
+        }
+        regenerated_hashes = {
+            key: value
+            for key, value in hash_tree(temp_output).items()
+            if key.startswith(GENERATED_HASH_PREFIXES)
+        }
         if current_hashes != regenerated_hashes:
             raise AssertionError("Generated data is not deterministic")
     finally:
@@ -161,6 +199,10 @@ def main() -> None:
     assert actual["surahs"] == 114 == expected["surahs"]
     assert actual["ayahs"] == 6236 == expected["ayahs"]
     assert actual["editions"] == 134 == expected["editions"]
+    assert actual["juzs"] == 30
+    assert actual["hizbs"] == 60
+    assert actual["rubs"] == 240
+    assert actual["pages"] == 604
     assert len(actual["en_sahih_ayah_ids"]) == actual["ayahs"] == len(expected["en_sahih_ayah_ids"])
 
     manifest_editions = actual["manifest"]["editions"]
@@ -174,6 +216,18 @@ def main() -> None:
     if sum(int(entry["row_count"]) for entry in manifest_editions.values()) != int(expected["ayah_edition"]):
         raise AssertionError("Total ayah_edition row count mismatch")
 
+    metadata = actual["metadata"]
+    if int(metadata["counts"]["surahs"]) != actual["surahs"]:
+        raise AssertionError("Metadata surah count mismatch")
+    if int(metadata["counts"]["ayahs"]) != actual["ayahs"]:
+        raise AssertionError("Metadata ayah count mismatch")
+    if int(metadata["counts"]["editions"]) != actual["editions"]:
+        raise AssertionError("Metadata edition count mismatch")
+    if int(metadata["counts"]["pages"]) != actual["pages"]:
+        raise AssertionError("Metadata page count mismatch")
+    if not metadata["source"]["sha256"]:
+        raise AssertionError("Metadata source hash missing")
+
     if args.check_determinism:
         verify_determinism(sql_path, output_dir)
 
@@ -183,6 +237,7 @@ def main() -> None:
                 "surahs": actual["surahs"],
                 "ayahs": actual["ayahs"],
                 "editions": actual["editions"],
+                "pages": actual["pages"],
                 "ayah_edition_rows": sum(int(entry["row_count"]) for entry in manifest_editions.values()),
                 "deterministic": bool(args.check_determinism),
             },

@@ -1,224 +1,187 @@
+import { statSync } from 'node:fs';
+import path from 'node:path';
 import DocsLayout from '@/components/DocsLayout';
-import { Database, Download, Table, RefreshCw, Zap, Server, ShieldCheck } from 'lucide-react';
+import { getDatasetMetadata, getKnowledgeCoverage } from '@/lib/data-loader';
+import {
+  Database,
+  Download,
+  Layers3,
+  ShieldCheck,
+  Sparkles,
+  TableProperties,
+  Zap,
+} from 'lucide-react';
+
+function getPublicFileSize(fileName: string) {
+  try {
+    const filePath = path.join(process.cwd(), 'public', fileName);
+    return `${(statSync(filePath).size / (1024 * 1024)).toFixed(1)} MB`;
+  } catch {
+    return 'Build first';
+  }
+}
 
 export default function DatabaseDocsPage() {
+  const metadata = getDatasetMetadata();
+  const knowledge = getKnowledgeCoverage();
+
+  const exportCards = [
+    {
+      title: 'SQLite Export',
+      href: '/quran_indexed.sqlite',
+      description: 'Portable file for local apps, edge reads, test fixtures, and offline bundles.',
+      badge: getPublicFileSize('quran_indexed.sqlite'),
+    },
+    {
+      title: 'PostgreSQL Export',
+      href: '/quran_postgres.sql',
+      description:
+        'Transactional schema + data dump with foreign keys, indexes, and normalized enrichment tables.',
+      badge: getPublicFileSize('quran_postgres.sql'),
+    },
+  ];
+
+  const schemaAreas = [
+    'Core canon: surahs, ayahs, words, editions',
+    'Reading divisions: juzs, hizbs, rubs, pages + normalized join tables',
+    'Context: duas, asbab al-nuzul, hadith references, surah profiles',
+    'Knowledge layer: themes, cross references, scientific notes, fiqh notes, linguistic notes, misinterpretations, FAQs, research refs',
+  ];
+
   return (
     <DocsLayout>
-      <div className="space-y-16 pb-20">
-        <section>
-          <div className="flex items-center gap-3 mb-4">
-            <Database className="w-8 h-8 text-blue-500" />
-            <h1 className="text-4xl font-bold tracking-tight">Database Architecture</h1>
+      <div className="space-y-10 pb-16">
+        <section className="rounded-[2rem] border border-cyan-500/15 bg-[radial-gradient(circle_at_top_left,_rgba(34,211,238,0.18),_transparent_30%),linear-gradient(180deg,rgba(9,17,28,0.96),rgba(7,11,18,0.98))] p-8">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200">
+            <Database className="h-3.5 w-3.5" />
+            Canonical Data Layer
           </div>
-          <p className="text-gray-400 text-lg max-w-3xl leading-relaxed">
-            Our platform provides a highly normalized and indexed relational database structure,
-            optimized for both research and production-grade application development.
+          <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white md:text-5xl">
+            JSON-first dataset. SQL local. Exports reproducible.
+          </h1>
+          <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-300">
+            Repo source-of-truth is sharded JSON under `lib/data`. Local `quran.sql` stays out of
+            Git, conversion is deterministic, verification compares counts plus file hashes, and SQL
+            exports are regenerated from committed JSON.
           </p>
-        </section>
 
-        {/* Schema Diagram */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <Table className="w-6 h-6 text-purple-500" />
-            Entity Relationship Diagram
-          </h2>
-          <div className="p-8 rounded-3xl border border-zinc-800 bg-zinc-900/30 font-mono text-xs overflow-x-auto">
-            <pre className="text-zinc-400">
-              {`erDiagram
-    SURAHS ||--o{ AYAHS : "contains"
-    SURAHS ||--o{ WORDS : "contains"
-    AYAHS ||--o{ WORDS : "broken down into"
-    JUZS ||--o{ AYAHS : "divides"
-    PAGES ||--o{ AYAHS : "maps to"
-    RUBS ||--o{ AYAHS : "quarters"
-
-    SURAHS {
-        int id PK
-        int number UK
-        string name_ar
-        string name_en
-        string name_en_translation
-    }
-    AYAHS {
-        int id PK
-        int number UK
-        string text
-        int surah_id FK
-        int juz_id FK
-        int page FK
-        bool sajda
-    }
-    WORDS {
-        int id PK
-        int ayah_id FK
-        string text
-        string root
-        string morphology
-    }`}
-            </pre>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <article className="rounded-3xl border border-white/8 bg-white/5 p-5">
+              <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">Source SHA-256</p>
+              <p className="mt-3 break-all text-sm text-zinc-200">{metadata.source.sha256}</p>
+            </article>
+            <article className="rounded-3xl border border-white/8 bg-white/5 p-5">
+              <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">SQL Size</p>
+              <p className="mt-3 text-3xl font-semibold text-white">
+                {(metadata.source.size_bytes / (1024 * 1024)).toFixed(1)} MB
+              </p>
+            </article>
+            <article className="rounded-3xl border border-white/8 bg-white/5 p-5">
+              <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">Coverage Layer</p>
+              <p className="mt-3 text-3xl font-semibold text-white">{knowledge.ayah_entries}</p>
+              <p className="mt-1 text-sm text-zinc-400">Curated ayah knowledge entries</p>
+            </article>
           </div>
         </section>
 
-        {/* Exports */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <Download className="w-6 h-6 text-green-500" />
-            Standard Data Exports
-          </h2>
-          <p className="text-gray-400">
-            Download our pre-indexed database exports. All files include proper foreign key
-            constraints and optimization indexes.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-6 rounded-2xl border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 transition-all group">
-              <h3 className="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">
-                SQLite (Production Ready)
-              </h3>
-              <p className="text-sm text-gray-500 mb-4">
-                Perfect for mobile apps and edge deployments. Pre-indexed with PRAGMA optimization.
-              </p>
+        <section className="grid gap-4 md:grid-cols-2">
+          {exportCards.map((card) => (
+            <article
+              key={card.title}
+              className="rounded-[1.75rem] border border-zinc-800 bg-zinc-950/70 p-6"
+            >
+              <div className="mb-5 flex items-start justify-between gap-4">
+                <div>
+                  <h2 className="text-2xl font-semibold text-zinc-100">{card.title}</h2>
+                  <p className="mt-2 text-sm leading-6 text-zinc-400">{card.description}</p>
+                </div>
+                <span className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-300">
+                  {card.badge}
+                </span>
+              </div>
               <a
-                href="/quran_indexed.sqlite"
+                href={card.href}
                 download
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 rounded-lg text-sm font-bold hover:bg-blue-500 transition-colors"
+                className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
               >
-                <Download className="w-4 h-4" />
-                Download .sqlite
+                <Download className="h-4 w-4" />
+                Download
               </a>
-            </div>
-            <div className="p-6 rounded-2xl border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 transition-all group">
-              <h3 className="text-xl font-bold mb-2 group-hover:text-green-400 transition-colors">
-                PostgreSQL (Schema & Data)
-              </h3>
-              <p className="text-sm text-gray-500 mb-4">
-                Optimized for server-side APIs. Includes full transaction blocks and SERIAL primary
-                keys.
-              </p>
-              <a
-                href="/quran_postgres.sql"
-                download
-                className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 rounded-lg text-sm font-bold hover:bg-zinc-700 transition-colors"
-              >
-                <Download className="w-4 h-4" />
-                Download .sql
-              </a>
-            </div>
-          </div>
+            </article>
+          ))}
         </section>
 
-        {/* Maintenance & Scripts */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <RefreshCw className="w-6 h-6 text-orange-500" />
-            Maintenance & Seeding
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-zinc-500" />
-                Database Migrations
-              </h3>
-              <p className="text-sm text-gray-400">
-                Manage data schema versions using our migration toolkit. Ensures consistency across
-                JSON and SQL formats.
-              </p>
-              <code className="block p-3 rounded-lg bg-black border border-zinc-800 text-xs text-blue-400">
-                python3 scripts/migrate_db.py
+        <section className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+          <article className="rounded-[1.75rem] border border-zinc-800 bg-zinc-950/70 p-6">
+            <div className="mb-5 flex items-center gap-3">
+              <TableProperties className="h-5 w-5 text-cyan-300" />
+              <h2 className="text-2xl font-semibold">Normalized Schema</h2>
+            </div>
+            <div className="space-y-3 text-sm text-zinc-300">
+              {schemaAreas.map((item) => (
+                <p
+                  key={item}
+                  className="rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3"
+                >
+                  {item}
+                </p>
+              ))}
+            </div>
+          </article>
+
+          <article className="rounded-[1.75rem] border border-zinc-800 bg-zinc-950/70 p-6">
+            <div className="mb-5 flex items-center gap-3">
+              <ShieldCheck className="h-5 w-5 text-emerald-300" />
+              <h2 className="text-2xl font-semibold">Ops Commands</h2>
+            </div>
+            <div className="space-y-3 text-sm text-zinc-300">
+              <code className="block rounded-2xl border border-zinc-800 bg-black/40 p-4 text-cyan-200">
+                npm run data:convert
+              </code>
+              <code className="block rounded-2xl border border-zinc-800 bg-black/40 p-4 text-cyan-200">
+                npm run data:verify -- --check-determinism
+              </code>
+              <code className="block rounded-2xl border border-zinc-800 bg-black/40 p-4 text-cyan-200">
+                npm run data:export
+              </code>
+              <code className="block rounded-2xl border border-zinc-800 bg-black/40 p-4 text-cyan-200">
+                npm run data:migrate
               </code>
             </div>
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <Zap className="w-5 h-5 text-yellow-500" />
-                Sample Data Seeding
-              </h3>
-              <p className="text-sm text-gray-400">
-                Generate a lightweight subset of the database (first 3 Surahs) for rapid development
-                and testing.
-              </p>
-              <code className="block p-3 rounded-lg bg-black border border-zinc-800 text-xs text-green-400">
-                python3 scripts/seed_data.py
-              </code>
-            </div>
-          </div>
+          </article>
         </section>
 
-        {/* Replication & Scaling */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <Server className="w-6 h-6 text-red-500" />
-            Scaling & Replication
-          </h2>
-          <div className="p-8 rounded-3xl bg-zinc-900/50 border border-zinc-800">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="space-y-3">
-                <h4 className="font-bold text-zinc-200">Edge Replication</h4>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  For global low-latency, use <strong>Turso</strong> to replicate the SQLite
-                  database across 30+ regions.
-                </p>
-              </div>
-              <div className="space-y-3">
-                <h4 className="font-bold text-zinc-200">Read Replicas</h4>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  The PostgreSQL export is optimized for <strong>Primary-Replica</strong> setups.
-                  Direct high-traffic search queries to read replicas.
-                </p>
-              </div>
-              <div className="space-y-3">
-                <h4 className="font-bold text-zinc-200">Horizontal Scaling</h4>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  Use connection poolers like <strong>PgBouncer</strong> to handle thousands of
-                  concurrent API requests efficiently.
-                </p>
-              </div>
+        <section className="grid gap-4 md:grid-cols-3">
+          <article className="rounded-[1.5rem] border border-zinc-800 bg-zinc-950/70 p-5">
+            <div className="mb-4 flex items-center gap-3">
+              <Layers3 className="h-5 w-5 text-fuchsia-300" />
+              <h3 className="text-lg font-semibold">Integrity</h3>
             </div>
-          </div>
-        </section>
-
-        {/* Performance */}
-        <section className="p-8 rounded-3xl bg-blue-600/5 border border-blue-500/20">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="p-2 rounded-lg bg-blue-500/20">
-              <Zap className="w-6 h-6 text-blue-400" />
+            <p className="text-sm leading-6 text-zinc-400">
+              Metadata records source hash, source size, generated timestamp, and canonical counts
+              for surahs, ayahs, editions, juzs, hizbs, rubs, and pages.
+            </p>
+          </article>
+          <article className="rounded-[1.5rem] border border-zinc-800 bg-zinc-950/70 p-5">
+            <div className="mb-4 flex items-center gap-3">
+              <Zap className="h-5 w-5 text-amber-300" />
+              <h3 className="text-lg font-semibold">Performance</h3>
             </div>
-            <h2 className="text-xl font-bold">Indexing & Performance</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-4">
-              <p className="text-sm text-gray-400 leading-relaxed">
-                All exports include optimized indexes for high-traffic query patterns. We benchmark
-                every build against the following metrics:
-              </p>
-              <ul className="space-y-3 text-xs text-gray-400">
-                <li className="flex items-center gap-2">
-                  <div className="w-1 h-1 rounded-full bg-blue-500" />
-                  <span>
-                    Surah/Ayah Lookup: <strong>&lt; 1ms</strong>
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1 h-1 rounded-full bg-blue-500" />
-                  <span>
-                    Full Word Search: <strong>&lt; 5ms</strong>
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1 h-1 rounded-full bg-blue-500" />
-                  <span>
-                    JSON Cold Load: <strong>~200ms</strong>
-                  </span>
-                </li>
-              </ul>
+            <p className="text-sm leading-6 text-zinc-400">
+              SQLite export ships with lookup indexes across ayah divisions, roots, themes, and
+              knowledge tables. Benchmarks live in `scripts/performance_metrics.py`.
+            </p>
+          </article>
+          <article className="rounded-[1.5rem] border border-zinc-800 bg-zinc-950/70 p-5">
+            <div className="mb-4 flex items-center gap-3">
+              <Sparkles className="h-5 w-5 text-sky-300" />
+              <h3 className="text-lg font-semibold">Scaling</h3>
             </div>
-            <div className="p-4 rounded-xl bg-black/40 border border-zinc-800">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
-                Benchmark Command
-              </h4>
-              <code className="text-[10px] text-blue-300">
-                python3 scripts/performance_metrics.py
-              </code>
-            </div>
-          </div>
+            <p className="text-sm leading-6 text-zinc-400">
+              JSON powers static and edge reads. SQLite handles embedded/offline workloads.
+              PostgreSQL export supports replicas, poolers, and warehouse-style joins.
+            </p>
+          </article>
         </section>
       </div>
     </DocsLayout>

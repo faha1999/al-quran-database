@@ -1,12 +1,15 @@
 # Quran Developer Platform
 
-Developer-first Quran dataset and API platform built on sharded JSON, strict TypeScript, Next.js
-App Router, and a lightweight JS/TS SDK.
+Developer-first Quran dataset and API platform built on canonical sharded JSON, strict
+TypeScript, Next.js App Router, and a lightweight JS/TS SDK.
 
 ## What ships
 
 - Clean REST API for surahs, ayahs, juz, hizb, rub, pages, words, duas, reciters, and search
 - Sharded JSON architecture for fast local reads and edge-friendly deployment
+- Canonical JSON-first workflow: `quran.sql` stays local, committed data lives in `lib/data/*`
+- Deterministic SQL → JSON verification with source SHA-256 metadata
+- Normalized PostgreSQL + SQLite exports including knowledge/context tables
 - JS/TS SDK in [`lib/sdk.ts`](al-quran-database/lib/sdk.ts)
 - Search UI with composable edition and language filters
 - SQL conversion, migration, export, validation, and performance scripts
@@ -50,12 +53,23 @@ Data pipeline:
 
 ```bash
 npm run data:convert
-npm run data:verify
+npm run data:verify -- --check-determinism
 npm run data:export
 npm run data:migrate
 npm run data:seed
 npm run data:bench
 ```
+
+## Canonical data model
+
+- `quran.sql` is local-only and ignored by Git because source dump is too large for healthy repo
+  workflows.
+- `lib/data/*` is committed source-of-truth.
+- `scripts/convert_quran_sql.py` derives JSON, sharded edition payloads, pages/juz/hizb/rub
+  groupings, and dataset metadata.
+- `scripts/verify_quran_data.py` proves row counts, shard integrity, and deterministic rebuilds.
+- `scripts/export_sql.py` regenerates downloadable PostgreSQL and SQLite artifacts from committed
+  JSON.
 
 ## Docs
 

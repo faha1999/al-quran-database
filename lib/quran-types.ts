@@ -82,6 +82,102 @@ export interface ExtraContext {
   hadith_references: HadithReferenceEntry[];
 }
 
+export interface AyahCrossReference {
+  ayah_id: number;
+  relationship: string;
+}
+
+export interface ScientificReference {
+  title: string;
+  summary: string;
+  caution?: string;
+  references: string[];
+}
+
+export interface LegalRuling {
+  scope: string;
+  summary: string;
+  evidence: string[];
+}
+
+export interface LinguisticNote {
+  token: string;
+  root: string | null;
+  morphology: string | null;
+  note: string;
+}
+
+export interface MisinterpretationNote {
+  claim: string;
+  clarification: string;
+}
+
+export interface AyahKnowledgeEntry {
+  ayah_id: number;
+  surah_id: number;
+  themes: string[];
+  historical_context: string;
+  cross_references: AyahCrossReference[];
+  scientific_references: ScientificReference[];
+  legal_rulings: LegalRuling[];
+  linguistic_notes: LinguisticNote[];
+  misinterpretation_notes: MisinterpretationNote[];
+}
+
+export interface SurahProfile {
+  surah_id: number;
+  period: string;
+  summary: string;
+  historical_context: string;
+}
+
+export interface KnowledgeFaqEntry {
+  id: number;
+  question: string;
+  answer: string;
+}
+
+export interface ResearchReference {
+  id: number;
+  title: string;
+  author: string;
+  type: string;
+  url: string;
+}
+
+export interface KnowledgeCoverage {
+  ayah_entries: number;
+  surah_profiles: number;
+  faq_entries: number;
+  research_references: number;
+}
+
+export interface KnowledgeBase {
+  coverage: KnowledgeCoverage;
+  ayahs: AyahKnowledgeEntry[];
+  surahs: SurahProfile[];
+  faqs: KnowledgeFaqEntry[];
+  research_references: ResearchReference[];
+}
+
+export interface DatasetMetadata {
+  source: {
+    sql_path: string;
+    sha256: string;
+    size_bytes: number;
+  };
+  generated_at: string;
+  counts: {
+    surahs: number;
+    ayahs: number;
+    editions: number;
+    juzs: number;
+    hizbs: number;
+    rubs: number;
+    pages: number;
+  };
+}
+
 export interface Page {
   id: number;
   ayah_count: number;
@@ -149,6 +245,7 @@ export interface ResolvedAyah extends Ayah {
   translation: string | null;
   edition_content?: string | null;
   edition?: EditionSummary | null;
+  knowledge?: AyahKnowledgeEntry | null;
 }
 
 export interface SearchFilters {

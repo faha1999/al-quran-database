@@ -1,0 +1,17 @@
+{
+  "source": {
+    "sql_path": "quran.sql",
+    "sha256": "fbb745997c555b3524dd1818cd2d4d9dc5fa3d2f4b24e5f5a0789bca77743e02",
+    "size_bytes": 196134785
+  },
+  "generated_at": "2026-05-05T12:39:16.246553+00:00",
+  "counts": {
+    "surahs": 114,
+    "ayahs": 6236,
+    "editions": 134,
+    "juzs": 30,
+    "hizbs": 60,
+    "rubs": 240,
+    "pages": 604
+  }
+}

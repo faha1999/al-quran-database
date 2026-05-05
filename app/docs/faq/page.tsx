@@ -1,45 +1,29 @@
 import DocsLayout from '@/components/DocsLayout';
-
-const faqs = [
-  {
-    question: 'Is the API free to use?',
-    answer:
-      'Yes, the Quran Developer Platform is open-source and free to use. No API key is required for the MVP.',
-  },
-  {
-    question: 'Where does the data come from?',
-    answer:
-      'The data comes from the local Quran SQL dump, then goes through a deterministic conversion and verification pipeline before JSON is shipped.',
-  },
-  {
-    question: 'Can I contribute more translations?',
-    answer:
-      'Yes. The dataset now stores edition metadata separately from ayah-edition content, so new editions can fit the same normalized JSON layout.',
-  },
-  {
-    question: 'Is there a rate limit?',
-    answer:
-      'Currently, we implement a basic rate limit of 100 requests per minute per IP to prevent abuse.',
-  },
-];
+import { getKnowledgeFaqs } from '@/lib/data-loader';
 
 export default function FaqPage() {
+  const faqs = getKnowledgeFaqs();
+
   return (
     <DocsLayout>
       <div className="space-y-8">
         <section>
-          <h1 className="text-4xl font-bold mb-4">FAQ</h1>
-          <p className="text-gray-400 text-lg">
-            Frequently asked questions about the Quran Developer Platform.
+          <h1 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">FAQ</h1>
+          <p className="mt-4 max-w-3xl text-lg leading-8 text-zinc-400">
+            Product, dataset, conversion, and interpretation policy questions from one canonical
+            knowledge file.
           </p>
         </section>
 
-        <div className="space-y-6">
-          {faqs.map((faq, index) => (
-            <div key={index} className="p-6 bg-zinc-900/50 rounded-2xl border border-zinc-800">
-              <h3 className="text-xl font-bold mb-2 text-blue-400">{faq.question}</h3>
-              <p className="text-gray-400 leading-relaxed">{faq.answer}</p>
-            </div>
+        <div className="space-y-4">
+          {faqs.map((faq) => (
+            <article
+              key={faq.id}
+              className="rounded-[1.5rem] border border-zinc-800 bg-zinc-950/70 p-6"
+            >
+              <h2 className="text-xl font-semibold text-cyan-300">{faq.question}</h2>
+              <p className="mt-3 text-sm leading-7 text-zinc-400">{faq.answer}</p>
+            </article>
           ))}
         </div>
       </div>

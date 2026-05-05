@@ -3,19 +3,19 @@ import DocsLayout from '@/components/DocsLayout';
 const quickLinks = [
   {
     title: 'REST API',
-    body: 'Typed JSON contracts for surahs, ayahs, juz, pages, rub, words, reciters, duas.',
+    body: 'Typed JSON contracts for surahs, ayahs, juz, pages, rub, words, reciters, duas, FAQs, and metadata.',
   },
   {
     title: 'Search System',
     body: 'Arabic-first search with edition and language filters, pagination, validation rules.',
   },
   {
-    title: 'SDK Usage',
-    body: 'Lightweight JS/TS client for consuming local or deployed API endpoints.',
+    title: 'Knowledge Layer',
+    body: 'Themes, cross references, legal notes, linguistic notes, misinterpretation notes, and research references.',
   },
   {
     title: 'Delivery Flow',
-    body: 'Lint, typecheck, unit tests, integration tests, e2e smoke tests, production build.',
+    body: 'Convert, verify, export, lint, typecheck, unit tests, integration tests, e2e smoke tests, production build.',
   },
 ];
 
@@ -32,7 +32,8 @@ export default function DocsPage() {
           </h1>
           <p className="max-w-3xl text-lg leading-8 text-zinc-400">
             This project serves sharded Quran JSON through typed Next.js API routes, a reusable
-            JS/TS SDK, searchable docs, SQL export pipeline, and production-ready quality gates.
+            JS/TS SDK, searchable docs, normalized SQL export pipeline, and production-ready quality
+            gates.
           </p>
         </section>
 
@@ -56,6 +57,7 @@ export default function DocsPage() {
 npm run dev
 
 curl "http://localhost:3000/api/search?q=mercy&language=en"
+curl "http://localhost:3000/api/meta"
 
 import { quran } from '@/lib/sdk';
 const surah = await quran.getSurah(1, 'en.sahih');`}</code>

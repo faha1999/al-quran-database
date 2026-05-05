@@ -1,5 +1,5 @@
 import { Ayah, AyahEdition, Edition, EditionSummary, ResolvedAyah } from '@/lib/quran-types';
-import { DEFAULT_TRANSLATION_IDENTIFIER, editionsByIdentifier } from './core';
+import { DEFAULT_TRANSLATION_IDENTIFIER, editionsByIdentifier, knowledgeByAyahId } from './core';
 import { loadEditionContent } from './cache';
 
 export function paginate<T>(items: T[], page = 1, limit = items.length) {
@@ -57,6 +57,7 @@ export function attachEdition(
     translation: resolveTranslation(ayah.id),
     edition_content: identifier ? resolvedSelectedText : null,
     edition: identifier ? getEditionSummary(selectedEdition) : null,
+    knowledge: knowledgeByAyahId.get(ayah.id) ?? null,
   };
 }
 

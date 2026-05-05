@@ -14,7 +14,8 @@ const endpoints = [
   {
     method: 'GET',
     path: '/ayahs/[id]',
-    description: 'Get one Ayah by global number (1-6236). Supports optional edition query param.',
+    description:
+      'Get one Ayah by global number (1-6236). Supports optional edition and include_words params, plus context and knowledge hydration.',
   },
   {
     method: 'GET',
@@ -53,6 +54,23 @@ const endpoints = [
   },
   {
     method: 'GET',
+    path: '/knowledge/[id]',
+    description:
+      'Get curated knowledge entry for an ayah: themes, cross refs, legal/scientific/linguistic notes, and misinterpretation guidance.',
+  },
+  {
+    method: 'GET',
+    path: '/faqs',
+    description: 'Get canonical FAQ entries stored in the knowledge layer.',
+  },
+  {
+    method: 'GET',
+    path: '/meta',
+    description:
+      'Get dataset metadata, source hash, canonical counts, and knowledge coverage summary.',
+  },
+  {
+    method: 'GET',
     path: '/search?q=[query]',
     description: 'Search ayahs. Supports edition, language, page, and limit query params.',
   },
@@ -77,6 +95,7 @@ export default function ApiReference() {
               <li>`edition` and `language` cannot be used together on search.</li>
               <li>`page` and `limit` must be positive integers.</li>
               <li>Unknown editions or languages return HTTP `400`.</li>
+              <li>Knowledge routes return `404` when entry coverage does not exist yet.</li>
             </ul>
           </div>
           <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
@@ -85,6 +104,7 @@ export default function ApiReference() {
               <li>Arabic source stays in `ayahs.text`.</li>
               <li>Default translation stays `en.sahih` in `translation`.</li>
               <li>Optional `edition_content` appears when an edition filter is used.</li>
+              <li>Optional `knowledge` appears when curated coverage exists for an ayah.</li>
             </ul>
           </div>
         </section>

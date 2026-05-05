@@ -3,6 +3,8 @@ import path from 'node:path';
 import type {
   AsbabAlNuzulEntry,
   Ayah,
+  AyahKnowledgeEntry,
+  DatasetMetadata,
   Dua,
   Edition,
   EditionManifest,
@@ -10,9 +12,13 @@ import type {
   HadithReferenceEntry,
   Hizb,
   Juz,
+  KnowledgeBase,
+  KnowledgeFaqEntry,
   Page,
   Reciter,
+  ResearchReference,
   Rub,
+  SurahProfile,
   Surah,
   Word,
 } from '@/lib/quran-types';
@@ -34,6 +40,10 @@ export const editionManifest = readJson<EditionManifest>(
 export const reciters = readJson<Reciter[]>(path.join(DATA_DIR, 'reciters.json'));
 export const duas = readJson<Dua[]>(path.join(DATA_DIR, 'duas.json'));
 export const extraContext = readJson<ExtraContext>(path.join(DATA_DIR, 'extra_context.json'));
+export const knowledgeBase = readJson<KnowledgeBase>(path.join(DATA_DIR, 'knowledge-base.json'));
+export const datasetMetadata = readJson<DatasetMetadata>(
+  path.join(DATA_DIR, 'dataset-metadata.json'),
+);
 
 export const DEFAULT_TRANSLATION_IDENTIFIER = editionManifest.default_translation_identifier;
 
@@ -51,6 +61,15 @@ export type ExtraContextByAyah = {
   asbab: AsbabAlNuzulEntry[];
   hadith: HadithReferenceEntry[];
 };
+
+export const knowledgeByAyahId = new Map<number, AyahKnowledgeEntry>(
+  knowledgeBase.ayahs.map((entry) => [entry.ayah_id, entry]),
+);
+export const surahProfilesById = new Map<number, SurahProfile>(
+  knowledgeBase.surahs.map((entry) => [entry.surah_id, entry]),
+);
+export const knowledgeFaqs: KnowledgeFaqEntry[] = knowledgeBase.faqs;
+export const researchReferences: ResearchReference[] = knowledgeBase.research_references;
 
 export function getJsonPath(filePath: string): string {
   return path.join(DATA_DIR, filePath);
