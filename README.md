@@ -3,6 +3,15 @@
 Developer-first Quran dataset and API platform built on canonical sharded JSON, strict
 TypeScript, Next.js App Router, and a lightweight JS/TS SDK.
 
+- Repository: [https://github.com/faha1999/al-quran-database](https://github.com/faha1999/al-quran-database)
+- npm package: [https://www.npmjs.com/package/@faha1999/al-quran-database](https://www.npmjs.com/package/@faha1999/al-quran-database)
+- Hosted docs: [https://al-quran-database.vercel.app/docs](https://al-quran-database.vercel.app/docs)
+
+## Hosted access policy
+
+- The public `https://al-quran-database.vercel.app` deployment is currently a docs/showcase surface.
+- To use the API, run the repository locally or deploy your own copy on your preferred hosting platform.
+
 ## What ships
 
 - Clean REST API for surahs, ayahs, juz, hizb, rub, pages, words, duas, reciters, and search
@@ -55,13 +64,24 @@ npm install @faha1999/al-quran-database
 
 Package source lives in [`packages/sdk`](./packages/sdk).
 
-Hosted SDK setup:
+Local SDK setup:
 
 ```ts
 import { QuranDevSDK } from '@faha1999/al-quran-database';
 
 const quran = new QuranDevSDK({
-  baseUrl: 'https://al-quran-database.vercel.app',
+  baseUrl: 'http://localhost:3000',
+  apiVersion: 'v1',
+});
+```
+
+Self-hosted production setup:
+
+```ts
+import { QuranDevSDK } from '@faha1999/al-quran-database';
+
+const quran = new QuranDevSDK({
+  baseUrl: 'https://your-domain.example',
   apiVersion: 'v1',
 });
 ```
@@ -111,6 +131,7 @@ npm run data:bench
 
 - Versioned REST lives under `/api/v1/*`.
 - Legacy `/api/*` aliases remain for backward compatibility during migration.
+- Official hosted domain `al-quran-database.vercel.app` blocks API traffic. Use local/self-hosted deployments for runtime access.
 - GraphQL endpoint supports composing `surah`, `ayah`, `search`, `faqs`, `knowledge`, and `meta`
   in one request.
 - Preferred GraphQL write path is `POST /api/v1/graphql`. Legacy `/api/graphql` alias remains.

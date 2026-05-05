@@ -4,11 +4,12 @@ import DocsLayout from '@/components/DocsLayout';
 import { motion } from 'framer-motion';
 import { Terminal, Shield, Zap, Database, Layers, Code } from 'lucide-react';
 import Link from 'next/link';
+import { localDevBaseUrl } from '@/lib/site-config';
 
 const quickLinks = [
   {
     title: 'REST API v1',
-    body: 'Stable `/api/v1/*` contracts for surahs, ayahs, search, divisions, and metadata.',
+    body: 'Stable `/api/v1/*` contracts for surahs, ayahs, search, divisions, and metadata in local or self-hosted deployments.',
     icon: <Terminal className="h-5 w-5 text-blue-400" />,
     href: '/docs/api-reference',
   },
@@ -67,7 +68,8 @@ export default function DocsPageClient() {
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-zinc-400">
               Sharded JSON source, versioned API contracts, verified npm SDK, and reproducible
-              database exports for production apps, docs, and research tooling.
+              database exports for production apps, docs, and research tooling. The public hosted
+              site is documentation-first right now; run the API locally or on your own hosting.
             </p>
           </motion.div>
         </section>
@@ -120,7 +122,7 @@ export default function DocsPageClient() {
 
 import { QuranDevSDK } from '@faha1999/al-quran-database';
 
-const quran = new QuranDevSDK({ baseUrl: 'https://al-quran-database.vercel.app' });
+const quran = new QuranDevSDK({ baseUrl: '${localDevBaseUrl}' });
 const data = await quran.getSurah(1, 'en.sahih');`}</code>
               </pre>
             </div>

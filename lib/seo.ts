@@ -212,7 +212,7 @@ export function createWebApiSchema() {
     '@type': 'WebAPI',
     name: `${productName} API`,
     description:
-      'Versioned Quran REST and GraphQL API with search, structured metadata, and typed client support.',
+      'Versioned Quran REST and GraphQL API for local and self-hosted deployments with search, structured metadata, and typed client support.',
     url: absoluteUrl('/docs/api-reference'),
     documentation: absoluteUrl('/docs/api-reference'),
     provider: {

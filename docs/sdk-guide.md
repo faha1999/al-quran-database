@@ -16,10 +16,13 @@ npm install @faha1999/al-quran-database
 import { QuranDevSDK } from '@faha1999/al-quran-database';
 
 const quran = new QuranDevSDK({
-  baseUrl: 'https://al-quran-database.vercel.app', // Optional, defaults to same origin
+  baseUrl: 'http://localhost:3000', // Optional, defaults to same origin
   apiVersion: 'v1',
 });
 ```
+
+For self-hosted production deployments, point `baseUrl` at your own domain instead of the public
+`al-quran-database.vercel.app` docs site.
 
 ## Usage Examples
 
