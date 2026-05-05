@@ -6,39 +6,61 @@ on:
 
 jobs:
   deploy:
-    if: ${{ secrets.VERCEL_TOKEN != '' && secrets.VERCEL_ORG_ID != '' && secrets.VERCEL_PROJECT_ID != '' }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check Vercel secrets presence
+        id: auth
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          if [ -n "$VERCEL_TOKEN" ] && [ -n "$VERCEL_ORG_ID" ] && [ -n "$VERCEL_PROJECT_ID" ]; then
+            echo "has_secrets=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_secrets=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Setup Node
+        if: ${{ steps.auth.outputs.has_secrets == 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
       - name: Install dependencies
+        if: ${{ steps.auth.outputs.has_secrets == 'true' }}
         run: npm ci
 
       - name: Install Vercel CLI
+        if: ${{ steps.auth.outputs.has_secrets == 'true' }}
         run: npm install --global vercel@latest
 
       - name: Pull Vercel environment
+        if: ${{ steps.auth.outputs.has_secrets == 'true' }}
         run: vercel pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
       - name: Build deployment bundle
+        if: ${{ steps.auth.outputs.has_secrets == 'true' }}
         run: vercel build --prod --token="${{ secrets.VERCEL_TOKEN }}"
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
       - name: Deploy to production
+        if: ${{ steps.auth.outputs.has_secrets == 'true' }}
         run: vercel deploy --prebuilt --prod --token="${{ secrets.VERCEL_TOKEN }}"
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Skip deploy because Vercel secrets missing
+        if: ${{ steps.auth.outputs.has_secrets != 'true' }}
+        run: echo "Vercel secrets missing. Skipping production deploy."

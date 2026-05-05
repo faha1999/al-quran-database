@@ -100,6 +100,8 @@ jobs:
       - name: Prepare publish workspace
         id: prepare
         run: |
+          set -euo pipefail
+
           PUBLISH_DIR="$RUNNER_TEMP/sdk-publish"
           export PUBLISH_DIR
           export NEXT_VERSION="${{ steps.registry.outputs.next_version }}"
@@ -110,18 +112,7 @@ jobs:
           cp packages/sdk/README.md "$PUBLISH_DIR/README.md"
           cp packages/sdk/LICENSE "$PUBLISH_DIR/LICENSE"
 
-          node <<'EOF'
-          const fs = require('node:fs');
-          const path = require('node:path');
-
-          const pkgPath = path.join(process.cwd(), 'packages/sdk/package.json');
-          const outPath = path.join(process.env.PUBLISH_DIR, 'package.json');
-          const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-
-          pkg.version = process.env.NEXT_VERSION;
-
-          fs.writeFileSync(outPath, `${JSON.stringify(pkg, null, 2)}\n`);
-          EOF
+          node -e 'const fs = require("node:fs"); const path = require("node:path"); const pkgPath = path.join(process.cwd(), "packages/sdk/package.json"); const outPath = path.join(process.env.PUBLISH_DIR, "package.json"); const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8")); pkg.version = process.env.NEXT_VERSION; fs.writeFileSync(outPath, `${JSON.stringify(pkg, null, 2)}\n`);'
 
           echo "publish_dir=$PUBLISH_DIR" >> "$GITHUB_OUTPUT"
 
@@ -130,6 +121,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          set -euo pipefail
+
           PACKAGE_NAME="${{ steps.pkg.outputs.name }}"
           TARGET_VERSION="${{ steps.registry.outputs.next_version }}"
           PUBLISH_DIR="${{ steps.prepare.outputs.publish_dir }}"
@@ -152,35 +145,11 @@ jobs:
           }
 
           stage_version() {
-            VERSION="$1" node <<'EOF'
-            const fs = require('node:fs');
-            const path = require('node:path');
-
-            const outPath = path.join(process.env.PUBLISH_DIR, 'package.json');
-            const pkg = JSON.parse(fs.readFileSync(outPath, 'utf8'));
-            pkg.version = process.env.VERSION;
-            fs.writeFileSync(outPath, `${JSON.stringify(pkg, null, 2)}\n`);
-            EOF
+            VERSION="$1" node -e 'const fs = require("node:fs"); const path = require("node:path"); const outPath = path.join(process.env.PUBLISH_DIR, "package.json"); const pkg = JSON.parse(fs.readFileSync(outPath, "utf8")); pkg.version = process.env.VERSION; fs.writeFileSync(outPath, `${JSON.stringify(pkg, null, 2)}\n`);'
           }
 
           next_patch_from_registry() {
-            PACKAGE_NAME="$1" node <<'EOF'
-            const { execSync } = require('node:child_process');
-
-            const pkgName = process.env.PACKAGE_NAME;
-            const raw = execSync(`npm view "${pkgName}" version --json`, {
-              encoding: 'utf8',
-              stdio: ['ignore', 'pipe', 'pipe'],
-            }).trim();
-            const latest = JSON.parse(raw);
-            const parts = latest.split('.').map((value) => Number.parseInt(value, 10));
-
-            if (parts.length !== 3 || parts.some(Number.isNaN)) {
-              throw new Error(`Unsupported semver latest version: ${latest}`);
-            }
-
-            process.stdout.write(`${parts[0]}.${parts[1]}.${parts[2] + 1}`);
-            EOF
+            PACKAGE_NAME="$1" node -e 'const { execSync } = require("node:child_process"); const pkgName = process.env.PACKAGE_NAME; const raw = execSync(`npm view "${pkgName}" version --json`, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim(); const latest = JSON.parse(raw); const parts = latest.split(".").map((value) => Number.parseInt(value, 10)); if (parts.length !== 3 || parts.some(Number.isNaN)) { throw new Error(`Unsupported semver latest version: ${latest}`); } process.stdout.write(`${parts[0]}.${parts[1]}.${parts[2] + 1}`);'
           }
 
           publish_once() {
