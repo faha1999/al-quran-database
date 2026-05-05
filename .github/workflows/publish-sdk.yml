@@ -5,9 +5,14 @@ on:
     branches: [main]
     paths:
       - 'packages/sdk/**'
+      - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/publish-sdk.yml'
   workflow_dispatch:
+
+concurrency:
+  group: publish-sdk-main
+  cancel-in-progress: false
 
 jobs:
   publish:
@@ -51,50 +56,174 @@ jobs:
           node <<'EOF' >> "$GITHUB_OUTPUT"
           const pkg = require('./packages/sdk/package.json');
           console.log(`name=${pkg.name}`);
-          console.log(`version=${pkg.version}`);
+          console.log(`repo_version=${pkg.version}`);
           EOF
 
-      - name: Check npm registry for current version
+      - name: Compute release version from npm registry
         id: registry
         run: |
           node <<'EOF' >> "$GITHUB_OUTPUT"
           const { execSync } = require('node:child_process');
           const pkg = require('./packages/sdk/package.json');
 
-          let versions = [];
+          let latestVersion = '';
+          let hasPublishedVersion = false;
 
           try {
-            const raw = execSync(`npm view "${pkg.name}" versions --json`, {
+            latestVersion = execSync(`npm view "${pkg.name}" version --json`, {
               encoding: 'utf8',
               stdio: ['ignore', 'pipe', 'pipe'],
             }).trim();
-
-            if (raw) {
-              const parsed = JSON.parse(raw);
-              versions = Array.isArray(parsed) ? parsed : [parsed];
-            }
+            latestVersion = JSON.parse(latestVersion);
+            hasPublishedVersion = Boolean(latestVersion);
           } catch {
-            versions = [];
+            latestVersion = '';
+            hasPublishedVersion = false;
           }
 
-          const shouldPublish = !versions.includes(pkg.version);
+          const baseVersion = hasPublishedVersion ? latestVersion : pkg.version || '1.0.0';
+          const parts = baseVersion.split('.').map((value) => Number.parseInt(value, 10));
 
-          console.log(`published_versions=${versions.join(',')}`);
-          console.log(`should_publish=${shouldPublish}`);
+          if (parts.length !== 3 || parts.some(Number.isNaN)) {
+            throw new Error(`Unsupported semver base version: ${baseVersion}`);
+          }
+
+          const nextVersion = hasPublishedVersion
+            ? `${parts[0]}.${parts[1]}.${parts[2] + 1}`
+            : baseVersion;
+
+          console.log(`latest_version=${latestVersion}`);
+          console.log(`next_version=${nextVersion}`);
+          console.log(`has_published_version=${hasPublishedVersion}`);
           EOF
 
+      - name: Prepare publish workspace
+        id: prepare
+        run: |
+          PUBLISH_DIR="$RUNNER_TEMP/sdk-publish"
+          export PUBLISH_DIR
+          export NEXT_VERSION="${{ steps.registry.outputs.next_version }}"
+
+          rm -rf "$PUBLISH_DIR"
+          mkdir -p "$PUBLISH_DIR/dist"
+          cp -R packages/sdk/dist/. "$PUBLISH_DIR/dist/"
+          cp packages/sdk/README.md "$PUBLISH_DIR/README.md"
+          cp packages/sdk/LICENSE "$PUBLISH_DIR/LICENSE"
+
+          node <<'EOF'
+          const fs = require('node:fs');
+          const path = require('node:path');
+
+          const pkgPath = path.join(process.cwd(), 'packages/sdk/package.json');
+          const outPath = path.join(process.env.PUBLISH_DIR, 'package.json');
+          const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+
+          pkg.version = process.env.NEXT_VERSION;
+
+          fs.writeFileSync(outPath, `${JSON.stringify(pkg, null, 2)}\n`);
+          EOF
+
+          echo "publish_dir=$PUBLISH_DIR" >> "$GITHUB_OUTPUT"
+
       - name: Publish package
-        if: ${{ steps.auth.outputs.has_token == 'true' && steps.registry.outputs.should_publish == 'true' }}
-        run: npm publish --workspace @faha1999/al-quran-database --access public --provenance
+        if: ${{ steps.auth.outputs.has_token == 'true' }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Skip duplicate publish
-        if: ${{ steps.auth.outputs.has_token == 'true' && steps.registry.outputs.should_publish != 'true' }}
         run: |
-          echo "SDK version ${{ steps.pkg.outputs.version }} already exists on npm."
-          echo "Published versions: ${{ steps.registry.outputs.published_versions }}"
+          PACKAGE_NAME="${{ steps.pkg.outputs.name }}"
+          TARGET_VERSION="${{ steps.registry.outputs.next_version }}"
+          PUBLISH_DIR="${{ steps.prepare.outputs.publish_dir }}"
+          LATEST_BEFORE="${{ steps.registry.outputs.latest_version }}"
+          export PACKAGE_NAME TARGET_VERSION PUBLISH_DIR
+
+          if [ -z "$LATEST_BEFORE" ]; then
+            LATEST_BEFORE="none"
+          fi
+
+          write_summary() {
+            {
+              echo "## SDK publish"
+              echo
+              echo "- package: \`$PACKAGE_NAME\`"
+              echo "- version: \`$1\`"
+              echo "- npm latest before run: \`$LATEST_BEFORE\`"
+              echo "- status: $2"
+            } >> "$GITHUB_STEP_SUMMARY"
+          }
+
+          stage_version() {
+            VERSION="$1" node <<'EOF'
+            const fs = require('node:fs');
+            const path = require('node:path');
+
+            const outPath = path.join(process.env.PUBLISH_DIR, 'package.json');
+            const pkg = JSON.parse(fs.readFileSync(outPath, 'utf8'));
+            pkg.version = process.env.VERSION;
+            fs.writeFileSync(outPath, `${JSON.stringify(pkg, null, 2)}\n`);
+            EOF
+          }
+
+          next_patch_from_registry() {
+            PACKAGE_NAME="$1" node <<'EOF'
+            const { execSync } = require('node:child_process');
+
+            const pkgName = process.env.PACKAGE_NAME;
+            const raw = execSync(`npm view "${pkgName}" version --json`, {
+              encoding: 'utf8',
+              stdio: ['ignore', 'pipe', 'pipe'],
+            }).trim();
+            const latest = JSON.parse(raw);
+            const parts = latest.split('.').map((value) => Number.parseInt(value, 10));
+
+            if (parts.length !== 3 || parts.some(Number.isNaN)) {
+              throw new Error(`Unsupported semver latest version: ${latest}`);
+            }
+
+            process.stdout.write(`${parts[0]}.${parts[1]}.${parts[2] + 1}`);
+            EOF
+          }
+
+          publish_once() {
+            VERSION="$1"
+            stage_version "$VERSION"
+            if (cd "$PUBLISH_DIR" && npm publish --access public --provenance 2>&1 | tee "$RUNNER_TEMP/sdk-publish.log"); then
+              write_summary "$VERSION" "published"
+              return 0
+            fi
+
+            return 1
+          }
+
+          if publish_once "$TARGET_VERSION"; then
+            exit 0
+          fi
+
+          if grep -Eq 'previously published versions|cannot publish over|403 Forbidden - PUT' "$RUNNER_TEMP/sdk-publish.log"; then
+            RETRY_VERSION="$(next_patch_from_registry "$PACKAGE_NAME")"
+
+            if [ "$RETRY_VERSION" = "$TARGET_VERSION" ]; then
+              echo "Publish failed and retry version did not advance: $RETRY_VERSION"
+              write_summary "$TARGET_VERSION" "failed duplicate publish"
+              exit 1
+            fi
+
+            echo "Retrying publish with next available patch version: $RETRY_VERSION"
+
+            if publish_once "$RETRY_VERSION"; then
+              exit 0
+            fi
+          fi
+
+          write_summary "$TARGET_VERSION" "failed"
+          exit 1
 
       - name: Skip publish because token missing
         if: ${{ steps.auth.outputs.has_token != 'true' }}
-        run: echo "NPM_TOKEN secret missing. Skipping npm publish."
+        run: |
+          echo "NPM_TOKEN secret missing. Skipping npm publish."
+          {
+            echo "## SDK publish"
+            echo
+            echo "- package: \`${{ steps.pkg.outputs.name }}\`"
+            echo "- status: skipped (missing \`NPM_TOKEN\`)"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -109,6 +109,11 @@ npm run data:bench
 - CI runs format check, lint, typecheck, unit/integration tests, SDK build/pack, e2e smoke tests, build
 - PR template + CODEOWNERS support review discipline before merge
 
+## SDK release automation
+
+- SDK npm releases are published from `main` by GitHub Actions.
+- Qualifying SDK-related changes auto-bump the next patch version from the npm registry state.
+
 ## License
 
 MIT. See [`LICENSE`](./LICENSE).
