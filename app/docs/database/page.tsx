@@ -42,7 +42,7 @@ export default function DatabaseDocsPage() {
 
   return (
     <DocsLayout>
-      <DatabaseDocsClient 
+      <DatabaseDocsClient
         metadata={metadata}
         knowledge={knowledge}
         exportCards={exportCards}

@@ -22,7 +22,10 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
         {/* Sidebar */}
         <aside className="border-b border-zinc-800/50 bg-zinc-950/40 p-6 backdrop-blur-xl lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto lg:border-b-0 lg:border-r lg:bg-zinc-950/20">
           <div className="mb-10 space-y-4">
-            <Link href="/" className="group flex items-center gap-2 text-2xl font-bold tracking-tight">
+            <Link
+              href="/"
+              className="group flex items-center gap-2 text-2xl font-bold tracking-tight"
+            >
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 font-black text-white shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-transform group-hover:scale-110">
                 Q
               </div>
@@ -31,7 +34,8 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
               </span>
             </Link>
             <p className="max-w-xs text-[13px] leading-relaxed text-zinc-500">
-              High-performance Quranic data platform with typed contracts, search, and scholarly metadata.
+              High-performance Quranic data platform with typed contracts, search, and scholarly
+              metadata.
             </p>
           </div>
 
@@ -49,7 +53,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
                     'group relative flex items-center rounded-xl px-3 py-2 text-sm transition-all duration-200',
                     isActive
                       ? 'bg-blue-600/10 text-white font-medium'
-                      : 'text-zinc-500 hover:bg-zinc-800/50 hover:text-zinc-300'
+                      : 'text-zinc-500 hover:bg-zinc-800/50 hover:text-zinc-300',
                   )}
                 >
                   {isActive && (

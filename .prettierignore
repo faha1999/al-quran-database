@@ -1,5 +1,8 @@
 .next
 coverage
+lib/data
+next-env.d.ts
 node_modules
+packages/sdk/dist
 playwright-report
 test-results

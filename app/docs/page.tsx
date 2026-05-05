@@ -67,7 +67,7 @@ export default function DocsPage() {
               Infinite Possibilities.
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-zinc-400">
-              The definitive Quranic data platform. Sharded JSON sources, typed API contracts, 
+              The definitive Quranic data platform. Sharded JSON sources, typed API contracts,
               robust SDK, and deep scholarly metadata — all engineered for production.
             </p>
           </motion.div>
@@ -114,14 +114,17 @@ export default function DocsPage() {
                 <div className="h-2.5 w-2.5 rounded-full bg-red-500/50" />
                 <div className="h-2.5 w-2.5 rounded-full bg-amber-500/50" />
                 <div className="h-2.5 w-2.5 rounded-full bg-emerald-500/50" />
-                <span className="ml-2 text-[10px] font-medium text-zinc-600 uppercase tracking-widest">bash</span>
+                <span className="ml-2 text-[10px] font-medium text-zinc-600 uppercase tracking-widest">
+                  bash
+                </span>
               </div>
               <pre className="p-6 text-[13px] font-mono leading-relaxed text-zinc-300 overflow-x-auto">
-                <code>{`# Install the SDK
-npm install @quran-dev/sdk
+                <code>{`import { QuranDevSDK } from '@faha1999/al-quran-database';
 
-# Fetch your first Surah
-import { quran } from '@quran-dev/sdk';
+const quran = new QuranDevSDK({
+  baseUrl: 'https://al-quran-database.vercel.app',
+});
+
 const data = await quran.getSurah(1);`}</code>
               </pre>
             </div>
@@ -137,7 +140,9 @@ const data = await quran.getSurah(1);`}</code>
                 <div className="h-2.5 w-2.5 rounded-full bg-red-500/50" />
                 <div className="h-2.5 w-2.5 rounded-full bg-amber-500/50" />
                 <div className="h-2.5 w-2.5 rounded-full bg-emerald-500/50" />
-                <span className="ml-2 text-[10px] font-medium text-zinc-600 uppercase tracking-widest">graphql</span>
+                <span className="ml-2 text-[10px] font-medium text-zinc-600 uppercase tracking-widest">
+                  graphql
+                </span>
               </div>
               <pre className="p-6 text-[13px] font-mono leading-relaxed text-zinc-400 overflow-x-auto">
                 <code>{`query {
@@ -145,7 +150,9 @@ const data = await quran.getSurah(1);`}</code>
     text
     knowledge {
       themes
-      scientific_notes
+      scientific_references {
+        title
+      }
     }
   }
 }`}</code>
@@ -161,12 +168,18 @@ const data = await quran.getSurah(1);`}</code>
             Built with Redis caching, strict TypeScript, and a deterministic data pipeline.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-             <Link href="/docs/api-reference" className="rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-bold text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-transform hover:scale-105 active:scale-95">
-               Read API Docs
-             </Link>
-             <Link href="/docs/architecture" className="rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-2.5 text-sm font-bold text-zinc-300 transition-colors hover:bg-zinc-800">
-               View Architecture
-             </Link>
+            <Link
+              href="/docs/api-reference"
+              className="rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-bold text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-transform hover:scale-105 active:scale-95"
+            >
+              Read API Docs
+            </Link>
+            <Link
+              href="/docs/architecture"
+              className="rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-2.5 text-sm font-bold text-zinc-300 transition-colors hover:bg-zinc-800"
+            >
+              View Architecture
+            </Link>
           </div>
         </section>
       </div>

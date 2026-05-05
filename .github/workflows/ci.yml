@@ -38,6 +38,12 @@ jobs:
       - name: Unit and integration tests
         run: npm test
 
+      - name: Build SDK package
+        run: npm run build:sdk
+
+      - name: Verify SDK package tarball
+        run: npm run pack:sdk
+
       - name: E2E smoke tests
         run: npm run test:e2e
 

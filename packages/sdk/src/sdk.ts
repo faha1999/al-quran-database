@@ -2,9 +2,11 @@ import type {
   ApiEnvelope,
   AyahKnowledgeEntry,
   DatasetMetadata,
+  Dua,
   KnowledgeCoverage,
   KnowledgeFaqEntry,
   PaginationMeta,
+  Reciter,
   ResearchReference,
   ResolvedAyah,
   ResolvedDivision,
@@ -13,7 +15,7 @@ import type {
   SearchResultAyah,
   Surah,
   Word,
-} from './quran-types';
+} from './quran-types.js';
 
 export interface QuranApiOptions {
   baseUrl?: string;
@@ -133,6 +135,18 @@ export class QuranDevSDK {
     return this.fetchEnvelope<Word[], { count: number }>(
       `${this.apiBasePath}/words?ayah_id=${ayahId}`,
     );
+  }
+
+  async getDuas(page?: number, limit?: number) {
+    const params = new URLSearchParams();
+    if (page) params.set('page', page.toString());
+    if (limit) params.set('limit', limit.toString());
+    const query = params.toString() ? `?${params.toString()}` : '';
+    return this.fetchEnvelope<Dua[], PaginationMeta>(`${this.apiBasePath}/duas${query}`);
+  }
+
+  async getReciters() {
+    return this.fetchEnvelope<Reciter[], { total: number }>(`${this.apiBasePath}/reciters`);
   }
 
   async getFaqs() {

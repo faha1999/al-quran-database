@@ -22,12 +22,12 @@ const principles = [
   },
   {
     title: 'Accessibility',
-    body: 'ARIA-compliant, keyboard-navigable, and high-contrast visuals for all users.',
+    body: 'Semantic structure and visible focus states are shipped; a dedicated full accessibility audit is still pending.',
     icon: <Accessibility className="w-5 h-5 text-amber-400" />,
   },
   {
     title: 'Responsive Design',
-    body: 'Fluid grid systems ensuring a premium experience from mobile to 4K displays.',
+    body: 'Responsive layouts are implemented across landing, docs, and search pages; a formal mobile audit is still pending.',
     icon: <Smartphone className="w-5 h-5 text-indigo-400" />,
   },
   {
@@ -43,20 +43,21 @@ export default function FrontendDocsPage() {
       <div className="space-y-16">
         {/* Header */}
         <section className="space-y-4">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="text-4xl font-black tracking-tight md:text-5xl"
           >
             Frontend Guide
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
             className="max-w-3xl text-lg leading-relaxed text-zinc-400"
           >
-            Documentation of our design philosophy, UI components, and the modern tech stack powering the platform.
+            Documentation of our design philosophy, UI components, and the modern tech stack
+            powering the platform.
           </motion.p>
         </section>
 
@@ -84,13 +85,15 @@ export default function FrontendDocsPage() {
 
         {/* Tech Stack Preview */}
         <section className="rounded-3xl border border-zinc-800 bg-zinc-950/50 p-10 backdrop-blur-xl text-center">
-           <h2 className="text-2xl font-bold mb-6 text-zinc-100">Modern Stack</h2>
-           <div className="flex flex-wrap justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all">
-              <span className="text-xl font-black tracking-tighter text-white">Next.js 16</span>
-              <span className="text-xl font-black tracking-tighter text-blue-400">Tailwind v4</span>
-              <span className="text-xl font-black tracking-tighter text-indigo-400">Framer Motion</span>
-              <span className="text-xl font-black tracking-tighter text-emerald-400">React 19</span>
-           </div>
+          <h2 className="text-2xl font-bold mb-6 text-zinc-100">Modern Stack</h2>
+          <div className="flex flex-wrap justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all">
+            <span className="text-xl font-black tracking-tighter text-white">Next.js 16</span>
+            <span className="text-xl font-black tracking-tighter text-blue-400">Tailwind v4</span>
+            <span className="text-xl font-black tracking-tighter text-indigo-400">
+              Framer Motion
+            </span>
+            <span className="text-xl font-black tracking-tighter text-emerald-400">React 19</span>
+          </div>
         </section>
       </div>
     </DocsLayout>

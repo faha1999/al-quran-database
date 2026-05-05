@@ -1,7 +1,10 @@
 {
   "name": "al-quran-database",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -20,7 +23,10 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint:fix": "eslint . --fix",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "build:sdk": "npm run build --workspace @faha1999/al-quran-database",
+    "pack:sdk": "npm pack --dry-run --workspace @faha1999/al-quran-database",
+    "verify:sdk": "npm run build:sdk && npm run pack:sdk"
   },
   "dependencies": {
     "clsx": "2.1.1",

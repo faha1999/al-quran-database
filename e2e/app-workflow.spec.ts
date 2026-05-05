@@ -2,8 +2,9 @@ import { expect, test } from '@playwright/test';
 
 test('docs home loads', async ({ page }) => {
   await page.goto('/docs');
+  await expect(page.getByText('Developer Platform')).toBeVisible();
   await expect(
-    page.getByRole('heading', { name: 'Quran data, API, docs, SDK. One system. Clean contracts.' }),
+    page.getByRole('heading', { name: /One Dataset\.\s*Infinite Possibilities\./i }),
   ).toBeVisible();
 });
 

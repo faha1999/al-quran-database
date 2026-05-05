@@ -9,13 +9,14 @@
    - **Data Pipeline**: Python scripts in `scripts/` handle conversion, verification (hashing), migration, and performance benchmarking.
 
 2. Domain
-   - **Data Loaders**: `lib/data-loader/*` provides high-performance access to Quran entities with built-in L1 caching.
+   - **Data Loaders**: `lib/data-loader/*` provides high-performance access to Quran entities and shared data access helpers.
    - **Knowledge Layer**: `knowledge-base.json` resolves thematic tags, cross-references, scientific notes, fiqh rulings, linguistic analysis, and research references.
    - **Search Engine**: `lib/search-engine.ts` integrates FlexSearch for ranked, fuzzy-matched keyword search.
 
 3. Transport
    - **Versioned REST API**: `app/api/v1/*` provides a stable interface for external consumers.
-   - **GraphQL API**: `app/api/graphql` exposes a typed query layer for complex, multi-entity requests.
+   - **Legacy REST Aliases**: `app/api/*` re-exports versioned handlers for backward compatibility.
+   - **GraphQL API**: `app/api/v1/graphql` is the preferred typed query layer for complex, multi-entity requests. Legacy `/api/graphql` alias still resolves.
    - **Multi-Level Caching**:
      - **L1 (In-Memory)**: Per-instance cache for ultra-fast response times.
      - **L2 (Redis)**: Optional shared cache for distributed scalability.
@@ -36,5 +37,5 @@
 - **Logic Isolation**: Business logic resides strictly in `lib/`. Route handlers are minimal.
 - **API Stability**: Public contracts (REST v1, GraphQL) must remain stable across internal refactors.
 - **Performance First**: Hot paths must utilize `withApiCache` and avoid heavy computations on the request path.
-- **Responsive & Accessible**: All UI components must adhere to high accessibility standards and provide a premium mobile experience.
+- **Responsive & Accessible**: Current docs and search layouts are built responsively, but no dedicated full a11y/mobile audit is documented yet.
 - **Deterministic Pipeline**: Data processing must be reproducible with cryptographic verification of output hashes.

@@ -5,7 +5,9 @@ The Al-Quran Database provides relational SQL exports for PostgreSQL and SQLite.
 ## Core Tables
 
 ### `surahs`
+
 Primary metadata for the 114 Surahs.
+
 - `id`: Internal ID (1-114).
 - `number`: Surah number.
 - `name_ar`: Arabic name.
@@ -14,7 +16,9 @@ Primary metadata for the 114 Surahs.
 - `type`: Revelation type (Meccan/Medinan).
 
 ### `ayahs`
+
 The central table linking text, divisions, and metadata.
+
 - `id`: Absolute ayah ID (1-6236).
 - `number`: Ayah number within the Surah.
 - `text`: Uthmani Arabic text.
@@ -24,7 +28,9 @@ The central table linking text, divisions, and metadata.
 - `sajda`: Boolean indicating if a prostration is required.
 
 ### `words`
+
 Linguistic breakdown for every word in the Quran.
+
 - `ayah_id`: FK to `ayahs`.
 - `text`: Arabic word text.
 - `position`: Position within the ayah.
@@ -32,7 +38,9 @@ Linguistic breakdown for every word in the Quran.
 - `morphology`: Morphological breakdown (if available).
 
 ## Divisions (Juz, Hizb, Rub, Page)
+
 Tables `juzs`, `hizbs`, `rubs`, and `pages` share a common structure:
+
 - `id`: Identifier.
 - `ayah_count`: Number of ayahs in the division.
 - `start_ayah_number`, `end_ayah_number`: Range of absolute ayah IDs.
@@ -49,10 +57,17 @@ Tables `juzs`, `hizbs`, `rubs`, and `pages` share a common structure:
 - `ayah_misinterpretations`: Clarifications for common misconceptions.
 
 ## Indexes
+
 The following indexes are pre-applied to the SQL exports to ensure fast lookups:
+
 - `idx_ayahs_surah`, `idx_ayahs_page`, `idx_ayahs_juz`
 - `idx_words_ayah`, `idx_words_root`
 - `idx_theme_ayah`, `idx_cross_ayah`, `idx_science_ayah`
 
 ## Data Pipeline
+
 The canonical source for this schema is the JSON files in `lib/data/`. The SQL exports are generated using `scripts/export_sql.py`.
+
+## Diagram Status
+
+No ERD or schema diagram artifact is currently committed. The generated PostgreSQL and SQLite exports are documented here, but visual schema documentation remains a pending task.
