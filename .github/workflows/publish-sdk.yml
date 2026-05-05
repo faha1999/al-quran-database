@@ -11,7 +11,7 @@ on:
 
 jobs:
   publish:
-    if: ${{ github.ref == 'refs/heads/main' && secrets.NPM_TOKEN != '' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -33,6 +33,17 @@ jobs:
 
       - name: Verify SDK package
         run: npm run verify:sdk
+
+      - name: Check npm token presence
+        id: auth
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -n "$NODE_AUTH_TOKEN" ]; then
+            echo "has_token=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_token=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Read package metadata
         id: pkg
@@ -73,13 +84,17 @@ jobs:
           EOF
 
       - name: Publish package
-        if: ${{ steps.registry.outputs.should_publish == 'true' }}
+        if: ${{ steps.auth.outputs.has_token == 'true' && steps.registry.outputs.should_publish == 'true' }}
         run: npm publish --workspace @faha1999/al-quran-database --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Skip duplicate publish
-        if: ${{ steps.registry.outputs.should_publish != 'true' }}
+        if: ${{ steps.auth.outputs.has_token == 'true' && steps.registry.outputs.should_publish != 'true' }}
         run: |
           echo "SDK version ${{ steps.pkg.outputs.version }} already exists on npm."
           echo "Published versions: ${{ steps.registry.outputs.published_versions }}"
+
+      - name: Skip publish because token missing
+        if: ${{ steps.auth.outputs.has_token != 'true' }}
+        run: echo "NPM_TOKEN secret missing. Skipping npm publish."
