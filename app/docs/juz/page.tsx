@@ -1,5 +1,21 @@
+import type { Metadata } from 'next';
 import DocsLayout from '@/components/DocsLayout';
 import ApiPreview from '@/components/ApiPreview';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = createPageMetadata({
+  title: 'Juz API Documentation',
+  description:
+    'Read Juz-level Quran data with metadata, page ranges, and resolved ayah content from the Al-Quran Database API.',
+  path: '/docs/juz',
+  keywords: [
+    'juz api',
+    'quran juz api',
+    'quran division api',
+    'juz documentation',
+    'quran juz data',
+  ],
+});
 
 export default function DocsJuz() {
   return (

@@ -38,7 +38,7 @@ export default function DatabaseDocsClient({
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-[2.5rem] border border-blue-500/10 bg-zinc-950/40 p-10 backdrop-blur-xl"
+        className="relative overflow-hidden rounded-[2rem] md:rounded-[2.5rem] border border-blue-500/10 bg-zinc-950/40 p-6 md:p-10 backdrop-blur-xl"
       >
         <div className="absolute -top-24 -left-24 h-48 w-48 bg-blue-600/10 blur-[100px] rounded-full" />
 
@@ -47,8 +47,8 @@ export default function DatabaseDocsClient({
             <Database className="h-3.5 w-3.5" />
             Canonical Data Layer
           </div>
-          <h1 className="max-w-3xl text-4xl font-black tracking-tight text-white md:text-5xl">
-            JSON-first dataset. <br />
+          <h1 className="max-w-3xl text-3xl font-black tracking-tight text-white md:text-5xl">
+            JSON-first dataset. <br className="hidden md:block" />
             SQL local. Exports reproducible.
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">
@@ -94,7 +94,7 @@ export default function DatabaseDocsClient({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="group flex flex-col justify-between rounded-[2rem] border border-zinc-800 bg-zinc-900/20 p-8 backdrop-blur-sm transition-all hover:bg-zinc-800/40"
+            className="group flex flex-col justify-between rounded-2xl md:rounded-[2rem] border border-zinc-800 bg-zinc-900/20 p-6 md:p-8 backdrop-blur-sm transition-all hover:bg-zinc-800/40"
           >
             <div className="mb-8">
               <div className="flex items-center justify-between gap-4 mb-4">

@@ -33,8 +33,21 @@
     "sdk",
     "typescript",
     "graphql",
-    "islamic-data"
+    "islamic-data",
+    "quran-api",
+    "quran-sdk",
+    "quran-database",
+    "al-quran-database",
+    "rest-api",
+    "search-api",
+    "typescript-sdk",
+    "nextjs",
+    "sqlite",
+    "postgresql",
+    "quran-search",
+    "developer-tools"
   ],
+  "author": "Kawsar Ahmed Fahad",
   "engines": {
     "node": ">=18"
   },
