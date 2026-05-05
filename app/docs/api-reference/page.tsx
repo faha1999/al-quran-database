@@ -1,184 +1,157 @@
-import DocsLayout from '@/components/DocsLayout';
+'use client';
 
-const endpoints = [
-  {
-    method: 'POST',
-    path: '/v1/graphql',
-    description:
-      'Flexible GraphQL endpoint for typed query composition across surahs, ayahs, search, knowledge, FAQs, and metadata.',
-  },
+import DocsLayout from '@/components/DocsLayout';
+import ApiCard from '@/components/ApiCard';
+import { motion } from 'framer-motion';
+import { Terminal, Code, Cpu, Info } from 'lucide-react';
+
+const restEndpoints = [
   {
     method: 'GET',
     path: '/v1/surahs',
-    description: 'Get all 114 Surahs. Supports optional page and limit query params.',
-  },
-  {
-    method: 'GET',
-    path: '/v1/surahs/[id]',
-    description: 'Get one Surah by ID or number. Supports optional edition query param.',
+    description: 'List all 114 Surahs with support for pagination (page/limit).',
+    responseExample: `{
+  "success": true,
+  "data": [{ "id": 1, "number": 1, "name_ar": "الفاتحة", ... }],
+  "meta": { "total": 114 }
+}`,
   },
   {
     method: 'GET',
     path: '/v1/ayahs/[id]',
-    description:
-      'Get one Ayah by global number (1-6236). Supports optional edition and include_words params, plus context and knowledge hydration.',
-  },
-  {
-    method: 'GET',
-    path: '/v1/juz/[id]',
-    description: 'Get one juz by ID (1-30), including derived ayah and page ranges.',
-  },
-  {
-    method: 'GET',
-    path: '/v1/hizb/[id]',
-    description: 'Get one hizb by ID (1-60), containing all ayahs in that division.',
-  },
-  {
-    method: 'GET',
-    path: '/v1/rub/[id]',
-    description: 'Get one Rub (Quarter) by ID (1-480).',
-  },
-  {
-    method: 'GET',
-    path: '/v1/pages/[id]',
-    description: 'Get ayahs for a specific Mushaf page (1-604).',
-  },
-  {
-    method: 'GET',
-    path: '/v1/words?ayah_id=[id]',
-    description: 'Get word-by-word breakdown (Arabic tokens) for a specific ayah.',
-  },
-  {
-    method: 'GET',
-    path: '/v1/reciters',
-    description: 'Get list of available reciters for audio streaming references.',
-  },
-  {
-    method: 'GET',
-    path: '/v1/duas',
-    description: 'Get all supplications (Duas) extracted from the Quran. Supports pagination.',
-  },
-  {
-    method: 'GET',
-    path: '/v1/knowledge/[id]',
-    description:
-      'Get curated knowledge entry for an ayah: themes, cross refs, legal/scientific/linguistic notes, and misinterpretation guidance.',
-  },
-  {
-    method: 'GET',
-    path: '/v1/faqs',
-    description: 'Get canonical FAQ entries stored in the knowledge layer.',
-  },
-  {
-    method: 'GET',
-    path: '/v1/meta',
-    description:
-      'Get dataset metadata, source hash, canonical counts, and knowledge coverage summary.',
+    description: 'Fetch specific ayah with optional translation, word-by-word breakdown, and knowledge hydration.',
+    responseExample: `{
+  "success": true,
+  "data": { "id": 1, "text": "...", "translation": "..." }
+}`,
   },
   {
     method: 'GET',
     path: '/v1/search?q=[query]',
-    description: 'Search ayahs. Supports edition, language, page, and limit query params.',
+    description: 'High-performance ranked keyword search across Arabic and translations.',
+    responseExample: `{
+  "success": true,
+  "data": [{ "id": 1, "matched_identifiers": ["text", "translation"], ... }]
+}`,
+  },
+  {
+    method: 'GET',
+    path: '/v1/knowledge/[ayah_id]',
+    description: 'Retrieve scholarly metadata including themes, fiqh, and linguistic notes.',
+    responseExample: `{
+  "success": true,
+  "data": { "themes": ["Guidance", "Praise"], ... }
+}`,
   },
 ];
 
 export default function ApiReference() {
   return (
     <DocsLayout>
-      <div className="space-y-8">
-        <section>
-          <h1 className="text-4xl font-bold mb-4">API Reference</h1>
-          <p className="text-gray-400 text-lg">
-            REST stays versioned under `/api/v1`. GraphQL sits beside it for flexible query
-            composition. Legacy `/api/*` aliases stay for backward compatibility.
-          </p>
+      <div className="space-y-16">
+        {/* Header */}
+        <section className="space-y-4">
+          <motion.h1 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="text-4xl font-black tracking-tight md:text-5xl"
+          >
+            API Reference
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="max-w-3xl text-lg leading-relaxed text-zinc-400"
+          >
+            A high-performance gateway to Quranic data. Choose between our versioned REST API or the flexible GraphQL query layer.
+          </motion.p>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
-            <h2 className="mb-3 text-xl font-bold">Query Rules</h2>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>`edition` and `language` cannot be used together on search.</li>
-              <li>`page` and `limit` must be positive integers.</li>
-              <li>Unknown editions or languages return HTTP `400`.</li>
-              <li>Knowledge routes return `404` when entry coverage does not exist yet.</li>
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
-            <h2 className="mb-3 text-xl font-bold">Default Text</h2>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>Arabic source stays in `ayahs.text`.</li>
-              <li>Default translation stays `en.sahih` in `translation`.</li>
-              <li>Optional `edition_content` appears when an edition filter is used.</li>
-              <li>Optional `knowledge` appears when curated coverage exists for an ayah.</li>
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
-            <h2 className="mb-3 text-xl font-bold">Cache + Version</h2>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>Responses include `X-API-Version` and `X-API-Latest-Version`.</li>
-              <li>
-                Hot endpoints expose `X-Cache` as `miss`, `hit-memory`, `hit-redis`, or `skip`.
-              </li>
-              <li>Redis cache activates when `REDIS_URL` exists; memory cache remains fallback.</li>
-            </ul>
-          </div>
-        </section>
-
-        <section className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
-          <h2 className="mb-4 text-xl font-bold">GraphQL Example</h2>
-          <pre className="bg-black/50 p-4 rounded-lg text-xs text-gray-400 overflow-x-auto">
-            {`query HomePayload {
-  meta {
-    dataset { counts { ayahs editions } }
-  }
-  surah(id: 1) {
-    name_en
-    ayahs { id number_in_surah translation }
-  }
-  search(query: "mercy", limit: 3) {
-    items { id translation matched_identifiers }
-    meta { total page limit }
-  }
-}`}
-          </pre>
-        </section>
-
-        <div className="grid gap-6">
-          {endpoints.map((endpoint) => (
-            <div
-              key={endpoint.path}
-              className="p-6 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-4"
-            >
-              <div className="flex items-center gap-3">
-                <span className="px-2 py-1 bg-blue-500/10 text-blue-500 text-xs font-bold rounded border border-blue-500/20">
-                  {endpoint.method}
-                </span>
-                <code className="text-gray-200 font-mono">{endpoint.path}</code>
+        {/* GraphQL Section */}
+        <section className="space-y-6">
+           <h2 className="text-2xl font-bold flex items-center gap-3">
+             <Code className="w-6 h-6 text-indigo-400" />
+             GraphQL API
+           </h2>
+           <div className="rounded-3xl border border-zinc-800 bg-zinc-950/50 p-8 backdrop-blur-xl">
+              <div className="mb-6">
+                <p className="text-sm text-zinc-500 mb-4">
+                  The preferred method for complex data requirements. Compose exactly the payload you need in a single request.
+                </p>
+                <div className="flex items-center gap-3">
+                   <span className="px-2 py-0.5 bg-zinc-800 text-[10px] font-black uppercase text-zinc-400 rounded">POST</span>
+                   <code className="text-sm font-mono text-zinc-300">/api/v1/graphql</code>
+                </div>
               </div>
-              <p className="text-gray-400 text-sm">{endpoint.description}</p>
-              <div className="pt-4 border-t border-zinc-800">
-                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
-                  Example Response
-                </h4>
-                <pre className="bg-black/50 p-4 rounded-lg text-xs text-gray-400 overflow-x-auto">
-                  {`// Success Response
-{
-  "success": true,
-  "data": { ... },
-  "meta": { ... }
-}
-
-// Error Response
-{
-  "success": false,
-  "error": "Error message description"
-}`}
-                </pre>
+              <div className="grid gap-6 lg:grid-cols-2">
+                <div className="space-y-2">
+                  <span className="text-[10px] font-black uppercase text-zinc-600 tracking-widest">Query</span>
+                  <pre className="rounded-2xl bg-black/40 p-5 text-xs text-zinc-400 overflow-x-auto border border-zinc-800/50">
+                    <code>{`query GetAyah {
+  ayah(id: 1, includeWords: true) {
+    text
+    translation
+    knowledge {
+      themes
+      historical_context
+    }
+  }
+}`}</code>
+                  </pre>
+                </div>
+                <div className="space-y-2">
+                  <span className="text-[10px] font-black uppercase text-zinc-600 tracking-widest">Response</span>
+                  <pre className="rounded-2xl bg-black/40 p-5 text-xs text-zinc-500 overflow-x-auto border border-zinc-800/50">
+                    <code>{`{
+  "data": {
+    "ayah": {
+      "text": "بِسْمِ اللَّهِ...",
+      "translation": "In the name of Allah...",
+      "knowledge": { ... }
+    }
+  }
+}`}</code>
+                  </pre>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+           </div>
+        </section>
+
+        {/* REST Section */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold flex items-center gap-3">
+            <Terminal className="w-6 h-6 text-blue-400" />
+            REST v1 Endpoints
+          </h2>
+          <div className="grid gap-6">
+            {restEndpoints.map((endpoint) => (
+              <ApiCard key={endpoint.path} {...endpoint} />
+            ))}
+          </div>
+        </section>
+
+        {/* Technical Constraints */}
+        <section className="grid gap-6 md:grid-cols-2">
+           <div className="rounded-3xl border border-zinc-800 bg-zinc-900/10 p-8">
+              <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                 <Cpu className="w-5 h-5 text-emerald-400" />
+                 Rate Limiting
+              </h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">
+                Public access is throttled at **100 requests per minute** per IP. Enterprise keys are available for higher throughput requirements.
+              </p>
+           </div>
+           <div className="rounded-3xl border border-zinc-800 bg-zinc-900/10 p-8">
+              <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                 <Info className="w-5 h-5 text-amber-400" />
+                 Cache Headers
+              </h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">
+                Watch the `X-Cache` header for performance metrics. Results are served from **Memory (L1)**, **Redis (L2)**, or directly from the **Sharded JSON (Disk)**.
+              </p>
+           </div>
+        </section>
       </div>
     </DocsLayout>
   );

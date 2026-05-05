@@ -1,21 +1,51 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { ChevronRight } from 'lucide-react';
+
 interface ApiCardProps {
   method: string;
   path: string;
   description: string;
+  responseExample?: string;
 }
 
-export default function ApiCard({ method, path, description }: ApiCardProps) {
+export default function ApiCard({ method, path, description, responseExample }: ApiCardProps) {
   return (
-    <div className="p-6 bg-zinc-900 rounded-2xl border border-zinc-800 hover:border-blue-500/50 transition-all group">
-      <div className="flex items-center gap-3 mb-4">
-        <span className="px-2 py-0.5 bg-blue-500/10 text-blue-500 text-[10px] font-black rounded border border-blue-500/20 uppercase">
-          {method}
-        </span>
-        <code className="text-zinc-200 font-mono text-sm group-hover:text-blue-400 transition-colors">
-          {path}
-        </code>
+    <motion.div 
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900/20 backdrop-blur-sm transition-all hover:border-blue-500/30 hover:bg-zinc-900/40 group"
+    >
+      <div className="p-8">
+        <div className="flex flex-wrap items-center gap-3 mb-6">
+          <span className="inline-flex items-center rounded-lg bg-blue-500/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-blue-500 border border-blue-500/20">
+            {method}
+          </span>
+          <code className="text-sm font-mono text-zinc-300 group-hover:text-white transition-colors">
+            {path}
+          </code>
+        </div>
+        
+        <p className="text-sm leading-relaxed text-zinc-500 group-hover:text-zinc-400 transition-colors">
+          {description}
+        </p>
+
+        {responseExample && (
+          <div className="mt-8 space-y-3">
+             <button className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-600 hover:text-zinc-400 transition-colors">
+                <ChevronRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+                Example Response
+             </button>
+             <div className="rounded-2xl bg-black/40 p-5 overflow-x-auto border border-zinc-800/50">
+                <pre className="text-[12px] font-mono leading-relaxed text-zinc-500">
+                   <code>{responseExample}</code>
+                </pre>
+             </div>
+          </div>
+        )}
       </div>
-      <p className="text-zinc-400 text-sm leading-relaxed">{description}</p>
-    </div>
+    </motion.div>
   );
 }
