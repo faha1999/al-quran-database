@@ -1,8 +1,24 @@
 import { statSync } from 'node:fs';
 import path from 'node:path';
+import type { Metadata } from 'next';
 import DocsLayout from '@/components/DocsLayout';
 import { getDatasetMetadata, getKnowledgeCoverage } from '@/lib/data-loader';
 import DatabaseDocsClient from '@/components/DatabaseDocsClient';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = createPageMetadata({
+  title: 'Quran Database Exports for SQLite & PostgreSQL',
+  description:
+    'Download and inspect SQLite and PostgreSQL exports of Al-Quran Database, including schema coverage, file sizes, and knowledge-layer structure.',
+  path: '/docs/database',
+  keywords: [
+    'quran sqlite database',
+    'quran postgresql database',
+    'quran database export',
+    'quran sql dump',
+    'quran dataset download',
+  ],
+});
 
 function getPublicFileSize(fileName: string) {
   try {
@@ -42,7 +58,7 @@ export default function DatabaseDocsPage() {
 
   return (
     <DocsLayout>
-      <DatabaseDocsClient 
+      <DatabaseDocsClient
         metadata={metadata}
         knowledge={knowledge}
         exportCards={exportCards}

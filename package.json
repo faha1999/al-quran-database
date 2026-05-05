@@ -1,7 +1,10 @@
 {
   "name": "al-quran-database",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -20,9 +23,14 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint:fix": "eslint . --fix",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "build:sdk": "npm run build --workspace @faha1999/al-quran-database",
+    "pack:sdk": "npm pack --dry-run --workspace @faha1999/al-quran-database",
+    "verify:sdk": "npm run build:sdk && npm run pack:sdk"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "clsx": "2.1.1",
     "flexsearch": "0.8.212",
     "framer-motion": "12.38.0",
@@ -49,5 +57,6 @@
     "tailwindcss": "4.2.4",
     "typescript": "6.0.3",
     "vitest": "^4.1.5"
-  }
+  },
+  "packageManager": "pnpm@10.33.3+sha512.a19744364a7e248b92657a4ca5973f9354d21caf982579674b1c539f32c7420c47138ad8b1254df07aba9bc782d9b3029e3db34d5dbff974326eb74dac8ff489"
 }

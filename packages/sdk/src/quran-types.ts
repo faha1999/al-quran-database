@@ -1,0 +1,299 @@
+export interface Surah {
+  id: number;
+  number: number;
+  name_ar: string;
+  name_en: string;
+  name_en_translation: string;
+  type: string;
+}
+
+export interface Ayah {
+  id: number;
+  number: number;
+  text: string;
+  number_in_surah: number;
+  page: number;
+  surah_id: number;
+  hizb_id: number;
+  rub_id: number;
+  juz_id: number;
+  sajda: boolean;
+  words?: Word[];
+}
+
+export interface Word {
+  id: number;
+  ayah_id: number;
+  text: string;
+  position: number;
+  surah_id: number;
+  number_in_surah: number;
+  root: string | null;
+  morphology: string | null;
+}
+
+export interface Edition {
+  id: number;
+  identifier: string;
+  language: string;
+  name: string;
+  englishName: string;
+  format: string;
+  type: string;
+}
+
+export interface AyahEdition {
+  ayah_id: number;
+  data: string;
+  is_audio: boolean;
+}
+
+export interface Reciter {
+  id: number;
+  name: string;
+  identifier: string;
+  type: string;
+  bitrate: string;
+}
+
+export interface Dua {
+  ayah_id: number;
+  surah_id: number;
+  ayah_number: number;
+  text: string;
+}
+
+export interface AsbabAlNuzulEntry {
+  ayah_id: number;
+  surah_id: number;
+  content: string;
+  source: string;
+}
+
+export interface HadithReferenceEntry {
+  ayah_id: number;
+  surah_id: number;
+  hadith: string;
+  source: string;
+}
+
+export interface ExtraContext {
+  asbab_al_nuzul: AsbabAlNuzulEntry[];
+  hadith_references: HadithReferenceEntry[];
+}
+
+export interface AyahCrossReference {
+  ayah_id: number;
+  relationship: string;
+}
+
+export interface ScientificReference {
+  title: string;
+  summary: string;
+  caution?: string;
+  references: string[];
+}
+
+export interface LegalRuling {
+  scope: string;
+  summary: string;
+  evidence: string[];
+}
+
+export interface LinguisticNote {
+  token: string;
+  root: string | null;
+  morphology: string | null;
+  note: string;
+}
+
+export interface MisinterpretationNote {
+  claim: string;
+  clarification: string;
+}
+
+export interface AyahKnowledgeEntry {
+  ayah_id: number;
+  surah_id: number;
+  themes: string[];
+  historical_context: string;
+  cross_references: AyahCrossReference[];
+  scientific_references: ScientificReference[];
+  legal_rulings: LegalRuling[];
+  linguistic_notes: LinguisticNote[];
+  misinterpretation_notes: MisinterpretationNote[];
+}
+
+export interface SurahProfile {
+  surah_id: number;
+  period: string;
+  summary: string;
+  historical_context: string;
+}
+
+export interface KnowledgeFaqEntry {
+  id: number;
+  question: string;
+  answer: string;
+}
+
+export interface ResearchReference {
+  id: number;
+  title: string;
+  author: string;
+  type: string;
+  url: string;
+}
+
+export interface KnowledgeCoverage {
+  ayah_entries: number;
+  surah_profiles: number;
+  faq_entries: number;
+  research_references: number;
+}
+
+export interface KnowledgeBase {
+  coverage: KnowledgeCoverage;
+  ayahs: AyahKnowledgeEntry[];
+  surahs: SurahProfile[];
+  faqs: KnowledgeFaqEntry[];
+  research_references: ResearchReference[];
+}
+
+export interface DatasetMetadata {
+  source: {
+    sql_path: string;
+    sha256: string;
+    size_bytes: number;
+  };
+  generated_at: string;
+  counts: {
+    surahs: number;
+    ayahs: number;
+    editions: number;
+    juzs: number;
+    hizbs: number;
+    rubs: number;
+    pages: number;
+  };
+}
+
+export interface Page {
+  id: number;
+  ayah_count: number;
+  start_ayah_number: number;
+  end_ayah_number: number;
+  start_page: number;
+  end_page: number;
+  surah_ids: number[];
+}
+
+export interface Rub {
+  id: number;
+  ayah_count: number;
+  start_ayah_number: number;
+  end_ayah_number: number;
+  start_page: number;
+  end_page: number;
+  surah_ids: number[];
+}
+
+export interface Juz {
+  id: number;
+  ayah_count: number;
+  start_ayah_number: number;
+  end_ayah_number: number;
+  start_page: number;
+  end_page: number;
+  surah_ids: number[];
+}
+
+export interface Hizb {
+  id: number;
+  ayah_count: number;
+  start_ayah_number: number;
+  end_ayah_number: number;
+  start_page: number;
+  end_page: number;
+  surah_ids: number[];
+}
+
+export interface EditionManifestEntry {
+  edition_id: number;
+  language: string;
+  type: string;
+  format: string;
+  row_count: number;
+  files: string[];
+}
+
+export interface EditionManifest {
+  default_translation_identifier: string;
+  editions: Record<string, EditionManifestEntry>;
+}
+
+export interface EditionSummary {
+  identifier: string;
+  language: string;
+  name: string;
+  englishName: string;
+  format: string;
+  type: string;
+}
+
+export interface ResolvedAyah extends Ayah {
+  translation: string | null;
+  edition_content?: string | null;
+  edition?: EditionSummary | null;
+  knowledge?: AyahKnowledgeEntry | null;
+}
+
+export interface ResolvedSurah extends Surah {
+  ayahs: ResolvedAyah[];
+}
+
+export interface ResolvedDivision {
+  id: number;
+  ayah_count: number;
+  start_ayah_number: number;
+  end_ayah_number: number;
+  start_page: number;
+  end_page: number;
+  surah_ids: number[];
+  ayahs: ResolvedAyah[];
+}
+
+export interface SearchFilters {
+  edition?: string;
+  language?: string;
+  limit?: number;
+  page?: number;
+}
+
+export interface SearchResultAyah extends ResolvedAyah {
+  matched_identifiers: string[];
+}
+
+export interface PaginationMeta {
+  total: number;
+  page?: number;
+  limit?: number;
+  total_pages?: number;
+  has_next_page?: boolean;
+}
+
+export interface SearchMeta extends PaginationMeta {
+  edition?: string | null;
+  language?: string | null;
+}
+
+export interface ApiEnvelope<T, TMeta = Record<string, unknown> | undefined> {
+  success: boolean;
+  data: T;
+  meta?: TMeta;
+}
+
+export interface SearchFilterState {
+  edition: string;
+  language: string;
+}

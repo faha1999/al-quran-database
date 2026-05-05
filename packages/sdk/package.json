@@ -1,0 +1,62 @@
+{
+  "name": "@faha1999/al-quran-database",
+  "version": "2.0.1",
+  "description": "Type-safe JavaScript and TypeScript SDK for the Al-Quran Database REST and GraphQL APIs.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faha1999/al-quran-database.git",
+    "directory": "packages/sdk"
+  },
+  "homepage": "https://al-quran-database.vercel.app/docs/sdk",
+  "bugs": {
+    "url": "https://github.com/faha1999/al-quran-database/issues"
+  },
+  "keywords": [
+    "quran",
+    "api",
+    "sdk",
+    "typescript",
+    "graphql",
+    "islamic-data",
+    "quran-api",
+    "quran-sdk",
+    "quran-database",
+    "al-quran-database",
+    "rest-api",
+    "search-api",
+    "typescript-sdk",
+    "nextjs",
+    "sqlite",
+    "postgresql",
+    "quran-search",
+    "developer-tools"
+  ],
+  "author": "Kawsar Ahmed Fahad",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "prepack": "npm run clean && npm run build"
+  }
+}

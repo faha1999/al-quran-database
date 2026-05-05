@@ -1,17 +1,41 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 import { docsNavItems } from '@/lib/docs-navigation';
 import { clsx } from 'clsx';
+import { useState } from 'react';
+import { createBreadcrumbSchema, serializeJsonLd } from '@/lib/seo';
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
+  const activeItem = docsNavItems.find((item) => item.href === pathname);
+  const breadcrumbItems =
+    pathname === '/docs'
+      ? [
+          { name: 'Home', path: '/' },
+          { name: 'Docs', path: '/docs' },
+        ]
+      : pathname.startsWith('/docs') && activeItem
+        ? [
+            { name: 'Home', path: '/' },
+            { name: 'Docs', path: '/docs' },
+            { name: activeItem.title, path: activeItem.href },
+          ]
+        : [];
+  const breadcrumbJson =
+    breadcrumbItems.length > 0 ? serializeJsonLd(createBreadcrumbSchema(breadcrumbItems)) : null;
 
   return (
     <div className="min-h-screen bg-[#030712] text-zinc-100 selection:bg-blue-500/30">
+      {breadcrumbJson ? (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJson }} />
+      ) : null}
       {/* Ambient background effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full" />
@@ -19,19 +43,51 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
       </div>
 
       <div className="relative mx-auto grid min-h-screen max-w-7xl gap-0 lg:grid-cols-[280px_minmax(0,1fr)]">
+        {/* Mobile Header */}
+        <div className="sticky top-0 z-50 flex items-center justify-between border-b border-zinc-800/50 bg-zinc-950/80 px-6 py-4 backdrop-blur-xl lg:hidden">
+          <Link href="/" className="flex items-center gap-2">
+            <Image src="/logo.png" alt="Logo" width={32} height={32} className="h-8 w-8" />
+            <span className="text-lg font-bold">
+              Quran <span className="text-blue-500">Dev</span>
+            </span>
+          </Link>
+          <button
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-400"
+          >
+            {isSidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+
         {/* Sidebar */}
-        <aside className="border-b border-zinc-800/50 bg-zinc-950/40 p-6 backdrop-blur-xl lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto lg:border-b-0 lg:border-r lg:bg-zinc-950/20">
+        <aside
+          className={clsx(
+            'fixed inset-y-0 left-0 z-40 w-72 transform border-r border-zinc-800/50 bg-zinc-950 p-6 backdrop-blur-xl transition-transform duration-300 ease-in-out lg:sticky lg:top-0 lg:h-screen lg:w-auto lg:translate-x-0 lg:overflow-y-auto lg:border-b-0 lg:bg-zinc-950/20',
+            isSidebarOpen ? 'translate-x-0' : '-translate-x-full',
+          )}
+        >
           <div className="mb-10 space-y-4">
-            <Link href="/" className="group flex items-center gap-2 text-2xl font-bold tracking-tight">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 font-black text-white shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-transform group-hover:scale-110">
-                Q
+            <Link
+              href="/"
+              className="group flex items-center gap-2 text-2xl font-bold tracking-tight"
+            >
+              <div className="flex h-16 w-16 items-center justify-center shadow-[0_0_15px_rgba(37,99,235,0.4)]">
+                <Image
+                  src="/logo.png"
+                  alt="Quran Dev Logo"
+                  width={64}
+                  height={64}
+                  className="h-16 w-16"
+                  priority
+                />
               </div>
               <span>
                 Quran <span className="text-blue-500">Dev</span>
               </span>
             </Link>
             <p className="max-w-xs text-[13px] leading-relaxed text-zinc-500">
-              High-performance Quranic data platform with typed contracts, search, and scholarly metadata.
+              High-performance Quranic data platform with typed contracts, search, and scholarly
+              metadata.
             </p>
           </div>
 
@@ -45,11 +101,12 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
                 <Link
                   key={item.href}
                   href={item.href}
+                  onClick={() => setIsSidebarOpen(false)}
                   className={clsx(
                     'group relative flex items-center rounded-xl px-3 py-2 text-sm transition-all duration-200',
                     isActive
                       ? 'bg-blue-600/10 text-white font-medium'
-                      : 'text-zinc-500 hover:bg-zinc-800/50 hover:text-zinc-300'
+                      : 'text-zinc-500 hover:bg-zinc-800/50 hover:text-zinc-300',
                   )}
                 >
                   {isActive && (
@@ -67,6 +124,14 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
             })}
           </nav>
         </aside>
+
+        {/* Backdrop for mobile */}
+        {isSidebarOpen && (
+          <div
+            className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm lg:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
 
         {/* Content */}
         <main className="relative px-6 py-12 md:px-12 lg:px-16">

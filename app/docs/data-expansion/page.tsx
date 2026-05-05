@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import DocsLayout from '@/components/DocsLayout';
 import {
   editions,
@@ -5,6 +6,21 @@ import {
   getResearchReferences,
   getSurahProfile,
 } from '@/lib/data-loader';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = createPageMetadata({
+  title: 'Quran Knowledge Data Expansion Model',
+  description:
+    'Explore how Al-Quran Database expands canonical ayah data with research references, thematic tags, transliterations, tafsir, and knowledge layers.',
+  path: '/docs/data-expansion',
+  keywords: [
+    'quran data expansion',
+    'quran knowledge graph',
+    'quran tafsir data',
+    'quran research references',
+    'quran metadata layers',
+  ],
+});
 
 const implementedItems = [
   'More translations',
