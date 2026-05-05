@@ -1,0 +1,85 @@
+name: Publish SDK
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/sdk/**'
+      - 'package-lock.json'
+      - '.github/workflows/publish-sdk.yml'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    if: ${{ github.ref == 'refs/heads/main' && secrets.NPM_TOKEN != '' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify SDK package
+        run: npm run verify:sdk
+
+      - name: Read package metadata
+        id: pkg
+        run: |
+          node <<'EOF' >> "$GITHUB_OUTPUT"
+          const pkg = require('./packages/sdk/package.json');
+          console.log(`name=${pkg.name}`);
+          console.log(`version=${pkg.version}`);
+          EOF
+
+      - name: Check npm registry for current version
+        id: registry
+        run: |
+          node <<'EOF' >> "$GITHUB_OUTPUT"
+          const { execSync } = require('node:child_process');
+          const pkg = require('./packages/sdk/package.json');
+
+          let versions = [];
+
+          try {
+            const raw = execSync(`npm view "${pkg.name}" versions --json`, {
+              encoding: 'utf8',
+              stdio: ['ignore', 'pipe', 'pipe'],
+            }).trim();
+
+            if (raw) {
+              const parsed = JSON.parse(raw);
+              versions = Array.isArray(parsed) ? parsed : [parsed];
+            }
+          } catch {
+            versions = [];
+          }
+
+          const shouldPublish = !versions.includes(pkg.version);
+
+          console.log(`published_versions=${versions.join(',')}`);
+          console.log(`should_publish=${shouldPublish}`);
+          EOF
+
+      - name: Publish package
+        if: ${{ steps.registry.outputs.should_publish == 'true' }}
+        run: npm publish --workspace @faha1999/al-quran-database --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Skip duplicate publish
+        if: ${{ steps.registry.outputs.should_publish != 'true' }}
+        run: |
+          echo "SDK version ${{ steps.pkg.outputs.version }} already exists on npm."
+          echo "Published versions: ${{ steps.registry.outputs.published_versions }}"

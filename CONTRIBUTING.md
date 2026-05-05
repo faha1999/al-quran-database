@@ -24,6 +24,13 @@ npm run test:e2e
 npm run build
 ```
 
+## SDK auto-publish
+
+- GitHub Actions publishes the SDK from `main` via `.github/workflows/publish-sdk.yml`.
+- Store an npm automation token in repository secret `NPM_TOKEN`.
+- Bump `packages/sdk/package.json` version before merge when a new npm release is intended.
+- The publish workflow skips automatically if that exact version already exists on npm.
+
 ## Engineering rules
 
 - Use strict TypeScript. Avoid `any`.
