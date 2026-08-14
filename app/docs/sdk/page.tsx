@@ -4,16 +4,19 @@ import SdkPageClient from './SdkPageClient';
 import { createPageMetadata, createSoftwareApplicationSchema } from '@/lib/seo';
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'TypeScript Quran SDK Guide',
+  title: 'TypeScript Quran SDK — Works Offline, No Server Required',
   description:
-    'Install and use the Al-Quran Database TypeScript SDK against local and self-hosted REST and GraphQL deployments with typed responses and production-ready Quran data workflows.',
+    'Install @faha1999/al-quran-database and call getSurah(), getAyah(), searchAyahs() with zero config — data bundled in the package. Also includes REST & GraphQL SDK for self-hosted deployments with all 134 editions.',
   path: '/docs/sdk',
   keywords: [
     'quran typescript sdk',
-    'quran npm package',
-    'quran javascript sdk',
-    'quran api client',
+    'quran npm package offline',
+    'quran javascript offline',
+    'quran api no server',
+    'quran bundled data npm',
     'al quran database sdk',
+    'quran getSurah',
+    'quran zero setup',
   ],
 });
 

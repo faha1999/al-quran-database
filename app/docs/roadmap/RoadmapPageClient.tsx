@@ -19,7 +19,14 @@ const phases = [
     title: 'Phase 2: Developer Ecosystem',
     status: 'Completed',
     icon: <Package className="h-5 w-5 text-blue-400" />,
-    items: ['JS/TS Developer SDK', 'PostgreSQL & SQLite Exports', 'Sharded Data Pipeline'],
+    items: [
+      'JS/TS Developer SDK (@faha1999/al-quran-database)',
+      'Zero-setup local data layer (getSurah, getAyah, searchAyahs offline)',
+      'Bundled editions (en.sahih, en.yusufali, quran-uthmani, quran-simple-clean)',
+      'jsDelivr / unpkg CDN auto-distribution',
+      'PostgreSQL & SQLite Exports',
+      'Sharded Data Pipeline',
+    ],
   },
   {
     title: 'Phase 3: Production Readiness',
@@ -34,13 +41,26 @@ const phases = [
   },
   {
     title: 'Phase 4: Advanced Scaling',
-    status: 'In Progress',
+    status: 'Completed',
     icon: <Rocket className="h-5 w-5 text-indigo-400" />,
     items: [
-      'Semantic Search (Vector Embeddings)',
-      'Interactive API Playground',
-      'npm registry publishing for @faha1999/al-quran-database',
-      'Audio Recitation Streaming API',
+      'npm registry publishing — package live',
+      'Versioned REST API (/api/v1/*)',
+      'Legacy API aliases for backward compatibility',
+      'Audio Recitation Streaming API (pending)',
+    ],
+  },
+  {
+    title: 'Phase 5: Growth & Distribution',
+    status: 'Completed',
+    icon: <Globe className="h-5 w-5 text-sky-400" />,
+    items: [
+      'README overhaul — badges, zero-setup example, comparison table',
+      'GitHub Sponsors via FUNDING.yml',
+      'Code of Conduct (Contributor Covenant v2.1)',
+      'Structured GitHub issue templates',
+      'CHANGELOG (Keep-a-Changelog format)',
+      'Light contribution path for docs/example PRs',
     ],
   },
 ];
@@ -122,10 +142,10 @@ export default function RoadmapPageClient() {
             <h2 className="text-2xl font-bold">Future Horizon</h2>
           </div>
           <p className="max-w-2xl text-sm leading-relaxed text-zinc-500">
-            Beyond Phase 4, we are exploring **Knowledge Graphs** for visual thematic mapping,
-            **Dockerized self-hosting** templates, and **PWA capabilities** for offline-first
-            documentation and API mock servers. Current workspace package already exists under
-            `packages/sdk`; public registry publishing is still pending.
+            Beyond Phase 5, we are exploring <strong className="text-zinc-400">Semantic Search</strong> (vector
+            embeddings for meaning-based lookup), an <strong className="text-zinc-400">Interactive API Playground</strong>,{' '}
+            <strong className="text-zinc-400">Docker self-hosting</strong> templates, and bundling all 134 editions
+            as CDN-served lazy-load shards. Community contributions welcome via the issue tracker.
           </p>
         </section>
       </div>

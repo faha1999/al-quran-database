@@ -1,19 +1,143 @@
 # Quran Developer Platform
 
-Developer-first Quran dataset and API platform built on canonical sharded JSON, strict
-TypeScript, Next.js App Router, and a lightweight JS/TS SDK.
+[![npm version](https://img.shields.io/npm/v/@faha1999/al-quran-database)](https://www.npmjs.com/package/@faha1999/al-quran-database)
+[![npm downloads](https://img.shields.io/npm/dm/@faha1999/al-quran-database)](https://www.npmjs.com/package/@faha1999/al-quran-database)
+[![GitHub stars](https://img.shields.io/github/stars/faha1999/al-quran-database)](https://github.com/faha1999/al-quran-database)
+[![License](https://img.shields.io/npm/l/@faha1999/al-quran-database)](./LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/faha1999/al-quran-database/ci.yml?label=CI)](https://github.com/faha1999/al-quran-database/actions)
 
-- Repository: [https://github.com/faha1999/al-quran-database](https://github.com/faha1999/al-quran-database)
-- npm package: [https://www.npmjs.com/package/@faha1999/al-quran-database](https://www.npmjs.com/package/@faha1999/al-quran-database)
-- Hosted docs: [https://al-quran-database.vercel.app/docs](https://al-quran-database.vercel.app/docs)
+Developer-first Quran dataset and API platform. Strict TypeScript, full offline support, REST + GraphQL API, 134 translations, word-by-word data, and a per-ayah scholarly knowledge base.
 
-## Hosted access policy
+## Zero-setup quick start
 
-- The public `https://al-quran-database.vercel.app` deployment is currently a docs/showcase surface.
-- To use the API, run the repository locally or deploy your own copy on your preferred hosting platform.
+```bash
+npm install @faha1999/al-quran-database
+```
+
+```ts
+import { getSurah, getAyah, searchAyahs } from '@faha1999/al-quran-database';
+
+// No server. No network. No .env file. Works immediately.
+const fatiha = getSurah(1);
+// → { id: 1, name_en: 'Al-Faatiha', ayahs: [...7 resolved ayahs...] }
+
+const ayah = getAyah(1, 'en.sahih');
+// → { text: 'بِسْمِ ٱللَّهِ ...', translation: 'In the name of Allah...' }
+
+const results = searchAyahs('mercy');
+// → { items: [...], meta: { total: 50, ... } }
+```
+
+The package ships its own data — **no running server required**. Four editions are bundled for instant offline use: `en.sahih`, `en.yusufali`, `quran-simple-clean`, and `quran-uthmani`. All 134 other editions are available via CDN (see [CDN access](#cdn-access-via-jsdelivr) below).
+
+## What makes this different
+
+| Feature | This package | `quran-json` | `quran-meta` | `@quranjs/api` |
+|---|---|---|---|---|
+| Works offline (no server) | ✅ | ✅ | ✅ | ❌ needs their API |
+| TypeScript types | ✅ full | ❌ | ✅ | ✅ |
+| 134 translations / editions | ✅ | partial | ❌ | partial |
+| Word-by-word morphology | ✅ | ❌ | ❌ | ❌ |
+| Per-ayah knowledge base | ✅ | ❌ | ❌ | ❌ |
+| GraphQL API | ✅ | ❌ | ❌ | ❌ |
+| SQL (PostgreSQL + SQLite) export | ✅ | ❌ | ❌ | ❌ |
+| REST API (self-host or local) | ✅ | ❌ | ❌ | ❌ |
+
+## Local data functions (offline, zero-dependency)
+
+All functions below work with no network or server:
+
+```ts
+import {
+  getSurah,          // surah + all resolved ayahs
+  getAyah,           // single ayah with translation + knowledge
+  getAyahByNumber,   // ayah by global number (1–6236)
+  getAllSurahs,       // all 114 surahs (paginatable)
+  getJuzById,        // juz with its ayahs
+  getHizbById,       // hizb with its ayahs
+  getRubById,        // rub with its ayahs
+  getPageById,       // Mushaf page with its ayahs
+  searchAyahs,       // full-text search (Arabic + translations)
+  getReciters,       // reciter list
+  getDuas,           // duas from Quran
+  getKnowledgeByAyah,  // per-ayah scholarly entry
+  getKnowledgeFaqs,    // FAQ knowledge base
+  getDatasetMetadata,  // dataset provenance info
+  // Raw data
+  surahs, ayahs, editions, juzs, hizbs, rubs, pages,
+  BUNDLED_EDITION_IDENTIFIERS,  // ['en.sahih', 'en.yusufali', ...]
+} from '@faha1999/al-quran-database';
+```
+
+### Bundled editions (available offline)
+
+```ts
+import { BUNDLED_EDITION_IDENTIFIERS, getSurah } from '@faha1999/al-quran-database';
+console.log(BUNDLED_EDITION_IDENTIFIERS);
+// → ['en.sahih', 'quran-simple-clean', 'en.yusufali', 'quran-uthmani']
+
+const surahWithArabic = getSurah(2, 'quran-uthmani');
+const surahWithEnglish = getSurah(2, 'en.sahih');
+```
+
+## CDN access via jsDelivr
+
+Every file in the published package is automatically served from [jsDelivr](https://www.jsdelivr.com/) — no signup, no config, free forever:
+
+```html
+<!-- Surah metadata -->
+<script src="https://cdn.jsdelivr.net/npm/@faha1999/al-quran-database@2.1.0/src/data/surahs.json"></script>
+
+<!-- Fetch in JS -->
+const res = await fetch('https://cdn.jsdelivr.net/npm/@faha1999/al-quran-database@2.1.0/src/data/surahs.json');
+const surahs = await res.json();
+```
+
+Available data files on CDN:
+
+| File | Description |
+|---|---|
+| `src/data/surahs.json` | All 114 surahs |
+| `src/data/ayahs.json` | All 6236 ayahs |
+| `src/data/editions.json` | All 134 editions metadata |
+| `src/data/juzs.json` | 30 juz divisions |
+| `src/data/hizbs.json` | 60 hizb divisions |
+| `src/data/rubs.json` | Rub divisions |
+| `src/data/pages.json` | Mushaf pages |
+| `src/data/knowledge-base.json` | Scholarly knowledge entries |
+| `src/data/ayah-editions/en.sahih.json` | Sahih International |
+| `src/data/ayah-editions/quran-uthmani.json` | Uthmani Arabic text |
+
+Replace `@2.1.0` with `@latest` for the latest version (may be cached). Use a pinned version for production.
+
+## Self-hosted REST + GraphQL API
+
+For applications that need all 134 editions, advanced search, or real-time features, run the full platform locally or deploy it yourself:
+
+```bash
+git clone https://github.com/faha1999/al-quran-database
+npm install
+npm run dev
+```
+
+```ts
+import { QuranDevSDK } from '@faha1999/al-quran-database';
+
+const sdk = new QuranDevSDK({ baseUrl: 'http://localhost:3000' });
+const result = await sdk.getSurah(2, 'ur.maududi');  // any of 134 editions
+const search = await sdk.search('mercy', { language: 'ur' });
+```
+
+Open locally:
+
+- Docs: [http://localhost:3000/docs](http://localhost:3000/docs)
+- Search UI: [http://localhost:3000/search](http://localhost:3000/search)
+- REST example: [http://localhost:3000/api/v1/search?q=mercy&language=en](http://localhost:3000/api/v1/search?q=mercy&language=en)
+- GraphQL: `POST /api/v1/graphql`
 
 ## What ships
 
+- Zero-dependency offline data layer with 20+ typed functions
 - Clean REST API for surahs, ayahs, juz, hizb, rub, pages, words, duas, reciters, and search
 - Versioned REST under `/api/v1/*` plus legacy `/api/*` aliases
 - GraphQL endpoint for flexible multi-entity queries
@@ -22,77 +146,14 @@ TypeScript, Next.js App Router, and a lightweight JS/TS SDK.
 - Deterministic SQL → JSON verification with source SHA-256 metadata
 - Normalized PostgreSQL + SQLite exports including knowledge/context tables
 - Optional Redis cache layer with in-memory fallback for hot API routes
-- Publishable JS/TS SDK package: `@faha1999/al-quran-database`
+- Publishable JS/TS SDK: `@faha1999/al-quran-database`
 - Search UI with composable edition and language filters
 - SQL conversion, migration, export, validation, and performance scripts
-- Repo docs for architecture, coding standards, roadmap, review policy, and release flow
-- Next.js docs pages for getting started, API reference, SDK usage, database exports, frontend guidance, and data expansion
 
 ## Stack
 
-- Next.js 16
-- React 19
-- TypeScript strict mode
-- Tailwind CSS v4
-- FlexSearch
-- Vitest
-- Playwright
-- ESLint + Prettier
-
-## Local setup
-
-```bash
-npm install
-npm run dev
-```
-
-Open:
-
-- Docs: [http://localhost:3000/docs](http://localhost:3000/docs)
-- SDK guide: [http://localhost:3000/docs/sdk](http://localhost:3000/docs/sdk)
-- API reference: [http://localhost:3000/docs/api-reference](http://localhost:3000/docs/api-reference)
-- Database exports: [http://localhost:3000/docs/database](http://localhost:3000/docs/database)
-- Search UI: [http://localhost:3000/search](http://localhost:3000/search)
-- REST example: [http://localhost:3000/api/v1/search?q=mercy&language=en](http://localhost:3000/api/v1/search?q=mercy&language=en)
-- GraphQL example: `POST /api/v1/graphql`
-
-SDK package:
-
-```bash
-npm install @faha1999/al-quran-database
-```
-
-Package source lives in [`packages/sdk`](./packages/sdk).
-
-Local SDK setup:
-
-```ts
-import { QuranDevSDK } from '@faha1999/al-quran-database';
-
-const quran = new QuranDevSDK({
-  baseUrl: 'http://localhost:3000',
-  apiVersion: 'v1',
-});
-```
-
-Self-hosted production setup:
-
-```ts
-import { QuranDevSDK } from '@faha1999/al-quran-database';
-
-const quran = new QuranDevSDK({
-  baseUrl: 'https://your-domain.example',
-  apiVersion: 'v1',
-});
-```
-
-Same-origin setup:
-
-```ts
-import { quran } from '@faha1999/al-quran-database';
-
-const ayah = await quran.getAyah(1, 'en.sahih', true);
-```
+- Next.js 16 · React 19 · TypeScript strict mode
+- Tailwind CSS v4 · FlexSearch · Vitest · Playwright · ESLint + Prettier
 
 ## Commands
 
@@ -118,25 +179,20 @@ npm run data:bench
 
 ## Canonical data model
 
-- `quran.sql` is local-only and ignored by Git because source dump is too large for healthy repo
-  workflows.
-- `lib/data/*` is committed source-of-truth.
-- `scripts/convert_quran_sql.py` derives JSON, sharded edition payloads, pages/juz/hizb/rub
-  groupings, and dataset metadata.
+- `quran.sql` is local-only and ignored by Git (source dump too large for repo workflows).
+- `lib/data/*` is the committed source-of-truth.
+- `scripts/convert_quran_sql.py` derives JSON, sharded edition payloads, groupings, and metadata.
 - `scripts/verify_quran_data.py` proves row counts, shard integrity, and deterministic rebuilds.
-- `scripts/export_sql.py` regenerates downloadable PostgreSQL and SQLite artifacts from committed
-  JSON.
+- `scripts/export_sql.py` regenerates downloadable PostgreSQL and SQLite artifacts.
 
 ## API platform notes
 
 - Versioned REST lives under `/api/v1/*`.
-- Legacy `/api/*` aliases remain for backward compatibility during migration.
-- Official hosted domain `al-quran-database.vercel.app` blocks API traffic. Use local/self-hosted deployments for runtime access.
-- GraphQL endpoint supports composing `surah`, `ayah`, `search`, `faqs`, `knowledge`, and `meta`
-  in one request.
-- Preferred GraphQL write path is `POST /api/v1/graphql`. Legacy `/api/graphql` alias remains.
-- GraphQL `GET /api/v1/graphql?query=...` is also supported for quick debugging and cached reads.
-- Search accepts either `edition` or `language`; sending both returns validation error.
+- Legacy `/api/*` aliases remain for backward compatibility.
+- Official hosted domain `al-quran-database.vercel.app` is a docs/showcase site only — API
+  traffic is disabled. Use local or self-hosted deployments for runtime access.
+- GraphQL supports composing `surah`, `ayah`, `search`, `faqs`, `knowledge`, and `meta`.
+- Search accepts either `edition` or `language`; sending both returns a validation error.
 - Set `REDIS_URL` to enable shared cache. Without it, in-memory cache still accelerates hot reads.
 
 ## Docs
@@ -144,10 +200,8 @@ npm run data:bench
 - Product docs UI: [`app/docs/*`](./app/docs)
 - SDK package source: [`packages/sdk`](./packages/sdk)
 - Repo docs: [`docs/api-reference.md`](./docs/api-reference.md), [`docs/sdk-guide.md`](./docs/sdk-guide.md),
-  [`docs/architecture.md`](./docs/architecture.md), [`docs/frontend-guide.md`](./docs/frontend-guide.md),
-  [`docs/roadmap.md`](./docs/roadmap.md)
+  [`docs/architecture.md`](./docs/architecture.md), [`docs/frontend-guide.md`](./docs/frontend-guide.md)
 - Live docs: [https://al-quran-database.vercel.app/docs](https://al-quran-database.vercel.app/docs)
-- Live SDK docs: [https://al-quran-database.vercel.app/docs/sdk](https://al-quran-database.vercel.app/docs/sdk)
 
 ## Quality gates
 
@@ -159,9 +213,20 @@ npm run data:bench
 ## SDK release automation
 
 - SDK npm releases are published from `main` by GitHub Actions.
-- Qualifying SDK-related changes auto-bump the next patch version from the npm registry state.
-- Current public exports: `QuranDevSDK`, `quran`, `QuranApiOptions`, `GraphqlRequest`,
-  `MetaPayload`, and public entity/response types from `packages/sdk/src/quran-types.ts`.
+- Qualifying `main` branch changes auto-bump the next patch version from the npm registry state.
+- Current public exports: `QuranDevSDK`, `quran`, `getSurah`, `getAyah`, `searchAyahs`,
+  and all local data functions — plus all TypeScript types.
+
+## Support this project
+
+If this project saves you time or powers your app, consider [sponsoring on GitHub](https://github.com/sponsors/faha1999). Every star and share also helps new developers discover it. ⭐
+
+## Links
+
+- Repository: [https://github.com/faha1999/al-quran-database](https://github.com/faha1999/al-quran-database)
+- npm: [https://www.npmjs.com/package/@faha1999/al-quran-database](https://www.npmjs.com/package/@faha1999/al-quran-database)
+- Docs: [https://al-quran-database.vercel.app/docs](https://al-quran-database.vercel.app/docs)
+- CHANGELOG: [CHANGELOG.md](./CHANGELOG.md)
 
 ## License
 

@@ -1,0 +1,355 @@
+{
+  "coverage": {
+    "ayah_entries": 8,
+    "surah_profiles": 6,
+    "faq_entries": 6,
+    "research_references": 6
+  },
+  "ayahs": [
+    {
+      "ayah_id": 190,
+      "surah_id": 2,
+      "themes": ["ethics of war", "self-restraint", "justice"],
+      "historical_context": "Medinan legal guidance revealed for community defense. Often read with adjacent verses to preserve limits on combat and non-aggression.",
+      "cross_references": [
+        { "ayah_id": 191, "relationship": "Immediate continuation of same legal passage" },
+        { "ayah_id": 8, "relationship": "Related to rules of conflict and restraint" }
+      ],
+      "scientific_references": [],
+      "legal_rulings": [
+        {
+          "scope": "Public law and ethics",
+          "summary": "Used by jurists as proof that fighting is conditional, defensive, and bounded by prohibition of transgression.",
+          "evidence": ["2:190", "2:191", "60:8"]
+        }
+      ],
+      "linguistic_notes": [
+        {
+          "token": "وَلَا تَعْتَدُوا",
+          "root": "ع د و",
+          "morphology": "imperfect verb with prohibition",
+          "note": "Negative imperative frames legal restraint, not unrestricted permission."
+        }
+      ],
+      "misinterpretation_notes": [
+        {
+          "claim": "Verse authorizes unrestricted violence.",
+          "clarification": "Classical and modern readings tie command to combat already initiated by aggressors and forbid excess."
+        }
+      ]
+    },
+    {
+      "ayah_id": 255,
+      "surah_id": 2,
+      "themes": ["creed", "divine attributes", "protection"],
+      "historical_context": "Ayat al-Kursi became central in devotional, theological, and pedagogical tradition due to its concentrated statement of divine sovereignty.",
+      "cross_references": [
+        { "ayah_id": 1, "relationship": "Shared emphasis on worship and lordship" },
+        { "ayah_id": 3, "relationship": "Shared theology of revelation and divine life" }
+      ],
+      "scientific_references": [],
+      "legal_rulings": [],
+      "linguistic_notes": [
+        {
+          "token": "الْحَيُّ الْقَيُّومُ",
+          "root": "ح ي ي / ق و م",
+          "morphology": "intensive nominal forms",
+          "note": "Pairing expresses self-subsisting life and sustaining authority."
+        }
+      ],
+      "misinterpretation_notes": [
+        {
+          "claim": "Kursi must be reduced to a physical object only.",
+          "clarification": "Exegetes differ between literal and majesty-centered readings; data model stores notes without forcing one school."
+        }
+      ]
+    },
+    {
+      "ayah_id": 282,
+      "surah_id": 2,
+      "themes": ["contracts", "commercial law", "documentation"],
+      "historical_context": "Longest ayah in Quran. Anchors documentation culture in debt contracts and delayed obligations.",
+      "cross_references": [
+        { "ayah_id": 283, "relationship": "Immediate continuation on trust and pledges" },
+        { "ayah_id": 29, "relationship": "Related commercial ethics passage" }
+      ],
+      "scientific_references": [],
+      "legal_rulings": [
+        {
+          "scope": "Commercial transactions",
+          "summary": "Core evidence for written debt records, witnesses, and clarity in deferred obligations.",
+          "evidence": ["2:282", "2:283", "5:1"]
+        }
+      ],
+      "linguistic_notes": [
+        {
+          "token": "فَاكْتُبُوهُ",
+          "root": "ك ت ب",
+          "morphology": "imperative plural verb",
+          "note": "Imperative drives juristic debate on obligation versus strong recommendation."
+        }
+      ],
+      "misinterpretation_notes": [
+        {
+          "claim": "Verse applies only to seventh-century debt practice.",
+          "clarification": "Most legal readings extract broader principles: documented consent, clarity, witnesses, and accountability."
+        }
+      ]
+    },
+    {
+      "ayah_id": 48,
+      "surah_id": 3,
+      "themes": ["creation", "embryology", "divine power"],
+      "historical_context": "Part of passage affirming divine authorship over human origin and prophetic mission.",
+      "cross_references": [
+        { "ayah_id": 14, "relationship": "Related passage on human creation in stages" },
+        { "ayah_id": 5, "relationship": "Shared creation-language in wombs" }
+      ],
+      "scientific_references": [
+        {
+          "title": "Embryological stage language",
+          "summary": "Frequently cited in Muslim science-and-faith literature when discussing human development.",
+          "caution": "Repository stores interpretive references, not claims of scientific proof.",
+          "references": ["3:6", "23:12-14"]
+        }
+      ],
+      "legal_rulings": [],
+      "linguistic_notes": [
+        {
+          "token": "يُصَوِّرُكُمْ",
+          "root": "ص و ر",
+          "morphology": "imperfect verb",
+          "note": "Verb emphasizes active forming and individuation."
+        }
+      ],
+      "misinterpretation_notes": []
+    },
+    {
+      "ayah_id": 103,
+      "surah_id": 5,
+      "themes": ["dietary law", "pilgrimage", "ritual boundaries"],
+      "historical_context": "Late Medinan legal material often used to discuss completion of religion and protected ritual limits.",
+      "cross_references": [
+        { "ayah_id": 3, "relationship": "Shares dietary and legal framing in same surah" },
+        { "ayah_id": 95, "relationship": "Connected hunting restrictions during ihram" }
+      ],
+      "scientific_references": [],
+      "legal_rulings": [
+        {
+          "scope": "Food and pilgrimage law",
+          "summary": "Supports legal distinctions in carrion, slaughter, hunting, and ritual conduct.",
+          "evidence": ["5:3", "5:95", "5:96"]
+        }
+      ],
+      "linguistic_notes": [
+        {
+          "token": "أَكْمَلْتُ",
+          "root": "ك م ل",
+          "morphology": "perfect verb, first person",
+          "note": "Completion-language shapes theological and legal discussions on finality."
+        }
+      ],
+      "misinterpretation_notes": []
+    },
+    {
+      "ayah_id": 30,
+      "surah_id": 21,
+      "themes": ["creation", "cosmos", "water", "signs"],
+      "historical_context": "Makkan argument from natural signs. Commonly cited in apologetic literature on cosmology and biology.",
+      "cross_references": [
+        { "ayah_id": 164, "relationship": "Shared natural-sign discourse" },
+        { "ayah_id": 45, "relationship": "Related creation-from-water motif" }
+      ],
+      "scientific_references": [
+        {
+          "title": "Cosmology and life from water",
+          "summary": "Modern writers connect verse to cosmic origin and biological dependence on water.",
+          "caution": "Interpretation contested; platform stores references with caution notes instead of certifying scientific miracles.",
+          "references": ["21:30", "24:45"]
+        }
+      ],
+      "legal_rulings": [],
+      "linguistic_notes": [
+        {
+          "token": "رَتْقًا",
+          "root": "ر ت ق",
+          "morphology": "verbal noun / accusative predicate",
+          "note": "Lexically conveys joinedness or closed-up state before separation."
+        }
+      ],
+      "misinterpretation_notes": [
+        {
+          "claim": "Verse is exact one-to-one scientific textbook prediction.",
+          "clarification": "Best used as theological sign language with room for layered interpretation, not lab-manual literalism."
+        }
+      ]
+    },
+    {
+      "ayah_id": 71,
+      "surah_id": 33,
+      "themes": ["prophetic ethics", "social conduct", "household boundaries"],
+      "historical_context": "Medinan guidance around prophetic household, public etiquette, and social boundaries.",
+      "cross_references": [
+        { "ayah_id": 53, "relationship": "Related etiquette legislation in same surah" },
+        { "ayah_id": 35, "relationship": "Linked social and devotional ideals" }
+      ],
+      "scientific_references": [],
+      "legal_rulings": [
+        {
+          "scope": "Public ethics and family law",
+          "summary": "Supports discussion on prophetic status, honor, and social boundaries in communal life.",
+          "evidence": ["33:53", "33:59", "49:2"]
+        }
+      ],
+      "linguistic_notes": [
+        {
+          "token": "أُسْوَةٌ",
+          "root": "أ س و",
+          "morphology": "noun",
+          "note": "Signals exemplar model, often translated as pattern or excellent example."
+        }
+      ],
+      "misinterpretation_notes": []
+    },
+    {
+      "ayah_id": 1,
+      "surah_id": 112,
+      "themes": ["monotheism", "creed", "divine uniqueness"],
+      "historical_context": "Short Makkan creed-text central to Islamic theology, recitation, and catechesis.",
+      "cross_references": [
+        { "ayah_id": 255, "relationship": "Shared core theology of divine transcendence" },
+        { "ayah_id": 11, "relationship": "Related incomparability doctrine" }
+      ],
+      "scientific_references": [],
+      "legal_rulings": [],
+      "linguistic_notes": [
+        {
+          "token": "أَحَدٌ",
+          "root": "أ ح د",
+          "morphology": "indefinite noun used predicatively",
+          "note": "Choice of form sharpens exclusivity beyond simple numeric one."
+        }
+      ],
+      "misinterpretation_notes": [
+        {
+          "claim": "Verse only means God is numerically first.",
+          "clarification": "Classical theology reads uniqueness here as absolute incomparability, not countable membership in a class."
+        }
+      ]
+    }
+  ],
+  "surahs": [
+    {
+      "surah_id": 1,
+      "period": "Meccan",
+      "summary": "Opening invocation, worship, guidance, covenant of servant with Lord.",
+      "historical_context": "Foundational prayer-text used in every unit of ritual prayer and early instruction."
+    },
+    {
+      "surah_id": 2,
+      "period": "Medinan",
+      "summary": "Largest surah. Community law, covenant, worship, finance, ethics, and narrative argument.",
+      "historical_context": "Built across Medinan period as community constitution-like corpus with doctrinal and legal density."
+    },
+    {
+      "surah_id": 3,
+      "period": "Medinan",
+      "summary": "Faith, scripture, family of Imran, debate, patience, and communal resilience.",
+      "historical_context": "Contains sustained engagement with People of the Book and post-Uhud moral formation."
+    },
+    {
+      "surah_id": 18,
+      "period": "Meccan",
+      "summary": "Trials of faith, knowledge, wealth, and power through narrative cycles.",
+      "historical_context": "Frequently taught for spiritual resilience and eschatological awareness."
+    },
+    {
+      "surah_id": 36,
+      "period": "Meccan",
+      "summary": "Resurrection, revelation, signs in creation, and moral accountability.",
+      "historical_context": "Widely recited in devotional settings; functions as concise proclamation text."
+    },
+    {
+      "surah_id": 112,
+      "period": "Meccan",
+      "summary": "Compressed creed of divine uniqueness and transcendence.",
+      "historical_context": "Serves as high-frequency teaching text in theology and daily recitation."
+    }
+  ],
+  "faqs": [
+    {
+      "id": 1,
+      "question": "Why ship JSON instead of committing quran.sql?",
+      "answer": "JSON is canonical in repo because large SQL dump exceeds practical Git workflow limits. SQL stays local, conversion is deterministic, verification checks counts and shard integrity."
+    },
+    {
+      "id": 2,
+      "question": "How do I prove JSON matches quran.sql?",
+      "answer": "Run `npm run data:verify -- --check-determinism`. Script re-counts source SQL tables, validates generated manifests, and compares regenerated file hashes."
+    },
+    {
+      "id": 3,
+      "question": "Do you support translations, tafsir, transliteration, and audio together?",
+      "answer": "Yes. Edition metadata is normalized, while ayah-edition content is sharded by identifier. Same loader resolves translation, tafsir, transliteration, or audio references."
+    },
+    {
+      "id": 4,
+      "question": "Is scientific miracles data treated as absolute proof?",
+      "answer": "No. Repository models them as interpretive references with caution notes, not as forced scientific certainties."
+    },
+    {
+      "id": 5,
+      "question": "How should legal-ruling data be used?",
+      "answer": "As research metadata and navigation aid. It should not replace qualified fiqh study or madhhab-specific legal guidance."
+    },
+    {
+      "id": 6,
+      "question": "Can I extend knowledge coverage to all ayahs?",
+      "answer": "Yes. Add curated entries into `knowledge-base.json`, rerun tests, regenerate exports, and update docs coverage counts."
+    }
+  ],
+  "research_references": [
+    {
+      "id": 1,
+      "title": "The Qur'an and Its Biblical Subtext",
+      "author": "Gabriel Said Reynolds",
+      "type": "book",
+      "url": "https://global.oup.com/academic/product/the-quran-and-its-biblical-subtext-9780415778934"
+    },
+    {
+      "id": 2,
+      "title": "Major Themes of the Qur'an",
+      "author": "Fazlur Rahman",
+      "type": "book",
+      "url": "https://press.uchicago.edu/ucp/books/book/chicago/M/bo3620398.html"
+    },
+    {
+      "id": 3,
+      "title": "Approaching the Qur'an: The Early Revelations",
+      "author": "Michael Sells",
+      "type": "book",
+      "url": "https://www.whitecloudpress.com/book/approaching-the-quran/"
+    },
+    {
+      "id": 4,
+      "title": "Journal of Qur'anic Studies",
+      "author": "Centre of Islamic Studies, SOAS",
+      "type": "journal",
+      "url": "https://www.euppublishing.com/loi/jqs"
+    },
+    {
+      "id": 5,
+      "title": "The Study Quran",
+      "author": "Seyyed Hossein Nasr et al.",
+      "type": "reference",
+      "url": "https://harpercollins.com/products/the-study-quran-seyyed-hossein-nasr"
+    },
+    {
+      "id": 6,
+      "title": "Encyclopaedia of the Qur'an",
+      "author": "Jane Dammen McAuliffe (ed.)",
+      "type": "reference",
+      "url": "https://brill.com/display/db/eqo"
+    }
+  ]
+}

@@ -10,24 +10,26 @@ type CacheResult<T> = {
   cacheStatus: 'hit-memory' | 'hit-redis' | 'miss' | 'skip';
 };
 
+type RedisClient = ReturnType<typeof createClient>;
+
 const memoryCache = new Map<string, CacheEntry<unknown>>();
-let redisClientPromise: Promise<ReturnType<typeof createClient> | null> | null = null;
+let redisClientPromise: Promise<RedisClient | null> | null = null;
 
 function getRedisUrl() {
   return process.env.REDIS_URL?.trim() || '';
 }
 
-async function getRedisClient(): Promise<ReturnType<typeof createClient> | null> {
+async function getRedisClient(): Promise<RedisClient | null> {
   const redisUrl = getRedisUrl();
   if (!redisUrl) return null;
 
   if (!redisClientPromise) {
-    redisClientPromise = (async () => {
+    redisClientPromise = (async (): Promise<RedisClient | null> => {
       try {
         const client = createClient({ url: redisUrl });
         client.on('error', () => {});
         await client.connect();
-        return client;
+        return client as RedisClient;
       } catch {
         return null;
       }

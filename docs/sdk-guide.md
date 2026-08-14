@@ -1,117 +1,200 @@
 # SDK Guide
 
-The Al-Quran Database provides a lightweight TypeScript SDK (`QuranDevSDK`) to simplify interactions with the REST and GraphQL APIs.
+`@faha1999/al-quran-database` — complete Quran dataset with TypeScript SDK.
+Works offline with no server. Also includes a REST + GraphQL SDK for full-platform access.
 
-Source of truth for the package lives in `packages/sdk`.
-
-## Installation
+## Install
 
 ```bash
 npm install @faha1999/al-quran-database
 ```
 
-## Initialization
+---
 
-```typescript
+## Zero-setup local data layer (no server required)
+
+The package ships its own data. These functions work immediately after install — no running server,
+no network calls, no `.env` file. Works in browsers, edge runtimes, and Node.js.
+
+```ts
+import { getSurah, getAyah, searchAyahs } from '@faha1999/al-quran-database';
+
+const fatiha = getSurah(1);
+// → { id: 1, name_en: 'Al-Faatiha', ayahs: [...7 resolved ayahs...] }
+
+const ayah = getAyah(1, 'en.sahih');
+// → { text: 'بِسْمِ ٱللَّهِ ...', translation: 'In the name of Allah...' }
+
+const results = searchAyahs('mercy');
+// → { items: [...], meta: { total: 50, page: 1, ... } }
+```
+
+### Bundled editions (offline, no CDN needed)
+
+```ts
+import { BUNDLED_EDITION_IDENTIFIERS } from '@faha1999/al-quran-database';
+// → ['en.sahih', 'quran-simple-clean', 'en.yusufali', 'quran-uthmani']
+
+const arabicSurah = getSurah(2, 'quran-uthmani');   // full Uthmani Arabic
+const englishSurah = getSurah(2, 'en.sahih');        // Sahih International
+```
+
+### Local data functions reference
+
+| Function | Description |
+|---|---|
+| `getSurah(id, edition?)` | Surah + all resolved ayahs |
+| `getAyah(id, edition?)` | Single ayah with translation + knowledge |
+| `getAyahByNumber(number, edition?)` | Ayah by global sequential number (1–6236) |
+| `getAllSurahs(page?, limit?)` | All 114 surahs, paginatable |
+| `getJuzById(id, edition?)` | Juz with its ayahs |
+| `getHizbById(id, edition?)` | Hizb with its ayahs |
+| `getRubById(id, edition?)` | Rub with its ayahs |
+| `getPageById(id, edition?)` | Mushaf page with its ayahs |
+| `searchAyahs(query, filters?)` | Full-text search (Arabic + bundled translations) |
+| `getReciters()` | Reciter list |
+| `getDuas(page?, limit?)` | Duas extracted from the Quran |
+| `getKnowledgeByAyah(ayahId)` | Scholarly knowledge entry |
+| `getSurahProfile(id)` | Surah period, summary, historical context |
+| `getKnowledgeFaqs()` | FAQ knowledge base entries |
+| `getResearchReferences()` | Research references |
+| `getDatasetMetadata()` | Dataset provenance info |
+| `getAllEditions()` | All 134 editions |
+| `getSupportedLanguagesList()` | Supported language codes |
+
+### Raw data exports
+
+```ts
+import {
+  surahs, ayahs, editions, juzs, hizbs, rubs, pages,
+  reciters, duas, knowledgeBase, datasetMetadata, extraContext,
+  ayahsByNumber, surahsById, editionsByIdentifier,
+} from '@faha1999/al-quran-database';
+```
+
+### CDN access via jsDelivr
+
+All bundled JSON is automatically served from jsDelivr after each publish — no extra config:
+
+```
+https://cdn.jsdelivr.net/npm/@faha1999/al-quran-database@latest/src/data/surahs.json
+https://cdn.jsdelivr.net/npm/@faha1999/al-quran-database@latest/src/data/ayah-editions/en.sahih.json
+```
+
+---
+
+## REST + GraphQL SDK (requires running server)
+
+For all 134 editions, advanced search, or real-time features, use `QuranDevSDK` against a local
+or self-hosted instance.
+
+### Local development
+
+```ts
 import { QuranDevSDK } from '@faha1999/al-quran-database';
 
 const quran = new QuranDevSDK({
-  baseUrl: 'http://localhost:3000', // Optional, defaults to same origin
+  baseUrl: 'http://localhost:3000',
   apiVersion: 'v1',
 });
 ```
 
-For self-hosted production deployments, point `baseUrl` at your own domain instead of the public
-`al-quran-database.vercel.app` docs site.
+### Self-hosted production
 
-## Usage Examples
+```ts
+const quran = new QuranDevSDK({
+  baseUrl: 'https://your-domain.example',
+});
 
-### Fetching Surahs
-
-```typescript
-const { data, meta } = await quran.getSurahs(1, 10);
-console.log(`Total Surahs: ${meta.total}`);
+const surah = await quran.getSurah(1, 'ur.maududi'); // any of 134 editions
 ```
 
-### Fetching a Specific Ayah
+### Same-origin (browser app deployed alongside the API)
 
-```typescript
-// Fetch Al-Fatiha 1 with Sahih International translation and word breakdown
+```ts
+import { quran } from '@faha1999/al-quran-database';
+
 const ayah = await quran.getAyah(1, 'en.sahih', true);
-console.log(ayah.text); // Arabic text
-console.log(ayah.translation); // English text
-console.log(ayah.words); // Array of word objects
+console.log(ayah.words?.[0]?.text);
 ```
 
-### Performing a Ranked Search
+---
 
-```typescript
-const { data: results, meta } = await quran.search('mercy', {
-  language: 'en',
-  limit: 5,
-});
+## QuranDevSDK method reference
 
-results.forEach((result) => {
-  console.log(`Matched Ayah: ${result.surah_id}:${result.number_in_surah}`);
-});
-```
+| Method | Description |
+|---|---|
+| `getSurahs(page?, limit?)` | List all surahs with pagination |
+| `getSurah(id, edition?)` | Surah with resolved ayahs |
+| `getAyah(id, edition?, includeWords?)` | Ayah with optional words |
+| `search(query, filters?)` | FlexSearch-ranked full-text search |
+| `getJuz(id, edition?)` | Juz with its ayahs |
+| `getHizb(id, edition?)` | Hizb with its ayahs |
+| `getRub(id, edition?)` | Rub with its ayahs |
+| `getPage(id, edition?)` | Mushaf page with its ayahs |
+| `getWords(ayahId)` | Word-by-word breakdown |
+| `getDuas(page?, limit?)` | Duas with pagination |
+| `getReciters()` | Reciter metadata |
+| `getFaqs()` | FAQ knowledge base |
+| `getKnowledge(ayahId)` | Scholarly per-ayah entry |
+| `getMeta()` | Dataset and knowledge base metadata |
+| `getResearchReferences()` | Research references via GraphQL |
+| `graphql({ query, variables? })` | Custom GraphQL query |
 
-### Accessing the Knowledge Layer
+---
 
-```typescript
-const knowledge = await quran.getKnowledge(1);
-console.log('Themes:', knowledge.themes);
-console.log('Historical Context:', knowledge.historical_context);
-```
+## GraphQL example
 
-### Fetching duas and reciters
-
-```typescript
-const { data: duas } = await quran.getDuas(1, 10);
-const { data: reciters } = await quran.getReciters();
-
-console.log(duas[0]?.text);
-console.log(reciters[0]?.identifier);
-```
-
-### Using GraphQL
-
-For custom data requirements, use the `graphql` method:
-
-```typescript
-const query = `
-  query GetAyah($id: Int!) {
-    ayah(id: $id) {
-      text
-      knowledge {
-        scientific_references {
-          title
-        }
+```ts
+const data = await quran.graphql<{
+  ayah: { text: string; knowledge: { themes: string[] } | null } | null;
+}>({
+  query: `
+    query GetAyah($id: Int!) {
+      ayah(id: $id) {
+        text
+        knowledge { themes }
       }
     }
-  }
-`;
-
-const data = await quran.graphql({ query, variables: { id: 1 } });
+  `,
+  variables: { id: 1 },
+});
 ```
 
-## API Reference (SDK Methods)
+---
 
-| Method                               | Description                                            |
-| :----------------------------------- | :----------------------------------------------------- |
-| `getSurahs(page, limit)`             | List all surahs with pagination metadata.              |
-| `getSurah(id, edition)`              | Get detailed surah metadata and ayahs.                 |
-| `getAyah(id, edition, includeWords)` | Get specific ayah with optional translation and words. |
-| `search(query, filters)`             | Perform full-text search with optional filters.        |
-| `getJuz(id, edition)`                | Get data for a specific Juz division.                  |
-| `getHizb(id, edition)`               | Get data for a specific Hizb division.                 |
-| `getRub(id, edition)`                | Get data for a specific Rub division.                  |
-| `getPage(id, edition)`               | Get data for a specific Mushaf page.                   |
-| `getWords(ayahId)`                   | Get word-by-word breakdown for one ayah.               |
-| `getDuas(page, limit)`               | List extracted duas with pagination metadata.          |
-| `getReciters()`                      | List normalized reciter metadata.                      |
-| `getFaqs()`                          | List FAQ entries from the knowledge base.              |
-| `getKnowledge(ayahId)`               | Get scholarly metadata for an ayah.                    |
-| `getMeta()`                          | Get system and dataset metadata.                       |
-| `getResearchReferences()`            | Fetch research references through GraphQL.             |
-| `graphql({ query, variables })`      | Execute a custom GraphQL query.                        |
+## Error handling
+
+```ts
+try {
+  await quran.getSurah(999999);
+} catch (error) {
+  // REST: "Quran API error: 404 Not Found" or envelope error text
+}
+
+// Local functions return null for not-found (no throws):
+const surah = getSurah(999); // → null
+```
+
+---
+
+## Default behavior
+
+- Local functions: work with zero config — data is bundled in the package.
+- `QuranDevSDK` `baseUrl`: defaults to `''` (same-origin).
+- `apiVersion`: defaults to `v1`.
+- Package is ESM-only, targets Node.js 18+.
+- REST helpers throw on non-2xx or failed API envelopes.
+- GraphQL helper throws on HTTP failures or `errors` in response.
+
+---
+
+## Public exports
+
+- `QuranDevSDK` — server-based SDK class
+- `quran` — singleton `QuranDevSDK` instance
+- `getSurah`, `getAyah`, `searchAyahs` + all local functions
+- `surahs`, `ayahs`, `editions` + all raw data arrays
+- `BUNDLED_EDITION_IDENTIFIERS`, `DEFAULT_TRANSLATION_IDENTIFIER`
+- `QuranApiOptions`, `GraphqlRequest`, `MetaPayload`
+- All TypeScript entity and response types
