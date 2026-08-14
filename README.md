@@ -82,33 +82,39 @@ const surahWithEnglish = getSurah(2, 'en.sahih');
 
 ## CDN access via jsDelivr
 
-Every file in the published package is automatically served from [jsDelivr](https://www.jsdelivr.com/) — no signup, no config, free forever:
+Served directly from the GitHub repository via jsDelivr — no signup, no config, CORS enabled, globally cached:
+
+```
+Base URL: https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@{tag}/{path}
+```
 
 ```html
-<!-- Surah metadata -->
-<script src="https://cdn.jsdelivr.net/npm/@faha1999/al-quran-database@2.1.0/src/data/surahs.json"></script>
-
 <!-- Fetch in JS -->
-const res = await fetch('https://cdn.jsdelivr.net/npm/@faha1999/al-quran-database@2.1.0/src/data/surahs.json');
+const res = await fetch('https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@v2.2.0/lib/data/surahs.json');
 const surahs = await res.json();
 ```
 
 Available data files on CDN:
 
-| File | Description |
+| CDN path | Description |
 |---|---|
-| `src/data/surahs.json` | All 114 surahs |
-| `src/data/ayahs.json` | All 6236 ayahs |
-| `src/data/editions.json` | All 134 editions metadata |
-| `src/data/juzs.json` | 30 juz divisions |
-| `src/data/hizbs.json` | 60 hizb divisions |
-| `src/data/rubs.json` | Rub divisions |
-| `src/data/pages.json` | Mushaf pages |
-| `src/data/knowledge-base.json` | Scholarly knowledge entries |
-| `src/data/ayah-editions/en.sahih.json` | Sahih International |
-| `src/data/ayah-editions/quran-uthmani.json` | Uthmani Arabic text |
+| `lib/data/surahs.json` | All 114 surahs |
+| `lib/data/ayahs.json` | All 6236 ayahs |
+| `lib/data/editions.json` | All 134 editions metadata |
+| `lib/data/juzs.json` | 30 juz divisions |
+| `lib/data/hizbs.json` | 60 hizb divisions |
+| `lib/data/rubs.json` | Rub divisions |
+| `lib/data/pages.json` | Mushaf pages |
+| `lib/data/knowledge-base.json` | Scholarly knowledge entries |
+| `lib/data/duas.json` | Duas from the Quran |
+| `lib/data/reciters.json` | Reciter metadata |
+| `lib/data/ayah-editions/en.sahih.json` | Sahih International (English) |
+| `lib/data/ayah-editions/en.yusufali.json` | Yusuf Ali (English) |
+| `lib/data/ayah-editions/quran-uthmani.json` | Uthmani Arabic text |
+| `lib/data/ayah-editions/quran-simple-clean.json` | Clean Arabic (no diacritics) |
 
-Replace `@2.1.0` with `@latest` for the latest version (may be cached). Use a pinned version for production.
+Pin to a specific release tag (e.g. `@v2.2.0`) for production. Use `@main` for the latest commit.
+
 
 ## Self-hosted REST + GraphQL API
 

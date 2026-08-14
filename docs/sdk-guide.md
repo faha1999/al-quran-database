@@ -77,8 +77,8 @@ import {
 All bundled JSON is automatically served from jsDelivr after each publish — no extra config:
 
 ```
-https://cdn.jsdelivr.net/npm/@faha1999/al-quran-database@latest/src/data/surahs.json
-https://cdn.jsdelivr.net/npm/@faha1999/al-quran-database@latest/src/data/ayah-editions/en.sahih.json
+https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@v2.2.0/lib/data/surahs.json
+https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@v2.2.0/lib/data/ayah-editions/en.sahih.json
 ```
 
 ---

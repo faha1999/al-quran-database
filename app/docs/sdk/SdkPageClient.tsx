@@ -200,20 +200,27 @@ console.log(BUNDLED_EDITION_IDENTIFIERS);
         <section className="rounded-3xl border border-zinc-800 bg-gradient-to-br from-zinc-950 via-zinc-950 to-indigo-900/10 p-8 space-y-4">
           <h2 className="flex items-center gap-3 text-2xl font-bold">
             <Wifi className="h-6 w-6 text-indigo-400" />
-            CDN Access via jsDelivr
+            CDN Access via jsDelivr (GitHub)
           </h2>
           <p className="text-sm text-zinc-400">
-            Every bundled file is auto-served from jsDelivr after each publish — no extra config, free forever.
+            All data files are served from jsDelivr via the GitHub repository — no extra config, free, global CDN, CORS enabled.
           </p>
           <pre className="overflow-x-auto rounded-2xl border border-zinc-800/50 bg-black/40 p-5 text-xs leading-relaxed text-zinc-400">
-            <code>{`// Surah list
-https://cdn.jsdelivr.net/npm/${npmPackageName}@latest/src/data/surahs.json
+            <code>{`// Base URL format:
+// https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@{tag}/{path}
+
+// Surah list (pinned v2.2.0)
+https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@v2.2.0/lib/data/surahs.json
 
 // All 6236 ayahs
-https://cdn.jsdelivr.net/npm/${npmPackageName}@latest/src/data/ayahs.json
+https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@v2.2.0/lib/data/ayahs.json
 
 // Bundled Sahih translation
-https://cdn.jsdelivr.net/npm/${npmPackageName}@latest/src/data/ayah-editions/en.sahih.json`}</code>
+https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@v2.2.0/lib/data/ayah-editions/en.sahih.json
+
+// Fetch example:
+const res = await fetch('https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@v2.2.0/lib/data/surahs.json');
+const surahs = await res.json();`}</code>
           </pre>
         </section>
 

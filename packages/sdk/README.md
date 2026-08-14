@@ -78,9 +78,9 @@ import {
 All bundled files are available on jsDelivr instantly after publish:
 
 ```
-https://cdn.jsdelivr.net/npm/@faha1999/al-quran-database@latest/src/data/surahs.json
-https://cdn.jsdelivr.net/npm/@faha1999/al-quran-database@latest/src/data/ayahs.json
-https://cdn.jsdelivr.net/npm/@faha1999/al-quran-database@latest/src/data/ayah-editions/en.sahih.json
+https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@v2.2.0/lib/data/surahs.json
+https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@v2.2.0/lib/data/ayahs.json
+https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@v2.2.0/lib/data/ayah-editions/en.sahih.json
 ```
 
 ## Self-hosted REST + GraphQL API
