@@ -2,11 +2,17 @@
 
 import DocsLayout from '@/components/DocsLayout';
 import { motion } from 'framer-motion';
-import { Terminal, Shield, Zap, Database, Layers, Code } from 'lucide-react';
+import { Terminal, Shield, Zap, Database, Layers, Code, WifiOff } from 'lucide-react';
 import Link from 'next/link';
 import { localDevBaseUrl } from '@/lib/site-config';
 
 const quickLinks = [
+  {
+    title: 'Offline SDK (npm)',
+    body: 'getSurah(), getAyah(), searchAyahs() work immediately after npm install — no server, no network call. 4 editions bundled.',
+    icon: <WifiOff className="h-5 w-5 text-emerald-400" />,
+    href: '/docs/sdk',
+  },
   {
     title: 'REST API v1',
     body: 'Stable `/api/v1/*` contracts for surahs, ayahs, search, divisions, and metadata in local or self-hosted deployments.',
@@ -21,8 +27,8 @@ const quickLinks = [
   },
   {
     title: 'SDK Guide',
-    body: 'ESM npm package with typed methods for REST, GraphQL, metadata, and research refs.',
-    icon: <Database className="h-5 w-5 text-emerald-400" />,
+    body: 'Full server-based SDK with typed methods for REST, GraphQL, 134 editions, metadata, and research refs.',
+    icon: <Database className="h-5 w-5 text-sky-400" />,
     href: '/docs/sdk',
   },
   {
@@ -67,9 +73,9 @@ export default function DocsPageClient() {
               Infinite Possibilities.
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-zinc-400">
-              Sharded JSON source, versioned API contracts, verified npm SDK, and reproducible
-              database exports for production apps, docs, and research tooling. The public hosted
-              site is documentation-first right now; run the API locally or on your own hosting.
+              Complete Quran dataset with TypeScript SDK — works offline with no server. Includes
+              sharded JSON source, versioned REST + GraphQL API, 134 translations, word-by-word data,
+              scholarly knowledge base, and SQL exports.
             </p>
           </motion.div>
         </section>

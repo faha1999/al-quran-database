@@ -1,7 +1,7 @@
 {
   "name": "@faha1999/al-quran-database",
   "version": "2.1.0",
-  "description": "Type-safe JavaScript and TypeScript SDK for the Al-Quran Database REST and GraphQL APIs.",
+  "description": "Complete Quran dataset with TypeScript SDK — works offline with no server. Includes REST & GraphQL SDK, 134 translations, word-by-word data, scholarly knowledge base, and SQL exports.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -13,6 +13,7 @@
   },
   "files": [
     "dist",
+    "src/data",
     "README.md",
     "LICENSE"
   ],
@@ -29,23 +30,35 @@
   },
   "keywords": [
     "quran",
+    "quran-data",
+    "quran-dataset",
+    "quran-api",
+    "quran-sdk",
+    "quran-database",
+    "quran-json",
+    "quran-search",
+    "quran-typescript",
+    "quran-graphql",
+    "quran-offline",
+    "al-quran-database",
+    "islamic-data",
+    "islamic-dataset",
+    "islam",
     "api",
     "sdk",
     "typescript",
     "graphql",
-    "islamic-data",
-    "quran-api",
-    "quran-sdk",
-    "quran-database",
-    "al-quran-database",
     "rest-api",
-    "search-api",
-    "typescript-sdk",
+    "offline",
+    "zero-dependency",
+    "standalone",
+    "developer-tools",
     "nextjs",
     "sqlite",
     "postgresql",
-    "quran-search",
-    "developer-tools"
+    "word-by-word",
+    "tafsir",
+    "translation"
   ],
   "author": "Kawsar Ahmed Fahad",
   "engines": {
@@ -60,3 +73,4 @@
     "prepack": "npm run clean && npm run build"
   }
 }
+

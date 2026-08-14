@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Abdul Basit Abdul Samad",
+    "identifier": "ar.abdulbasitmurattal",
+    "type": "Murattal",
+    "bitrate": "128kbps"
+  },
+  {
+    "id": 2,
+    "name": "Mishary Rashid Alafasy",
+    "identifier": "ar.alafasy",
+    "type": "Murattal",
+    "bitrate": "128kbps"
+  },
+  {
+    "id": 3,
+    "name": "Mahmoud Khalil Al-Husary",
+    "identifier": "ar.husary",
+    "type": "Murattal",
+    "bitrate": "128kbps"
+  },
+  {
+    "id": 4,
+    "name": "Mohamed Siddiq El-Minshawi",
+    "identifier": "ar.minshawi",
+    "type": "Murattal",
+    "bitrate": "128kbps"
+  },
+  {
+    "id": 5,
+    "name": "Maher Al-Muaiqly",
+    "identifier": "ar.mahermuaiqly",
+    "type": "Murattal",
+    "bitrate": "128kbps"
+  },
+  {
+    "id": 6,
+    "name": "Muhammad Ayyoub",
+    "identifier": "ar.muhammadayyoub",
+    "type": "Murattal",
+    "bitrate": "128kbps"
+  }
+]

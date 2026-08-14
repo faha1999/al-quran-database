@@ -57,6 +57,28 @@ for merge policy detail.
 - Run `npm run data:verify` after modifying source data or conversion scripts.
 - Include schema impact and source references in PR description.
 
+## Light contribution path (docs, examples, typos)
+
+Not every contribution needs the full quality gate. For the following low-risk
+change types, you can skip `npm run test:e2e` and `npm run build`:
+
+- Fixing a typo in docs, README, or a comment
+- Adding or improving a usage example
+- Adding a new entry to `lib/data/duas.json` or metadata-only fields
+- Translating or improving wording in `app/docs/*`
+
+**Minimum steps for light PRs:**
+
+```bash
+npm run format
+npm run lint
+npm run typecheck
+npm test
+```
+
+Please note in your PR description which light path applies. CODEOWNERS
+may still request a full gate run if the change touches shared code paths.
+
 ## License
 
 By contributing, you agree contributions are licensed under MIT.
