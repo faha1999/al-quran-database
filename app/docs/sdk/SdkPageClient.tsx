@@ -2,7 +2,18 @@
 
 import DocsLayout from '@/components/DocsLayout';
 import { motion } from 'framer-motion';
-import { BookOpen, Code, Database, Package, Radio, Shield, Terminal, Wifi, WifiOff, Zap } from 'lucide-react';
+import {
+  BookOpen,
+  Code,
+  Database,
+  Package,
+  Radio,
+  Shield,
+  Terminal,
+  Wifi,
+  WifiOff,
+  Zap,
+} from 'lucide-react';
 import { localDevBaseUrl, npmPackageName, selfHostPlaceholderUrl } from '@/lib/site-config';
 
 const localFunctions = [
@@ -108,9 +119,9 @@ export default function SdkPageClient() {
             </h2>
             <div className="space-y-2 text-sm leading-relaxed text-zinc-400">
               <p>
-                Data is{' '}
-                <strong className="text-zinc-200">bundled in the package</strong>. No server, no
-                network call, no <code className="text-emerald-400">.env</code> file needed.
+                Data is <strong className="text-zinc-200">bundled in the package</strong>. No
+                server, no network call, no <code className="text-emerald-400">.env</code> file
+                needed.
               </p>
               <p>Four editions ship ready for offline use — see Bundled Editions below.</p>
               <p>All 134 other editions available via jsDelivr CDN or self-hosted REST API.</p>
@@ -203,7 +214,8 @@ console.log(BUNDLED_EDITION_IDENTIFIERS);
             CDN Access via jsDelivr (GitHub)
           </h2>
           <p className="text-sm text-zinc-400">
-            All data files are served from jsDelivr via the GitHub repository — no extra config, free, global CDN, CORS enabled.
+            All data files are served from jsDelivr via the GitHub repository — no extra config,
+            free, global CDN, CORS enabled.
           </p>
           <pre className="overflow-x-auto rounded-2xl border border-zinc-800/50 bg-black/40 p-5 text-xs leading-relaxed text-zinc-400">
             <code>{`// Base URL format:
@@ -292,7 +304,9 @@ console.log(results[0]?.matched_identifiers);`}</code>
             </article>
 
             <article className="rounded-3xl border border-zinc-800 bg-zinc-900/20 p-8">
-              <h3 className="mb-4 text-lg font-bold text-zinc-200">Ayah with words and knowledge</h3>
+              <h3 className="mb-4 text-lg font-bold text-zinc-200">
+                Ayah with words and knowledge
+              </h3>
               <pre className="overflow-x-auto rounded-2xl border border-zinc-800/50 bg-black/40 p-5 text-xs leading-relaxed text-zinc-400">
                 <code>{`const ayah = await quran.getAyah(1, 'en.sahih', true);
 const knowledge = await quran.getKnowledge(1);

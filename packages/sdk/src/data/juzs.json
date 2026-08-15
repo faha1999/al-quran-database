@@ -6,10 +6,7 @@
     "end_ayah_number": 148,
     "start_page": 1,
     "end_page": 21,
-    "surah_ids": [
-      1,
-      2
-    ]
+    "surah_ids": [1, 2]
   },
   {
     "id": 2,
@@ -18,9 +15,7 @@
     "end_ayah_number": 259,
     "start_page": 22,
     "end_page": 41,
-    "surah_ids": [
-      2
-    ]
+    "surah_ids": [2]
   },
   {
     "id": 3,
@@ -29,10 +24,7 @@
     "end_ayah_number": 385,
     "start_page": 42,
     "end_page": 62,
-    "surah_ids": [
-      2,
-      3
-    ]
+    "surah_ids": [2, 3]
   },
   {
     "id": 4,
@@ -41,10 +33,7 @@
     "end_ayah_number": 516,
     "start_page": 62,
     "end_page": 81,
-    "surah_ids": [
-      3,
-      4
-    ]
+    "surah_ids": [3, 4]
   },
   {
     "id": 5,
@@ -53,9 +42,7 @@
     "end_ayah_number": 640,
     "start_page": 82,
     "end_page": 101,
-    "surah_ids": [
-      4
-    ]
+    "surah_ids": [4]
   },
   {
     "id": 6,
@@ -64,10 +51,7 @@
     "end_ayah_number": 750,
     "start_page": 102,
     "end_page": 121,
-    "surah_ids": [
-      4,
-      5
-    ]
+    "surah_ids": [4, 5]
   },
   {
     "id": 7,
@@ -76,10 +60,7 @@
     "end_ayah_number": 899,
     "start_page": 121,
     "end_page": 141,
-    "surah_ids": [
-      5,
-      6
-    ]
+    "surah_ids": [5, 6]
   },
   {
     "id": 8,
@@ -88,10 +69,7 @@
     "end_ayah_number": 1041,
     "start_page": 142,
     "end_page": 161,
-    "surah_ids": [
-      6,
-      7
-    ]
+    "surah_ids": [6, 7]
   },
   {
     "id": 9,
@@ -100,10 +78,7 @@
     "end_ayah_number": 1200,
     "start_page": 162,
     "end_page": 181,
-    "surah_ids": [
-      7,
-      8
-    ]
+    "surah_ids": [7, 8]
   },
   {
     "id": 10,
@@ -112,10 +87,7 @@
     "end_ayah_number": 1327,
     "start_page": 182,
     "end_page": 201,
-    "surah_ids": [
-      8,
-      9
-    ]
+    "surah_ids": [8, 9]
   },
   {
     "id": 11,
@@ -124,11 +96,7 @@
     "end_ayah_number": 1478,
     "start_page": 201,
     "end_page": 221,
-    "surah_ids": [
-      9,
-      10,
-      11
-    ]
+    "surah_ids": [9, 10, 11]
   },
   {
     "id": 12,
@@ -137,10 +105,7 @@
     "end_ayah_number": 1648,
     "start_page": 222,
     "end_page": 241,
-    "surah_ids": [
-      11,
-      12
-    ]
+    "surah_ids": [11, 12]
   },
   {
     "id": 13,
@@ -149,11 +114,7 @@
     "end_ayah_number": 1802,
     "start_page": 242,
     "end_page": 261,
-    "surah_ids": [
-      12,
-      13,
-      14
-    ]
+    "surah_ids": [12, 13, 14]
   },
   {
     "id": 14,
@@ -162,10 +123,7 @@
     "end_ayah_number": 2029,
     "start_page": 262,
     "end_page": 281,
-    "surah_ids": [
-      15,
-      16
-    ]
+    "surah_ids": [15, 16]
   },
   {
     "id": 15,
@@ -174,10 +132,7 @@
     "end_ayah_number": 2214,
     "start_page": 282,
     "end_page": 301,
-    "surah_ids": [
-      17,
-      18
-    ]
+    "surah_ids": [17, 18]
   },
   {
     "id": 16,
@@ -186,11 +141,7 @@
     "end_ayah_number": 2483,
     "start_page": 302,
     "end_page": 321,
-    "surah_ids": [
-      18,
-      19,
-      20
-    ]
+    "surah_ids": [18, 19, 20]
   },
   {
     "id": 17,
@@ -199,10 +150,7 @@
     "end_ayah_number": 2673,
     "start_page": 322,
     "end_page": 341,
-    "surah_ids": [
-      21,
-      22
-    ]
+    "surah_ids": [21, 22]
   },
   {
     "id": 18,
@@ -211,11 +159,7 @@
     "end_ayah_number": 2875,
     "start_page": 342,
     "end_page": 361,
-    "surah_ids": [
-      23,
-      24,
-      25
-    ]
+    "surah_ids": [23, 24, 25]
   },
   {
     "id": 19,
@@ -224,11 +168,7 @@
     "end_ayah_number": 3214,
     "start_page": 362,
     "end_page": 381,
-    "surah_ids": [
-      25,
-      26,
-      27
-    ]
+    "surah_ids": [25, 26, 27]
   },
   {
     "id": 20,
@@ -237,11 +177,7 @@
     "end_ayah_number": 3385,
     "start_page": 382,
     "end_page": 401,
-    "surah_ids": [
-      27,
-      28,
-      29
-    ]
+    "surah_ids": [27, 28, 29]
   },
   {
     "id": 21,
@@ -250,13 +186,7 @@
     "end_ayah_number": 3563,
     "start_page": 402,
     "end_page": 421,
-    "surah_ids": [
-      29,
-      30,
-      31,
-      32,
-      33
-    ]
+    "surah_ids": [29, 30, 31, 32, 33]
   },
   {
     "id": 22,
@@ -265,12 +195,7 @@
     "end_ayah_number": 3732,
     "start_page": 422,
     "end_page": 441,
-    "surah_ids": [
-      33,
-      34,
-      35,
-      36
-    ]
+    "surah_ids": [33, 34, 35, 36]
   },
   {
     "id": 23,
@@ -279,12 +204,7 @@
     "end_ayah_number": 4089,
     "start_page": 442,
     "end_page": 461,
-    "surah_ids": [
-      36,
-      37,
-      38,
-      39
-    ]
+    "surah_ids": [36, 37, 38, 39]
   },
   {
     "id": 24,
@@ -293,11 +213,7 @@
     "end_ayah_number": 4264,
     "start_page": 462,
     "end_page": 481,
-    "surah_ids": [
-      39,
-      40,
-      41
-    ]
+    "surah_ids": [39, 40, 41]
   },
   {
     "id": 25,
@@ -306,13 +222,7 @@
     "end_ayah_number": 4510,
     "start_page": 482,
     "end_page": 502,
-    "surah_ids": [
-      41,
-      42,
-      43,
-      44,
-      45
-    ]
+    "surah_ids": [41, 42, 43, 44, 45]
   },
   {
     "id": 26,
@@ -321,14 +231,7 @@
     "end_ayah_number": 4705,
     "start_page": 502,
     "end_page": 521,
-    "surah_ids": [
-      46,
-      47,
-      48,
-      49,
-      50,
-      51
-    ]
+    "surah_ids": [46, 47, 48, 49, 50, 51]
   },
   {
     "id": 27,
@@ -337,15 +240,7 @@
     "end_ayah_number": 5104,
     "start_page": 522,
     "end_page": 541,
-    "surah_ids": [
-      51,
-      52,
-      53,
-      54,
-      55,
-      56,
-      57
-    ]
+    "surah_ids": [51, 52, 53, 54, 55, 56, 57]
   },
   {
     "id": 28,
@@ -354,17 +249,7 @@
     "end_ayah_number": 5241,
     "start_page": 542,
     "end_page": 561,
-    "surah_ids": [
-      58,
-      59,
-      60,
-      61,
-      62,
-      63,
-      64,
-      65,
-      66
-    ]
+    "surah_ids": [58, 59, 60, 61, 62, 63, 64, 65, 66]
   },
   {
     "id": 29,
@@ -373,19 +258,7 @@
     "end_ayah_number": 5672,
     "start_page": 562,
     "end_page": 581,
-    "surah_ids": [
-      67,
-      68,
-      69,
-      70,
-      71,
-      72,
-      73,
-      74,
-      75,
-      76,
-      77
-    ]
+    "surah_ids": [67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77]
   },
   {
     "id": 30,
@@ -395,43 +268,8 @@
     "start_page": 582,
     "end_page": 604,
     "surah_ids": [
-      78,
-      79,
-      80,
-      81,
-      82,
-      83,
-      84,
-      85,
-      86,
-      87,
-      88,
-      89,
-      90,
-      91,
-      92,
-      93,
-      94,
-      95,
-      96,
-      97,
-      98,
-      99,
-      100,
-      101,
-      102,
-      103,
-      104,
-      105,
-      106,
-      107,
-      108,
-      109,
-      110,
-      111,
-      112,
-      113,
-      114
+      78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100,
+      101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114
     ]
   }
 ]

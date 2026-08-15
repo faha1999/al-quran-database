@@ -142,10 +142,13 @@ export default function RoadmapPageClient() {
             <h2 className="text-2xl font-bold">Future Horizon</h2>
           </div>
           <p className="max-w-2xl text-sm leading-relaxed text-zinc-500">
-            Beyond Phase 5, we are exploring <strong className="text-zinc-400">Semantic Search</strong> (vector
-            embeddings for meaning-based lookup), an <strong className="text-zinc-400">Interactive API Playground</strong>,{' '}
-            <strong className="text-zinc-400">Docker self-hosting</strong> templates, and bundling all 134 editions
-            as CDN-served lazy-load shards. Community contributions welcome via the issue tracker.
+            Beyond Phase 5, we are exploring{' '}
+            <strong className="text-zinc-400">Semantic Search</strong> (vector embeddings for
+            meaning-based lookup), an{' '}
+            <strong className="text-zinc-400">Interactive API Playground</strong>,{' '}
+            <strong className="text-zinc-400">Docker self-hosting</strong> templates, and bundling
+            all 134 editions as CDN-served lazy-load shards. Community contributions welcome via the
+            issue tracker.
           </p>
         </section>
       </div>

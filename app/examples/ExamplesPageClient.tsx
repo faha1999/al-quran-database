@@ -19,17 +19,13 @@ interface SurahsResponse {
 
 export default function ExamplesPageClient() {
   const [surahs, setSurahs] = useState<Surah[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [isHostedSite, setIsHostedSite] = useState(false);
+  const [isHostedSite] = useState(
+    () => typeof window !== 'undefined' && isHostedApiDisabledHost(window.location.hostname),
+  );
+  const [loading, setLoading] = useState(!isHostedSite);
 
   useEffect(() => {
-    const hosted = isHostedApiDisabledHost(window.location.hostname);
-    setIsHostedSite(hosted);
-
-    if (hosted) {
-      setLoading(false);
-      return;
-    }
+    if (isHostedSite) return;
 
     fetch('/api/surahs')
       .then((res) => res.json() as Promise<SurahsResponse>)
@@ -42,7 +38,7 @@ export default function ExamplesPageClient() {
       .catch(() => {
         setLoading(false);
       });
-  }, []);
+  }, [isHostedSite]);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] px-4 py-6 text-white sm:px-6 md:px-10 md:py-10">
@@ -76,7 +72,9 @@ export default function ExamplesPageClient() {
           >
             <div>
               <p className="text-sm font-semibold text-white">Clone the repository</p>
-              <p className="mt-1 text-sm text-zinc-400">Run the full API locally with `npm run dev`.</p>
+              <p className="mt-1 text-sm text-zinc-400">
+                Run the full API locally with `npm run dev`.
+              </p>
             </div>
             <GitBranch className="h-5 w-5 text-zinc-500" />
           </a>
@@ -88,7 +86,9 @@ export default function ExamplesPageClient() {
           >
             <div>
               <p className="text-sm font-semibold text-white">Install the SDK</p>
-              <p className="mt-1 text-sm text-zinc-400">Point the client at your local or hosted base URL.</p>
+              <p className="mt-1 text-sm text-zinc-400">
+                Point the client at your local or hosted base URL.
+              </p>
             </div>
             <Package className="h-5 w-5 text-zinc-500" />
           </a>

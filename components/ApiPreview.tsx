@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Play, Check, Copy, Lock } from 'lucide-react';
 import { isHostedApiDisabledHost } from '@/lib/site-config';
 
@@ -14,12 +14,10 @@ export default function ApiPreview({ endpoint, method = 'GET', initialData }: Ap
   const [data, setData] = useState<unknown>(initialData ?? null);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [isHostedSite, setIsHostedSite] = useState(false);
+  const [isHostedSite] = useState(
+    () => typeof window !== 'undefined' && isHostedApiDisabledHost(window.location.hostname),
+  );
   const hasData = data !== null;
-
-  useEffect(() => {
-    setIsHostedSite(isHostedApiDisabledHost(window.location.hostname));
-  }, []);
 
   const fetchData = async () => {
     if (isHostedSite) {

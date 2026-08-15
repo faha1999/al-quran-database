@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { ChevronLeft, Loader2, Search as SearchIcon, Shield } from 'lucide-react';
@@ -46,13 +46,11 @@ export default function SearchPageClient({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [meta, setMeta] = useState<SearchMeta | null>(null);
-  const [isHostedSite, setIsHostedSite] = useState(false);
+  const [isHostedSite] = useState(
+    () => typeof window !== 'undefined' && isHostedApiDisabledHost(window.location.hostname),
+  );
   const router = useRouter();
   const pathname = usePathname();
-
-  useEffect(() => {
-    setIsHostedSite(isHostedApiDisabledHost(window.location.hostname));
-  }, []);
 
   const runSearch = async (nextQuery: string, nextEdition: string, nextLanguage: string) => {
     if (!nextQuery.trim()) {

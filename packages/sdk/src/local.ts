@@ -218,8 +218,9 @@ function normalizeText(value: string): string {
     .normalize('NFKD')
     .replace(ARABIC_DIACRITICS_REGEX, '')
     .replace(/\u0640/g, '')
-    .replace(/[\u0671\u0623\u0625\u0622\u0649\u0624\u0626]/g, (c) =>
-      ARABIC_LETTER_NORMALIZATION[c] ?? c,
+    .replace(
+      /[\u0671\u0623\u0625\u0622\u0649\u0624\u0626]/g,
+      (c) => ARABIC_LETTER_NORMALIZATION[c] ?? c,
     )
     .replace(/\s+/g, ' ')
     .trim()
@@ -302,7 +303,13 @@ export function getJuzs(): Juz[] {
 export function getJuzById(id: number, edition?: string): ResolvedDivision | null {
   const juz = (juzs as Juz[]).find((j) => j.id === id) ?? null;
   if (!juz) return null;
-  return { ...juz, ayahs: resolveAyahs((ayahs as Ayah[]).filter((a) => a.juz_id === id), edition) };
+  return {
+    ...juz,
+    ayahs: resolveAyahs(
+      (ayahs as Ayah[]).filter((a) => a.juz_id === id),
+      edition,
+    ),
+  };
 }
 
 /** Get all hizbs */
@@ -314,7 +321,13 @@ export function getHizbs(): Hizb[] {
 export function getHizbById(id: number, edition?: string): ResolvedDivision | null {
   const hizb = (hizbs as Hizb[]).find((h) => h.id === id) ?? null;
   if (!hizb) return null;
-  return { ...hizb, ayahs: resolveAyahs((ayahs as Ayah[]).filter((a) => a.hizb_id === id), edition) };
+  return {
+    ...hizb,
+    ayahs: resolveAyahs(
+      (ayahs as Ayah[]).filter((a) => a.hizb_id === id),
+      edition,
+    ),
+  };
 }
 
 /** Get all rubs */
@@ -326,7 +339,13 @@ export function getRubs(): Rub[] {
 export function getRubById(id: number, edition?: string): ResolvedDivision | null {
   const rub = (rubs as Rub[]).find((r) => r.id === id) ?? null;
   if (!rub) return null;
-  return { ...rub, ayahs: resolveAyahs((ayahs as Ayah[]).filter((a) => a.rub_id === id), edition) };
+  return {
+    ...rub,
+    ayahs: resolveAyahs(
+      (ayahs as Ayah[]).filter((a) => a.rub_id === id),
+      edition,
+    ),
+  };
 }
 
 /** Get all pages */
@@ -338,7 +357,13 @@ export function getPages(): Page[] {
 export function getPageById(id: number, edition?: string): ResolvedDivision | null {
   const page = (pages as Page[]).find((p) => p.id === id) ?? null;
   if (!page) return null;
-  return { ...page, ayahs: resolveAyahs((ayahs as Ayah[]).filter((a) => a.page === id), edition) };
+  return {
+    ...page,
+    ayahs: resolveAyahs(
+      (ayahs as Ayah[]).filter((a) => a.page === id),
+      edition,
+    ),
+  };
 }
 
 /** Get all reciters */
@@ -421,7 +446,10 @@ export function searchAyahs(query: string, filters: SearchFilters = {}) {
           matchesQuery(ayah.text, normalizedQuery) ||
           matchesQuery(editionMap.get(ayah.id)?.data, normalizedQuery),
       )
-      .map((ayah) => ({ ...attachEdition(ayah, filters.edition), matched_identifiers: [filters.edition!] }));
+      .map((ayah) => ({
+        ...attachEdition(ayah, filters.edition),
+        matched_identifiers: [filters.edition!],
+      }));
   } else if (filters.language) {
     const searchableEditions = (editions as Edition[]).filter(
       (e) => e.language === filters.language && e.format === 'text',

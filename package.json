@@ -1,6 +1,6 @@
 {
   "name": "al-quran-database",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -12,7 +12,7 @@
     "prebuild": "node scripts/sync-version.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings 0",
     "pretypecheck": "node scripts/sync-version.mjs",
     "typecheck": "next typegen && tsc --noEmit",
     "data:convert": "python3 scripts/convert_quran_sql.py",
@@ -27,7 +27,7 @@
     "test:ui": "vitest --ui",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "next lint --fix",
     "pretest:e2e": "node scripts/sync-version.mjs",
     "test:e2e": "playwright test",
     "prebuild:sdk": "node scripts/sync-version.mjs",
@@ -57,13 +57,13 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "@vitest/ui": "^4.1.10",
-    "eslint": "^10.8.1",
+    "eslint": "^8.57.0",
     "eslint-config-next": "^16.3.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
     "prettier": "^3.9.6",
     "tailwindcss": "^4.3.3",
-    "typescript": "^7.0.2",
+    "typescript": "^5.8.3",
     "vitest": "^4.1.10"
   },
   "packageManager": "pnpm@10.33.3+sha512.a19744364a7e248b92657a4ca5973f9354d21caf982579674b1c539f32c7420c47138ad8b1254df07aba9bc782d9b3029e3db34d5dbff974326eb74dac8ff489"

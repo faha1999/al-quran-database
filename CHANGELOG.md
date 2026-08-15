@@ -18,9 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   ```ts
   import { getSurah, getAyah, searchAyahs } from '@faha1999/al-quran-database';
 
-  const fatiha = getSurah(1);           // no server, no network call
+  const fatiha = getSurah(1); // no server, no network call
   const ayah = getAyah(1, 'en.sahih'); // with bundled Sahih International
-  const hits = searchAyahs('mercy');   // offline full-text search
+  const hits = searchAyahs('mercy'); // offline full-text search
   ```
 
 - **Bundled editions** — four editions now ship inside the package for instant offline access:
@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **jsDelivr / unpkg CDN support** — all bundled data is automatically available via CDN
   from the moment a new version is published (no extra setup):
+
   ```
   https://cdn.jsdelivr.net/npm/@faha1999/al-quran-database@2.1.0/src/data/surahs.json
   ```

@@ -35,8 +35,8 @@ const results = searchAyahs('mercy');
 import { BUNDLED_EDITION_IDENTIFIERS } from '@faha1999/al-quran-database';
 // → ['en.sahih', 'quran-simple-clean', 'en.yusufali', 'quran-uthmani']
 
-const surah = getSurah(2, 'quran-uthmani');   // full Uthmani Arabic
-const surah = getSurah(2, 'en.sahih');        // Sahih International English
+const surah = getSurah(2, 'quran-uthmani'); // full Uthmani Arabic
+const surah = getSurah(2, 'en.sahih'); // Sahih International English
 ```
 
 All 134 other editions are available via CDN or the self-hosted REST API.
@@ -46,30 +46,57 @@ All 134 other editions are available via CDN or the self-hosted REST API.
 ```ts
 import {
   // Surahs
-  getSurah, getAllSurahs,
+  getSurah,
+  getAllSurahs,
   // Ayahs
-  getAyah, getAyahByNumber,
+  getAyah,
+  getAyahByNumber,
   // Divisions
-  getJuzById, getHizbById, getRubById, getPageById,
-  getJuzs, getHizbs, getRubs, getPages,
+  getJuzById,
+  getHizbById,
+  getRubById,
+  getPageById,
+  getJuzs,
+  getHizbs,
+  getRubs,
+  getPages,
   // Editions
-  getAllEditions, getTextEditions, getEditionByIdentifier,
+  getAllEditions,
+  getTextEditions,
+  getEditionByIdentifier,
   // Content
-  getReciters, getDuas,
+  getReciters,
+  getDuas,
   // Knowledge base
-  getKnowledgeByAyah, getSurahProfile, getKnowledgeFaqs, getKnowledgeCoverage,
+  getKnowledgeByAyah,
+  getSurahProfile,
+  getKnowledgeFaqs,
+  getKnowledgeCoverage,
   // Research
   getResearchReferences,
   // Meta
-  getDatasetMetadata, getSupportedLanguagesList,
+  getDatasetMetadata,
+  getSupportedLanguagesList,
   // Search
   searchAyahs,
   // Raw data arrays
-  surahs, ayahs, editions, juzs, hizbs, rubs, pages, reciters, duas,
-  knowledgeBase, datasetMetadata, extraContext,
+  surahs,
+  ayahs,
+  editions,
+  juzs,
+  hizbs,
+  rubs,
+  pages,
+  reciters,
+  duas,
+  knowledgeBase,
+  datasetMetadata,
+  extraContext,
   // Utilities
-  BUNDLED_EDITION_IDENTIFIERS, DEFAULT_TRANSLATION_IDENTIFIER,
-  paginate, loadEditionContent,
+  BUNDLED_EDITION_IDENTIFIERS,
+  DEFAULT_TRANSLATION_IDENTIFIER,
+  paginate,
+  loadEditionContent,
 } from '@faha1999/al-quran-database';
 ```
 

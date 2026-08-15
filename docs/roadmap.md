@@ -48,4 +48,3 @@
 4. **Docker Setup**: Containerized deployment for self-hosted instances.
 5. **All 134 editions bundled in CDN shards**: Lazy-load any edition by identifier from CDN with a simple fetch helper.
 6. **awesome-list listings**: Submissions to `awesome-Islam`, `Awesome-Muslims`, `awesome-islam`.
-

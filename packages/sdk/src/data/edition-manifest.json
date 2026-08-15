@@ -7,9 +7,7 @@
       "type": "translation",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.abdulbasitmurattal.json"
-      ]
+      "files": ["ayah-editions/ar.abdulbasitmurattal.json"]
     },
     "ar.abdullahbasfar": {
       "edition_id": 107,
@@ -17,9 +15,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.abdullahbasfar.json"
-      ]
+      "files": ["ayah-editions/ar.abdullahbasfar.json"]
     },
     "ar.abdulsamad": {
       "edition_id": 109,
@@ -27,9 +23,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.abdulsamad.json"
-      ]
+      "files": ["ayah-editions/ar.abdulsamad.json"]
     },
     "ar.abdurrahmaansudais": {
       "edition_id": 108,
@@ -37,9 +31,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.abdurrahmaansudais.json"
-      ]
+      "files": ["ayah-editions/ar.abdurrahmaansudais.json"]
     },
     "ar.ahmedajamy": {
       "edition_id": 111,
@@ -47,9 +39,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.ahmedajamy.json"
-      ]
+      "files": ["ayah-editions/ar.ahmedajamy.json"]
     },
     "ar.alafasy": {
       "edition_id": 112,
@@ -57,9 +47,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.alafasy.json"
-      ]
+      "files": ["ayah-editions/ar.alafasy.json"]
     },
     "ar.hanirifai": {
       "edition_id": 113,
@@ -67,9 +55,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.hanirifai.json"
-      ]
+      "files": ["ayah-editions/ar.hanirifai.json"]
     },
     "ar.hudhaify": {
       "edition_id": 116,
@@ -77,9 +63,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.hudhaify.json"
-      ]
+      "files": ["ayah-editions/ar.hudhaify.json"]
     },
     "ar.husary": {
       "edition_id": 114,
@@ -87,9 +71,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.husary.json"
-      ]
+      "files": ["ayah-editions/ar.husary.json"]
     },
     "ar.husarymujawwad": {
       "edition_id": 115,
@@ -97,9 +79,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.husarymujawwad.json"
-      ]
+      "files": ["ayah-editions/ar.husarymujawwad.json"]
     },
     "ar.ibrahimakhbar": {
       "edition_id": 117,
@@ -107,9 +87,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.ibrahimakhbar.json"
-      ]
+      "files": ["ayah-editions/ar.ibrahimakhbar.json"]
     },
     "ar.jalalayn": {
       "edition_id": 103,
@@ -117,9 +95,7 @@
       "type": "tafsir",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.jalalayn.json"
-      ]
+      "files": ["ayah-editions/ar.jalalayn.json"]
     },
     "ar.mahermuaiqly": {
       "edition_id": 118,
@@ -127,9 +103,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.mahermuaiqly.json"
-      ]
+      "files": ["ayah-editions/ar.mahermuaiqly.json"]
     },
     "ar.minshawi": {
       "edition_id": 119,
@@ -137,9 +111,7 @@
       "type": "translation",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.minshawi.json"
-      ]
+      "files": ["ayah-editions/ar.minshawi.json"]
     },
     "ar.minshawimujawwad": {
       "edition_id": 120,
@@ -147,9 +119,7 @@
       "type": "translation",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.minshawimujawwad.json"
-      ]
+      "files": ["ayah-editions/ar.minshawimujawwad.json"]
     },
     "ar.muhammadayyoub": {
       "edition_id": 121,
@@ -157,9 +127,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.muhammadayyoub.json"
-      ]
+      "files": ["ayah-editions/ar.muhammadayyoub.json"]
     },
     "ar.muhammadjibreel": {
       "edition_id": 122,
@@ -167,9 +135,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.muhammadjibreel.json"
-      ]
+      "files": ["ayah-editions/ar.muhammadjibreel.json"]
     },
     "ar.muyassar": {
       "edition_id": 1,
@@ -177,9 +143,7 @@
       "type": "tafsir",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.muyassar.json"
-      ]
+      "files": ["ayah-editions/ar.muyassar.json"]
     },
     "ar.parhizgar": {
       "edition_id": 126,
@@ -187,9 +151,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.parhizgar.json"
-      ]
+      "files": ["ayah-editions/ar.parhizgar.json"]
     },
     "ar.saoodshuraym": {
       "edition_id": 123,
@@ -197,9 +159,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.saoodshuraym.json"
-      ]
+      "files": ["ayah-editions/ar.saoodshuraym.json"]
     },
     "ar.shaatree": {
       "edition_id": 110,
@@ -207,9 +167,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ar.shaatree.json"
-      ]
+      "files": ["ayah-editions/ar.shaatree.json"]
     },
     "az.mammadaliyev": {
       "edition_id": 2,
@@ -217,9 +175,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/az.mammadaliyev.json"
-      ]
+      "files": ["ayah-editions/az.mammadaliyev.json"]
     },
     "az.musayev": {
       "edition_id": 3,
@@ -227,9 +183,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/az.musayev.json"
-      ]
+      "files": ["ayah-editions/az.musayev.json"]
     },
     "bg.theophanov": {
       "edition_id": 83,
@@ -237,9 +191,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/bg.theophanov.json"
-      ]
+      "files": ["ayah-editions/bg.theophanov.json"]
     },
     "bn.bengali": {
       "edition_id": 4,
@@ -247,9 +199,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/bn.bengali.json"
-      ]
+      "files": ["ayah-editions/bn.bengali.json"]
     },
     "bs.korkut": {
       "edition_id": 102,
@@ -257,9 +207,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/bs.korkut.json"
-      ]
+      "files": ["ayah-editions/bs.korkut.json"]
     },
     "bs.mlivo": {
       "edition_id": 84,
@@ -267,9 +215,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/bs.mlivo.json"
-      ]
+      "files": ["ayah-editions/bs.mlivo.json"]
     },
     "cs.hrbek": {
       "edition_id": 5,
@@ -277,9 +223,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/cs.hrbek.json"
-      ]
+      "files": ["ayah-editions/cs.hrbek.json"]
     },
     "cs.nykl": {
       "edition_id": 6,
@@ -287,9 +231,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/cs.nykl.json"
-      ]
+      "files": ["ayah-editions/cs.nykl.json"]
     },
     "de.aburida": {
       "edition_id": 7,
@@ -297,9 +239,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/de.aburida.json"
-      ]
+      "files": ["ayah-editions/de.aburida.json"]
     },
     "de.bubenheim": {
       "edition_id": 8,
@@ -307,9 +247,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/de.bubenheim.json"
-      ]
+      "files": ["ayah-editions/de.bubenheim.json"]
     },
     "de.khoury": {
       "edition_id": 9,
@@ -317,9 +255,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/de.khoury.json"
-      ]
+      "files": ["ayah-editions/de.khoury.json"]
     },
     "de.zaidan": {
       "edition_id": 10,
@@ -327,9 +263,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/de.zaidan.json"
-      ]
+      "files": ["ayah-editions/de.zaidan.json"]
     },
     "dv.divehi": {
       "edition_id": 11,
@@ -337,9 +271,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/dv.divehi.json"
-      ]
+      "files": ["ayah-editions/dv.divehi.json"]
     },
     "en.ahmedali": {
       "edition_id": 12,
@@ -347,9 +279,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.ahmedali.json"
-      ]
+      "files": ["ayah-editions/en.ahmedali.json"]
     },
     "en.ahmedraza": {
       "edition_id": 13,
@@ -357,9 +287,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.ahmedraza.json"
-      ]
+      "files": ["ayah-editions/en.ahmedraza.json"]
     },
     "en.arberry": {
       "edition_id": 14,
@@ -367,9 +295,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.arberry.json"
-      ]
+      "files": ["ayah-editions/en.arberry.json"]
     },
     "en.asad": {
       "edition_id": 15,
@@ -377,9 +303,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.asad.json"
-      ]
+      "files": ["ayah-editions/en.asad.json"]
     },
     "en.daryabadi": {
       "edition_id": 16,
@@ -387,9 +311,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.daryabadi.json"
-      ]
+      "files": ["ayah-editions/en.daryabadi.json"]
     },
     "en.hilali": {
       "edition_id": 17,
@@ -397,9 +319,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.hilali.json"
-      ]
+      "files": ["ayah-editions/en.hilali.json"]
     },
     "en.maududi": {
       "edition_id": 72,
@@ -407,9 +327,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.maududi.json"
-      ]
+      "files": ["ayah-editions/en.maududi.json"]
     },
     "en.pickthall": {
       "edition_id": 18,
@@ -417,9 +335,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.pickthall.json"
-      ]
+      "files": ["ayah-editions/en.pickthall.json"]
     },
     "en.qaribullah": {
       "edition_id": 19,
@@ -427,9 +343,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.qaribullah.json"
-      ]
+      "files": ["ayah-editions/en.qaribullah.json"]
     },
     "en.sahih": {
       "edition_id": 20,
@@ -437,9 +351,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.sahih.json"
-      ]
+      "files": ["ayah-editions/en.sahih.json"]
     },
     "en.sarwar": {
       "edition_id": 21,
@@ -447,9 +359,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.sarwar.json"
-      ]
+      "files": ["ayah-editions/en.sarwar.json"]
     },
     "en.shakir": {
       "edition_id": 73,
@@ -457,9 +367,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.shakir.json"
-      ]
+      "files": ["ayah-editions/en.shakir.json"]
     },
     "en.transliteration": {
       "edition_id": 74,
@@ -467,9 +375,7 @@
       "type": "transliteration",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.transliteration.json"
-      ]
+      "files": ["ayah-editions/en.transliteration.json"]
     },
     "en.walk": {
       "edition_id": 124,
@@ -477,9 +383,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.walk.json"
-      ]
+      "files": ["ayah-editions/en.walk.json"]
     },
     "en.yusufali": {
       "edition_id": 22,
@@ -487,9 +391,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/en.yusufali.json"
-      ]
+      "files": ["ayah-editions/en.yusufali.json"]
     },
     "es.asad": {
       "edition_id": 86,
@@ -497,9 +399,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/es.asad.json"
-      ]
+      "files": ["ayah-editions/es.asad.json"]
     },
     "es.cortes": {
       "edition_id": 75,
@@ -507,9 +407,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/es.cortes.json"
-      ]
+      "files": ["ayah-editions/es.cortes.json"]
     },
     "fa.ansarian": {
       "edition_id": 76,
@@ -517,9 +415,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fa.ansarian.json"
-      ]
+      "files": ["ayah-editions/fa.ansarian.json"]
     },
     "fa.ayati": {
       "edition_id": 23,
@@ -527,9 +423,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fa.ayati.json"
-      ]
+      "files": ["ayah-editions/fa.ayati.json"]
     },
     "fa.bahrampour": {
       "edition_id": 85,
@@ -537,9 +431,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fa.bahrampour.json"
-      ]
+      "files": ["ayah-editions/fa.bahrampour.json"]
     },
     "fa.fooladvand": {
       "edition_id": 24,
@@ -547,9 +439,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fa.fooladvand.json"
-      ]
+      "files": ["ayah-editions/fa.fooladvand.json"]
     },
     "fa.ghomshei": {
       "edition_id": 25,
@@ -557,9 +447,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fa.ghomshei.json"
-      ]
+      "files": ["ayah-editions/fa.ghomshei.json"]
     },
     "fa.hedayatfarfooladvand": {
       "edition_id": 125,
@@ -567,9 +455,7 @@
       "type": "translation",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fa.hedayatfarfooladvand.json"
-      ]
+      "files": ["ayah-editions/fa.hedayatfarfooladvand.json"]
     },
     "fa.khorramdel": {
       "edition_id": 100,
@@ -577,9 +463,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fa.khorramdel.json"
-      ]
+      "files": ["ayah-editions/fa.khorramdel.json"]
     },
     "fa.khorramshahi": {
       "edition_id": 87,
@@ -587,9 +471,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fa.khorramshahi.json"
-      ]
+      "files": ["ayah-editions/fa.khorramshahi.json"]
     },
     "fa.makarem": {
       "edition_id": 26,
@@ -597,9 +479,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fa.makarem.json"
-      ]
+      "files": ["ayah-editions/fa.makarem.json"]
     },
     "fa.moezzi": {
       "edition_id": 101,
@@ -607,9 +487,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fa.moezzi.json"
-      ]
+      "files": ["ayah-editions/fa.moezzi.json"]
     },
     "fa.mojtabavi": {
       "edition_id": 88,
@@ -617,9 +495,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fa.mojtabavi.json"
-      ]
+      "files": ["ayah-editions/fa.mojtabavi.json"]
     },
     "fr.hamidullah": {
       "edition_id": 27,
@@ -627,9 +503,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fr.hamidullah.json"
-      ]
+      "files": ["ayah-editions/fr.hamidullah.json"]
     },
     "fr.leclerc": {
       "edition_id": 129,
@@ -637,9 +511,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/fr.leclerc.json"
-      ]
+      "files": ["ayah-editions/fr.leclerc.json"]
     },
     "ha.gumi": {
       "edition_id": 28,
@@ -647,9 +519,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ha.gumi.json"
-      ]
+      "files": ["ayah-editions/ha.gumi.json"]
     },
     "hi.farooq": {
       "edition_id": 89,
@@ -657,9 +527,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/hi.farooq.json"
-      ]
+      "files": ["ayah-editions/hi.farooq.json"]
     },
     "hi.hindi": {
       "edition_id": 29,
@@ -667,9 +535,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/hi.hindi.json"
-      ]
+      "files": ["ayah-editions/hi.hindi.json"]
     },
     "id.indonesian": {
       "edition_id": 30,
@@ -677,9 +543,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/id.indonesian.json"
-      ]
+      "files": ["ayah-editions/id.indonesian.json"]
     },
     "id.muntakhab": {
       "edition_id": 90,
@@ -687,9 +551,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/id.muntakhab.json"
-      ]
+      "files": ["ayah-editions/id.muntakhab.json"]
     },
     "it.piccardo": {
       "edition_id": 31,
@@ -697,9 +559,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/it.piccardo.json"
-      ]
+      "files": ["ayah-editions/it.piccardo.json"]
     },
     "ja.japanese": {
       "edition_id": 32,
@@ -707,9 +567,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ja.japanese.json"
-      ]
+      "files": ["ayah-editions/ja.japanese.json"]
     },
     "ko.korean": {
       "edition_id": 33,
@@ -717,9 +575,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ko.korean.json"
-      ]
+      "files": ["ayah-editions/ko.korean.json"]
     },
     "ku.asan": {
       "edition_id": 34,
@@ -727,9 +583,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ku.asan.json"
-      ]
+      "files": ["ayah-editions/ku.asan.json"]
     },
     "ml.abdulhameed": {
       "edition_id": 35,
@@ -737,9 +591,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ml.abdulhameed.json"
-      ]
+      "files": ["ayah-editions/ml.abdulhameed.json"]
     },
     "ms.basmeih": {
       "edition_id": 91,
@@ -747,9 +599,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ms.basmeih.json"
-      ]
+      "files": ["ayah-editions/ms.basmeih.json"]
     },
     "nl.keyzer": {
       "edition_id": 36,
@@ -757,9 +607,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/nl.keyzer.json"
-      ]
+      "files": ["ayah-editions/nl.keyzer.json"]
     },
     "no.berg": {
       "edition_id": 37,
@@ -767,9 +615,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/no.berg.json"
-      ]
+      "files": ["ayah-editions/no.berg.json"]
     },
     "pl.bielawskiego": {
       "edition_id": 38,
@@ -777,9 +623,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/pl.bielawskiego.json"
-      ]
+      "files": ["ayah-editions/pl.bielawskiego.json"]
     },
     "pt.elhayek": {
       "edition_id": 39,
@@ -787,9 +631,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/pt.elhayek.json"
-      ]
+      "files": ["ayah-editions/pt.elhayek.json"]
     },
     "quran-buck": {
       "edition_id": 133,
@@ -797,9 +639,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/quran-buck.json"
-      ]
+      "files": ["ayah-editions/quran-buck.json"]
     },
     "quran-corpus-qd": {
       "edition_id": 131,
@@ -807,9 +647,7 @@
       "type": "quran",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/quran-corpus-qd.json"
-      ]
+      "files": ["ayah-editions/quran-corpus-qd.json"]
     },
     "quran-kids": {
       "edition_id": 130,
@@ -817,9 +655,7 @@
       "type": "quran",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/quran-kids.json"
-      ]
+      "files": ["ayah-editions/quran-kids.json"]
     },
     "quran-simple": {
       "edition_id": 77,
@@ -827,9 +663,7 @@
       "type": "quran",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/quran-simple.json"
-      ]
+      "files": ["ayah-editions/quran-simple.json"]
     },
     "quran-simple-clean": {
       "edition_id": 78,
@@ -837,9 +671,7 @@
       "type": "quran",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/quran-simple-clean.json"
-      ]
+      "files": ["ayah-editions/quran-simple-clean.json"]
     },
     "quran-simple-enhanced": {
       "edition_id": 79,
@@ -847,9 +679,7 @@
       "type": "quran",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/quran-simple-enhanced.json"
-      ]
+      "files": ["ayah-editions/quran-simple-enhanced.json"]
     },
     "quran-simple-min": {
       "edition_id": 80,
@@ -857,9 +687,7 @@
       "type": "quran",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/quran-simple-min.json"
-      ]
+      "files": ["ayah-editions/quran-simple-min.json"]
     },
     "quran-tajweed": {
       "edition_id": 104,
@@ -867,9 +695,7 @@
       "type": "quran",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/quran-tajweed.json"
-      ]
+      "files": ["ayah-editions/quran-tajweed.json"]
     },
     "quran-uthmani": {
       "edition_id": 82,
@@ -877,9 +703,7 @@
       "type": "quran",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/quran-uthmani.json"
-      ]
+      "files": ["ayah-editions/quran-uthmani.json"]
     },
     "quran-uthmani-min": {
       "edition_id": 81,
@@ -887,9 +711,7 @@
       "type": "quran",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/quran-uthmani-min.json"
-      ]
+      "files": ["ayah-editions/quran-uthmani-min.json"]
     },
     "quran-wordbyword": {
       "edition_id": 105,
@@ -897,9 +719,7 @@
       "type": "quran",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/quran-wordbyword.json"
-      ]
+      "files": ["ayah-editions/quran-wordbyword.json"]
     },
     "ro.grigore": {
       "edition_id": 40,
@@ -907,9 +727,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ro.grigore.json"
-      ]
+      "files": ["ayah-editions/ro.grigore.json"]
     },
     "ru.abuadel": {
       "edition_id": 92,
@@ -917,9 +735,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ru.abuadel.json"
-      ]
+      "files": ["ayah-editions/ru.abuadel.json"]
     },
     "ru.krachkovsky": {
       "edition_id": 93,
@@ -927,9 +743,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ru.krachkovsky.json"
-      ]
+      "files": ["ayah-editions/ru.krachkovsky.json"]
     },
     "ru.kuliev": {
       "edition_id": 41,
@@ -937,9 +751,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ru.kuliev.json"
-      ]
+      "files": ["ayah-editions/ru.kuliev.json"]
     },
     "ru.muntahab": {
       "edition_id": 94,
@@ -947,9 +759,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ru.muntahab.json"
-      ]
+      "files": ["ayah-editions/ru.muntahab.json"]
     },
     "ru.osmanov": {
       "edition_id": 42,
@@ -957,9 +767,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ru.osmanov.json"
-      ]
+      "files": ["ayah-editions/ru.osmanov.json"]
     },
     "ru.porokhova": {
       "edition_id": 43,
@@ -967,9 +775,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ru.porokhova.json"
-      ]
+      "files": ["ayah-editions/ru.porokhova.json"]
     },
     "ru.sablukov": {
       "edition_id": 95,
@@ -977,9 +783,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ru.sablukov.json"
-      ]
+      "files": ["ayah-editions/ru.sablukov.json"]
     },
     "sd.amroti": {
       "edition_id": 44,
@@ -987,9 +791,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/sd.amroti.json"
-      ]
+      "files": ["ayah-editions/sd.amroti.json"]
     },
     "si.naseemismail": {
       "edition_id": 132,
@@ -997,9 +799,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/si.naseemismail.json"
-      ]
+      "files": ["ayah-editions/si.naseemismail.json"]
     },
     "so.abduh": {
       "edition_id": 45,
@@ -1007,9 +807,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/so.abduh.json"
-      ]
+      "files": ["ayah-editions/so.abduh.json"]
     },
     "sq.ahmeti": {
       "edition_id": 46,
@@ -1017,9 +815,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/sq.ahmeti.json"
-      ]
+      "files": ["ayah-editions/sq.ahmeti.json"]
     },
     "sq.mehdiu": {
       "edition_id": 47,
@@ -1027,9 +823,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/sq.mehdiu.json"
-      ]
+      "files": ["ayah-editions/sq.mehdiu.json"]
     },
     "sq.nahi": {
       "edition_id": 48,
@@ -1037,9 +831,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/sq.nahi.json"
-      ]
+      "files": ["ayah-editions/sq.nahi.json"]
     },
     "sv.bernstrom": {
       "edition_id": 49,
@@ -1047,9 +839,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/sv.bernstrom.json"
-      ]
+      "files": ["ayah-editions/sv.bernstrom.json"]
     },
     "sw.barwani": {
       "edition_id": 50,
@@ -1057,9 +847,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/sw.barwani.json"
-      ]
+      "files": ["ayah-editions/sw.barwani.json"]
     },
     "ta.tamil": {
       "edition_id": 51,
@@ -1067,9 +855,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ta.tamil.json"
-      ]
+      "files": ["ayah-editions/ta.tamil.json"]
     },
     "tg.ayati": {
       "edition_id": 52,
@@ -1077,9 +863,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/tg.ayati.json"
-      ]
+      "files": ["ayah-editions/tg.ayati.json"]
     },
     "th.thai": {
       "edition_id": 53,
@@ -1087,9 +871,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/th.thai.json"
-      ]
+      "files": ["ayah-editions/th.thai.json"]
     },
     "tr.ates": {
       "edition_id": 54,
@@ -1097,9 +879,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/tr.ates.json"
-      ]
+      "files": ["ayah-editions/tr.ates.json"]
     },
     "tr.bulac": {
       "edition_id": 55,
@@ -1107,9 +887,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/tr.bulac.json"
-      ]
+      "files": ["ayah-editions/tr.bulac.json"]
     },
     "tr.diyanet": {
       "edition_id": 56,
@@ -1117,9 +895,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/tr.diyanet.json"
-      ]
+      "files": ["ayah-editions/tr.diyanet.json"]
     },
     "tr.golpinarli": {
       "edition_id": 57,
@@ -1127,9 +903,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/tr.golpinarli.json"
-      ]
+      "files": ["ayah-editions/tr.golpinarli.json"]
     },
     "tr.ozturk": {
       "edition_id": 58,
@@ -1137,9 +911,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/tr.ozturk.json"
-      ]
+      "files": ["ayah-editions/tr.ozturk.json"]
     },
     "tr.transliteration": {
       "edition_id": 59,
@@ -1147,9 +919,7 @@
       "type": "transliteration",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/tr.transliteration.json"
-      ]
+      "files": ["ayah-editions/tr.transliteration.json"]
     },
     "tr.vakfi": {
       "edition_id": 60,
@@ -1157,9 +927,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/tr.vakfi.json"
-      ]
+      "files": ["ayah-editions/tr.vakfi.json"]
     },
     "tr.yazir": {
       "edition_id": 61,
@@ -1167,9 +935,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/tr.yazir.json"
-      ]
+      "files": ["ayah-editions/tr.yazir.json"]
     },
     "tr.yildirim": {
       "edition_id": 62,
@@ -1177,9 +943,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/tr.yildirim.json"
-      ]
+      "files": ["ayah-editions/tr.yildirim.json"]
     },
     "tr.yuksel": {
       "edition_id": 63,
@@ -1187,9 +951,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/tr.yuksel.json"
-      ]
+      "files": ["ayah-editions/tr.yuksel.json"]
     },
     "tt.nugman": {
       "edition_id": 64,
@@ -1197,9 +959,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/tt.nugman.json"
-      ]
+      "files": ["ayah-editions/tt.nugman.json"]
     },
     "ug.saleh": {
       "edition_id": 65,
@@ -1207,9 +967,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ug.saleh.json"
-      ]
+      "files": ["ayah-editions/ug.saleh.json"]
     },
     "ur.ahmedali": {
       "edition_id": 66,
@@ -1217,9 +975,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ur.ahmedali.json"
-      ]
+      "files": ["ayah-editions/ur.ahmedali.json"]
     },
     "ur.jalandhry": {
       "edition_id": 67,
@@ -1227,9 +983,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ur.jalandhry.json"
-      ]
+      "files": ["ayah-editions/ur.jalandhry.json"]
     },
     "ur.jawadi": {
       "edition_id": 68,
@@ -1237,9 +991,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ur.jawadi.json"
-      ]
+      "files": ["ayah-editions/ur.jawadi.json"]
     },
     "ur.junagarhi": {
       "edition_id": 96,
@@ -1247,9 +999,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ur.junagarhi.json"
-      ]
+      "files": ["ayah-editions/ur.junagarhi.json"]
     },
     "ur.kanzuliman": {
       "edition_id": 69,
@@ -1257,9 +1007,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ur.kanzuliman.json"
-      ]
+      "files": ["ayah-editions/ur.kanzuliman.json"]
     },
     "ur.khan": {
       "edition_id": 127,
@@ -1267,9 +1015,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ur.khan.json"
-      ]
+      "files": ["ayah-editions/ur.khan.json"]
     },
     "ur.maududi": {
       "edition_id": 97,
@@ -1277,9 +1023,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ur.maududi.json"
-      ]
+      "files": ["ayah-editions/ur.maududi.json"]
     },
     "ur.qadri": {
       "edition_id": 70,
@@ -1287,9 +1031,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/ur.qadri.json"
-      ]
+      "files": ["ayah-editions/ur.qadri.json"]
     },
     "uz.sodik": {
       "edition_id": 71,
@@ -1297,9 +1039,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/uz.sodik.json"
-      ]
+      "files": ["ayah-editions/uz.sodik.json"]
     },
     "zh.chinese": {
       "edition_id": 128,
@@ -1307,9 +1047,7 @@
       "type": "versebyverse",
       "format": "audio",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/zh.chinese.json"
-      ]
+      "files": ["ayah-editions/zh.chinese.json"]
     },
     "zh.jian": {
       "edition_id": 98,
@@ -1317,9 +1055,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/zh.jian.json"
-      ]
+      "files": ["ayah-editions/zh.jian.json"]
     },
     "zh.majian": {
       "edition_id": 99,
@@ -1327,9 +1063,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/zh.majian.json"
-      ]
+      "files": ["ayah-editions/zh.majian.json"]
     },
     "zh.mazhonggang": {
       "edition_id": 134,
@@ -1337,9 +1071,7 @@
       "type": "translation",
       "format": "text",
       "row_count": 6236,
-      "files": [
-        "ayah-editions/zh.mazhonggang.json"
-      ]
+      "files": ["ayah-editions/zh.mazhonggang.json"]
     }
   }
 }

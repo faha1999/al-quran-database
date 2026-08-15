@@ -117,7 +117,7 @@ export default function HomePageClient({ releaseLabel }: HomePageClientProps) {
                 variants={itemVariants}
                 className="mx-auto max-w-xl text-lg leading-relaxed text-zinc-400 lg:mx-0 lg:text-xl"
               >
-                Production-grade Quran dataset, TypeScript SDK, and real-time search engine. 
+                Production-grade Quran dataset, TypeScript SDK, and real-time search engine.
                 Everything you need to build scholarly Islamic applications at scale.
               </motion.p>
 
@@ -145,10 +145,7 @@ export default function HomePageClient({ releaseLabel }: HomePageClientProps) {
               </motion.div>
             </div>
 
-            <motion.div
-              variants={itemVariants}
-              className="relative hidden lg:block"
-            >
+            <motion.div variants={itemVariants} className="relative hidden lg:block">
               <div className="absolute -inset-0.5 rounded-[2.5rem] bg-gradient-to-br from-blue-500 to-indigo-600 opacity-20 blur-2xl" />
               <div className="relative rounded-[2.5rem] border border-zinc-800 bg-zinc-950/80 p-8 backdrop-blur-2xl">
                 <div className="mb-8 flex items-center justify-between border-b border-zinc-800 pb-6">
@@ -164,21 +161,22 @@ export default function HomePageClient({ releaseLabel }: HomePageClientProps) {
                 <div className="space-y-4 font-mono text-[13px] leading-relaxed text-zinc-400">
                   <p className="text-blue-400">{`{`}</p>
                   <p className="pl-4">
-                    <span className="text-zinc-500">"surahs":</span> 114,
+                    <span className="text-zinc-500">{`"surahs":`}</span> 114,
                   </p>
                   <p className="pl-4">
-                    <span className="text-zinc-500">"ayahs":</span> 6236,
+                    <span className="text-zinc-500">{`"ayahs":`}</span> 6236,
                   </p>
                   <p className="pl-4">
-                    <span className="text-zinc-500">"editions":</span> 134,
+                    <span className="text-zinc-500">{`"editions":`}</span> 134,
                   </p>
                   <p className="pl-4">
-                    <span className="text-zinc-500">"languages":</span> ["ar", "en", "ur", "fr", "..."],
+                    <span className="text-zinc-500">{`"languages":`}</span>{' '}
+                    {`["ar", "en", "ur", "fr", "..."],`}
                   </p>
                   <p className="pl-4">
-                    <span className="text-zinc-500">"features":</span> [
+                    <span className="text-zinc-500">{`"features":`}</span> [
                   </p>
-                  <p className="pl-8 text-emerald-400">"Search", "Tafsir", "Audio"</p>
+                  <p className="pl-8 text-emerald-400">{`"Search", "Tafsir", "Audio"`}</p>
                   <p className="pl-4">]</p>
                   <p className="text-blue-400">{`}`}</p>
                 </div>
@@ -198,12 +196,10 @@ export default function HomePageClient({ releaseLabel }: HomePageClientProps) {
                 <Search className="mb-6 h-10 w-10 text-blue-500" />
                 <h3 className="mb-4 text-2xl font-bold text-white">Semantic Search</h3>
                 <p className="mb-8 text-zinc-400">
-                  Experience high-performance, ranked search results powered by FlexSearch. 
+                  Experience high-performance, ranked search results powered by FlexSearch.
                   Optimized for both Arabic text and translations with zero-latency response.
                 </p>
-                <div
-                  className="inline-flex items-center gap-2 text-sm font-bold text-blue-400 transition-colors group-hover:text-blue-300"
-                >
+                <div className="inline-flex items-center gap-2 text-sm font-bold text-blue-400 transition-colors group-hover:text-blue-300">
                   Try Search Workflow <ArrowUpRight className="h-4 w-4" />
                 </div>
               </motion.div>
@@ -275,12 +271,10 @@ export default function HomePageClient({ releaseLabel }: HomePageClientProps) {
                 <GitBranch className="mb-6 h-10 w-10 text-emerald-400" />
                 <h3 className="mb-4 text-2xl font-bold text-white">Open Source First</h3>
                 <p className="mb-8 text-zinc-400">
-                  The platform is fully open source. Use the repository to spin up your own instances, 
-                  extend the dataset, or contribute to the SDK.
+                  The platform is fully open source. Use the repository to spin up your own
+                  instances, extend the dataset, or contribute to the SDK.
                 </p>
-                <div
-                  className="inline-flex items-center gap-2 text-sm font-bold text-emerald-400 transition-colors group-hover:text-emerald-300"
-                >
+                <div className="inline-flex items-center gap-2 text-sm font-bold text-emerald-400 transition-colors group-hover:text-emerald-300">
                   View Architecture Docs <ArrowUpRight className="h-4 w-4" />
                 </div>
               </motion.div>

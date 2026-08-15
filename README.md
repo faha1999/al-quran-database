@@ -32,16 +32,16 @@ The package ships its own data — **no running server required**. Four editions
 
 ## What makes this different
 
-| Feature | This package | `quran-json` | `quran-meta` | `@quranjs/api` |
-|---|---|---|---|---|
-| Works offline (no server) | ✅ | ✅ | ✅ | ❌ needs their API |
-| TypeScript types | ✅ full | ❌ | ✅ | ✅ |
-| 134 translations / editions | ✅ | partial | ❌ | partial |
-| Word-by-word morphology | ✅ | ❌ | ❌ | ❌ |
-| Per-ayah knowledge base | ✅ | ❌ | ❌ | ❌ |
-| GraphQL API | ✅ | ❌ | ❌ | ❌ |
-| SQL (PostgreSQL + SQLite) export | ✅ | ❌ | ❌ | ❌ |
-| REST API (self-host or local) | ✅ | ❌ | ❌ | ❌ |
+| Feature                          | This package | `quran-json` | `quran-meta` | `@quranjs/api`     |
+| -------------------------------- | ------------ | ------------ | ------------ | ------------------ |
+| Works offline (no server)        | ✅           | ✅           | ✅           | ❌ needs their API |
+| TypeScript types                 | ✅ full      | ❌           | ✅           | ✅                 |
+| 134 translations / editions      | ✅           | partial      | ❌           | partial            |
+| Word-by-word morphology          | ✅           | ❌           | ❌           | ❌                 |
+| Per-ayah knowledge base          | ✅           | ❌           | ❌           | ❌                 |
+| GraphQL API                      | ✅           | ❌           | ❌           | ❌                 |
+| SQL (PostgreSQL + SQLite) export | ✅           | ❌           | ❌           | ❌                 |
+| REST API (self-host or local)    | ✅           | ❌           | ❌           | ❌                 |
 
 ## Local data functions (offline, zero-dependency)
 
@@ -49,23 +49,29 @@ All functions below work with no network or server:
 
 ```ts
 import {
-  getSurah,          // surah + all resolved ayahs
-  getAyah,           // single ayah with translation + knowledge
-  getAyahByNumber,   // ayah by global number (1–6236)
-  getAllSurahs,       // all 114 surahs (paginatable)
-  getJuzById,        // juz with its ayahs
-  getHizbById,       // hizb with its ayahs
-  getRubById,        // rub with its ayahs
-  getPageById,       // Mushaf page with its ayahs
-  searchAyahs,       // full-text search (Arabic + translations)
-  getReciters,       // reciter list
-  getDuas,           // duas from Quran
-  getKnowledgeByAyah,  // per-ayah scholarly entry
-  getKnowledgeFaqs,    // FAQ knowledge base
-  getDatasetMetadata,  // dataset provenance info
+  getSurah, // surah + all resolved ayahs
+  getAyah, // single ayah with translation + knowledge
+  getAyahByNumber, // ayah by global number (1–6236)
+  getAllSurahs, // all 114 surahs (paginatable)
+  getJuzById, // juz with its ayahs
+  getHizbById, // hizb with its ayahs
+  getRubById, // rub with its ayahs
+  getPageById, // Mushaf page with its ayahs
+  searchAyahs, // full-text search (Arabic + translations)
+  getReciters, // reciter list
+  getDuas, // duas from Quran
+  getKnowledgeByAyah, // per-ayah scholarly entry
+  getKnowledgeFaqs, // FAQ knowledge base
+  getDatasetMetadata, // dataset provenance info
   // Raw data
-  surahs, ayahs, editions, juzs, hizbs, rubs, pages,
-  BUNDLED_EDITION_IDENTIFIERS,  // ['en.sahih', 'en.yusufali', ...]
+  surahs,
+  ayahs,
+  editions,
+  juzs,
+  hizbs,
+  rubs,
+  pages,
+  BUNDLED_EDITION_IDENTIFIERS, // ['en.sahih', 'en.yusufali', ...]
 } from '@faha1999/al-quran-database';
 ```
 
@@ -90,31 +96,31 @@ Base URL: https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@{tag}/{path}
 
 ```html
 <!-- Fetch in JS -->
-const res = await fetch('https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@v2.2.0/lib/data/surahs.json');
-const surahs = await res.json();
+const res = await
+fetch('https://cdn.jsdelivr.net/gh/faha1999/al-quran-database@v2.2.0/lib/data/surahs.json'); const
+surahs = await res.json();
 ```
 
 Available data files on CDN:
 
-| CDN path | Description |
-|---|---|
-| `lib/data/surahs.json` | All 114 surahs |
-| `lib/data/ayahs.json` | All 6236 ayahs |
-| `lib/data/editions.json` | All 134 editions metadata |
-| `lib/data/juzs.json` | 30 juz divisions |
-| `lib/data/hizbs.json` | 60 hizb divisions |
-| `lib/data/rubs.json` | Rub divisions |
-| `lib/data/pages.json` | Mushaf pages |
-| `lib/data/knowledge-base.json` | Scholarly knowledge entries |
-| `lib/data/duas.json` | Duas from the Quran |
-| `lib/data/reciters.json` | Reciter metadata |
-| `lib/data/ayah-editions/en.sahih.json` | Sahih International (English) |
-| `lib/data/ayah-editions/en.yusufali.json` | Yusuf Ali (English) |
-| `lib/data/ayah-editions/quran-uthmani.json` | Uthmani Arabic text |
-| `lib/data/ayah-editions/quran-simple-clean.json` | Clean Arabic (no diacritics) |
+| CDN path                                         | Description                   |
+| ------------------------------------------------ | ----------------------------- |
+| `lib/data/surahs.json`                           | All 114 surahs                |
+| `lib/data/ayahs.json`                            | All 6236 ayahs                |
+| `lib/data/editions.json`                         | All 134 editions metadata     |
+| `lib/data/juzs.json`                             | 30 juz divisions              |
+| `lib/data/hizbs.json`                            | 60 hizb divisions             |
+| `lib/data/rubs.json`                             | Rub divisions                 |
+| `lib/data/pages.json`                            | Mushaf pages                  |
+| `lib/data/knowledge-base.json`                   | Scholarly knowledge entries   |
+| `lib/data/duas.json`                             | Duas from the Quran           |
+| `lib/data/reciters.json`                         | Reciter metadata              |
+| `lib/data/ayah-editions/en.sahih.json`           | Sahih International (English) |
+| `lib/data/ayah-editions/en.yusufali.json`        | Yusuf Ali (English)           |
+| `lib/data/ayah-editions/quran-uthmani.json`      | Uthmani Arabic text           |
+| `lib/data/ayah-editions/quran-simple-clean.json` | Clean Arabic (no diacritics)  |
 
 Pin to a specific release tag (e.g. `@v2.2.0`) for production. Use `@main` for the latest commit.
-
 
 ## Self-hosted REST + GraphQL API
 
@@ -130,7 +136,7 @@ npm run dev
 import { QuranDevSDK } from '@faha1999/al-quran-database';
 
 const sdk = new QuranDevSDK({ baseUrl: 'http://localhost:3000' });
-const result = await sdk.getSurah(2, 'ur.maududi');  // any of 134 editions
+const result = await sdk.getSurah(2, 'ur.maududi'); // any of 134 editions
 const search = await sdk.search('mercy', { language: 'ur' });
 ```
 

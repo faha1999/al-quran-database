@@ -74,8 +74,8 @@ export default function DocsPageClient() {
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-zinc-400">
               Complete Quran dataset with TypeScript SDK — works offline with no server. Includes
-              sharded JSON source, versioned REST + GraphQL API, 134 translations, word-by-word data,
-              scholarly knowledge base, and SQL exports.
+              sharded JSON source, versioned REST + GraphQL API, 134 translations, word-by-word
+              data, scholarly knowledge base, and SQL exports.
             </p>
           </motion.div>
         </section>
