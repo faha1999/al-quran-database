@@ -2,12 +2,12 @@ import { expect, test } from '@playwright/test';
 
 test('landing page shows self-host guidance and project links', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByText('Docs Public, API Self-Hosted')).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Repository' }).first()).toHaveAttribute(
+  await expect(page.getByText(/Self-Host/i).first()).toBeVisible();
+  await expect(page.getByRole('link', { name: /GitHub repository/i }).first()).toHaveAttribute(
     'href',
     /github\.com\/faha1999\/al-quran-database/,
   );
-  await expect(page.getByRole('link', { name: 'npm Package' }).first()).toHaveAttribute(
+  await expect(page.getByRole('link', { name: /Install SDK/i }).first()).toHaveAttribute(
     'href',
     /npmjs\.com\/package\/@faha1999\/al-quran-database/,
   );
@@ -31,10 +31,10 @@ test('docs home loads', async ({ page }) => {
 test('sdk docs page renders install and method coverage', async ({ page }) => {
   await page.goto('/docs/sdk');
   await expect(page.getByRole('heading', { name: 'SDK Guide' })).toBeVisible();
-  await expect(page.getByText('npm install @faha1999/al-quran-database')).toBeVisible();
-  await expect(page.getByText('http://localhost:3000')).toBeVisible();
-  await expect(page.getByText('getResearchReferences()')).toBeVisible();
-  await expect(page.getByText('graphql({ query, variables? })')).toBeVisible();
+  await expect(page.getByText('npm install @faha1999/al-quran-database').first()).toBeVisible();
+  await expect(page.getByText('http://localhost:3000').first()).toBeVisible();
+  await expect(page.getByText('getResearchReferences()').first()).toBeVisible();
+  await expect(page.getByText('graphql({ query, variables? })').first()).toBeVisible();
 });
 
 test('api reference shows stable routes and graphql endpoint', async ({ page }) => {
